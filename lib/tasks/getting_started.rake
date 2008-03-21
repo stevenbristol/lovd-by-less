@@ -4,6 +4,7 @@ namespace :gems do
     task :install do
       gems = %w[
           uuidtools colored redgreen
+          tzinfo
           flickr youtube-g
           acts_as_ferret ferret 
         ]
