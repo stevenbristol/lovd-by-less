@@ -5,6 +5,7 @@ namespace :gems do
       windoz = /win32/ =~ RUBY_PLATFORM
       gems = %w[
           uuidtools colored redgreen
+          RedCloth mocha
           tzinfo
           flickr youtube-g
           acts_as_ferret ferret 
