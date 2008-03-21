@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(:version => 1) do
     t.datetime "updated_at"
   end
 
+  add_index "blogs", ["profile_id"], :name => "index_blogs_on_profile_id"
+
   create_table "comments", :force => true do |t|
     t.text     "comment"
     t.datetime "created_at",                          :null => false
@@ -26,13 +28,12 @@ ActiveRecord::Schema.define(:version => 1) do
     t.integer  "profile_id"
     t.string   "commentable_type", :default => "",    :null => false
     t.integer  "commentable_id",                      :null => false
-    t.boolean  "story",            :default => false
     t.integer  "is_denied",        :default => 0,     :null => false
     t.boolean  "is_reviewed",      :default => false
   end
 
-  add_index "comments", ["profile_id"], :name => "index_comments_on_author_id"
-  add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
+  add_index "comments", ["profile_id"], :name => "index_comments_on_profile_id"
+  add_index "comments", ["commentable_id", "commentable_type"], :name => "index_comments_on_commentable_id_and_commentable_type"
 
   create_table "feed_items", :force => true do |t|
     t.boolean  "include_comments", :default => false, :null => false
@@ -43,10 +44,14 @@ ActiveRecord::Schema.define(:version => 1) do
     t.datetime "updated_at"
   end
 
+  add_index "feed_items", ["item_id", "item_type"], :name => "index_feed_items_on_item_id_and_item_type"
+
   create_table "feeds", :force => true do |t|
     t.integer "profile_id"
     t.integer "feed_item_id"
   end
+
+  add_index "feeds", ["profile_id", "feed_item_id"], :name => "index_feeds_on_profile_id_and_feed_item_id"
 
   create_table "friends", :force => true do |t|
     t.integer  "inviter_id"
@@ -63,11 +68,14 @@ ActiveRecord::Schema.define(:version => 1) do
     t.string   "subject"
     t.text     "body"
     t.datetime "created_at"
-    t.datetime "updated_at",                     :null => false
-    t.integer  "sender_id",                      :null => false
-    t.integer  "receiver_id",                    :null => false
+    t.datetime "updated_at"
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
     t.boolean  "read",        :default => false, :null => false
   end
+
+  add_index "messages", ["sender_id"], :name => "index_messages_on_sender_id"
+  add_index "messages", ["receiver_id"], :name => "index_messages_on_receiver_id"
 
   create_table "photos", :force => true do |t|
     t.string   "caption",    :limit => 1000
@@ -76,6 +84,8 @@ ActiveRecord::Schema.define(:version => 1) do
     t.integer  "profile_id"
     t.string   "image"
   end
+
+  add_index "photos", ["profile_id"], :name => "index_photos_on_profile_id"
 
   create_table "profiles", :force => true do |t|
     t.integer  "user_id"
@@ -93,9 +103,9 @@ ActiveRecord::Schema.define(:version => 1) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email"
-    t.boolean  "is_active",        :default => true, :null => false
+    t.boolean  "is_active",        :default => false
     t.string   "youtube_username"
-    t.string   "flickr_username",  :default => "",   :null => false
+    t.string   "flickr_username",  :default => "",    :null => false
   end
 
   add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"

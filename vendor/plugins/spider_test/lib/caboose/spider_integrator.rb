@@ -98,7 +98,7 @@ module Caboose::SpiderIntegrator
     return if tag.attributes['class'] && tag.attributes['class']['thickbox'] == 'thickbox'
     return if tag.attributes['onclick']
     dest = (tag.attributes['onclick'] =~ /^new Ajax.Updater\(['"].*?['"], ['"](.*?)['"]/i) ? $1 : tag.attributes['href']
-    if !(dest =~ %r{^(mailto:|#|javascript:|http://dl_server.com|.*\.jpg|aim:|ichat:|xmpp:)})
+    if !(dest =~ %r{^(mailto:|#|javascript:|http://|.*\.jpg|aim:|ichat:|xmpp:)})
       @links_to_visit << Link.new( dest, source )
     end
   end
