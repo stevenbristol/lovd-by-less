@@ -1,0 +1,15 @@
+
+<div class="activity_box">
+  <h2>Search Results</h2>
+
+  <% @results.each do |p| %>
+  <div class="<%= cycle('odd','even') %> search_row left">
+    <div><%= icon p, :small %></div>
+    <div><%= link_to h(p.f), p %></div>
+    <div><%= mail_to h(p.email), p.email %></div>
+    <div><%= link_to_remote "#{ p.is_active ? 'deactivate' : 'activate' }", {:url => formatted_admin_user_path(p, 'js'), :method => :put}, {:id => p.dom_id('link')} %></div>						
+  </div>
+  <% end %>
+  <div class="clear"></div>
+  <%= william_paginate @results.total_entries %>
+</div>

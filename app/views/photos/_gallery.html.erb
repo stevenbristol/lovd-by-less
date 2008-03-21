@@ -1,0 +1,60 @@
+<%-
+# Locals
+me = @p == @profile
+mini ||= false
+profile ||= @profile
+photos ||= @photos
+
+if mini
+  size ||= 8
+  photos = profile.photos.find :all, :limit => size
+  total = profile.photos.count -%>
+
+  <%- unless photos.empty? -%>
+  <div class="activity_box" id="photo">
+    <h2>Photos</h2>
+    <div id="photos" class="inside_box">
+      <% photos.each do |picture|%>
+      <div class="image left">
+        <div>
+          <%= link_to image(picture, :small), profile_photos_path(picture.profile) %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <%- end -%>	
+
+  <%- else -%>
+
+  <div class="left" id="column_l">	
+    <h1><%= icon profile %> <%= "#{profile.f}'s Photos" %></h1>
+
+    <div id="sub_nav">
+      <%= link_to '&larr; Back to Dashboard', profile_path(profile) if me %>
+      <%= link_to "&larr; Back to #{h profile.f}'s profile", profile_path(profile) unless me %> 
+    </div>	
+    <div id="photo_wall">
+      <%= render :partial => 'photo', :collection => @photos %>
+
+      <div class="clear"></div>
+    </div>
+    <%= william_paginate @photos.total_entries %>
+
+    <div class="clear"></div>
+  </div>
+
+  <div class="right" id="column_r">
+    <% if me %>
+    <div class="right upload_form activity_box">
+      <%= render :partial => 'form' %>
+    </div>
+    <% end %>
+
+  </div>
+
+
+
+  <%- end -%>
+
+

@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; utf-8" />
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <title><%= @title || SITE_NAME %></title>
+  <%= javascript_include_tag :defaults, 'jquery', 'thickbox', 'truncator', :cache=>true %>
+  <%= stylesheet_link_tag 'reset', 'ie', 'application', :cache=>true %>
+  <%= yield :head%>
+
+
+  <!--[if lt IE 7.]>
+    <script defer type="text/javascript" src="/javascripts/pngfix.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+
+
+    <div id="wrapper">
+      <div id="top" >
+        <%= link_to(image_tag('logo.png', :class=>'png left'), home_path) %>
+        <div class="half right text_r">
+          <%= link_to 'Newest Stuff', home_path %>
+          <%= link_to('Dashboard', @p) if @p %>
+          <%= link_to('Admin', admin_users_path) if @p && @p.user.is_admin %>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content">  
+        <div id="just_for_hearts">
+
+
+          <div id="content_top">
+            <div id="search" class="left">
+              <%= render :partial => "shared/#{params[:controller].match(/admin/) ? 'admin_search' : 'search'}" %>
+            </div>
+            <div id="welcome" class="right">
+              <% if @u.nil? or @u.new_record? %>
+              <strong>You must <%= link_to 'Login', login_path %> or <%= link_to 'Sign-up', signup_path %> to participate</strong>
+              <% else %>	
+              <%= icon(@p, :small) unless @p.blank? %> <strong>Hi, <%= @u.f %></strong> <%= link_to '(logout)', logout_path %> 
+              <% end %>
+            </div>  
+            <div class="clear"></div>   
+          </div>   
+
+
+          <div id="main">
+            <%= display_standard_flashes %>
+            <%= yield %>
+            <div class="clear"></div>
+          </div>
+
+          <div class="clear"></div>	    
+        </div>	
+      </div>    
+
+    </div>
+
+    <%= render :partial => 'shared/footer' %>
+
+
+
+  </body>
+  </html>

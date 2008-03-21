@@ -1,0 +1,70 @@
+LessJsRoutes
+============
+
+Have you ever wanted to use named routes in your JavaScript? So have I. Now you can.
+
+LessJsRoutes will generate a javascript file with functions that give you the path to the route
+and functions that will call these routes using ajax (uses jQuery or Prototype).
+
+
+
+
+
+Installation
+============
+1. ./script/plugin install http://lessjsroutes.googlecode.com/svn/trunk/less_js_routes
+2. Add 'less_routes' to your javascript_include tag
+3. Either:
+
+  RAKE TASK:
+    rake less:js:routes
+    will create public/javascripts/less_routes.js
+
+  AND/OR
+    
+  ENVIRONMENT:
+    add 
+    Less::JsRoutes.generate!
+    to your environment file. This will auto generate less_routes.js every time your rails app is started.
+
+
+4. There is no number 4.
+
+
+
+Usage
+=====
+In your routes file:
+  map.resources :users do |user|
+    user.resources :profiles
+  end
+
+In your layout:
+  <%= javascript_include_tag :defaults, 'less_routes' %>
+  
+In your applicaiton.js (or any script block):
+  users_path() => '/users/'
+  users_ajax() => GET '/users/'
+  user_path(1) => '/users/1/'
+  user_ajax(1) => GET '/user/1'
+  user_profile_path(1,5) => '/users/1/profiles/5/'
+  user_profile_ajax(1,5) => GET '/users/1/profiles/5/'
+  user_ajax('post', {name: 'fonzie', password: 'cool', password_confirmation: 'cool'}) => POST '/users/'
+  change_password_user_ajax('put', {password: 'cool', new_password: '2cool', password_confirmation: '2cool'}) => PUT '/users/'
+  
+  _path functions return the path and take the proper variables, :id, :nested_id, :format, etc.
+  _ajax functions return the server response of the ajax call. The parameters are (1) the proper variable, :id, :nested_id, :format, :etc, (2) the http verb (get, post, put, delete) (get is default), an object of parameters, an object of any jQuery.ajax options that should be added to the ajax call.
+  
+
+
+
+Notes
+=====
+* Less Js Routes will use jQuery if available and Prototype if it is not.
+* If a formatted ajax function is called with a json format, the json string will be converted and returned as a JavaScript object, not a string.
+* This hasn't had a lot of testing in the wild, so please report any bugs you find to http://code.google.com/p/lessjsroutes/issues/entry.
+
+
+Brought to you with love, from Less Everything (http://lesseverything.com)
+  
+Copyright (c) 2007 Less Everything, Inc., released under the MIT license

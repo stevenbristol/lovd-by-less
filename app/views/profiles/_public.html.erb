@@ -1,0 +1,66 @@
+<%
+me = @p == @profile
+can_send = !@p.blank?
+%>
+<div id="sub_nav">
+<%= link_to( 'Edit this page', edit_profile_path(@p)) if me %>
+</div>
+<div class="left" id="column_l">
+  
+  <%= render :partial => 'profiles/bio' %>
+  <div class="clear"></div>  
+
+  <%= render :partial => 'profiles/recent_activity' %>	
+  <%= render :partial => 'blogs/list' %>	
+  <%= render :partial => 'comments/list', :locals => {:with_form => true, :with_wall_to_wall => true} %>	
+  <%= render :partial => 'photos/gallery', :locals => {:mini => true} %>
+  <%- if @video -%>
+  <div class="activity_box">
+    <h2>Latest YouTube Video</h2>
+    <%= @video.embed_html %>
+  </div>
+  <%- end -%>
+
+  <% if @flickr %>  
+  <div class="activity_box">
+    <h2>Latest Flickr Pictures</h2>
+    <% @flickr.each do |flickr|%>
+    <div class="flickr left">
+      <div>
+        <a href="http://www.flickr.com/photos/<%= flickr.owner_id %>/<%= flickr.id %>" target="_blank">
+          <%= image_tag flickr.url('t'), :alt => 'FlickrHolder', :class => 'flickr_image' %>
+        </a>
+      </div>
+    </div>
+    <%end%>
+  </div>
+  <% end %>
+
+
+
+  <%- unless can_send -%>
+  <div id="new_direct_message" class="hidden">
+    <%= render :partial => 'messages/form', :locals => {:hide_header => true} %>
+  </div>
+  <%- end -%>
+
+  <div class="clear"></div>
+</div>
+
+<div class="right" id="column_r">
+  <ul>
+    <%- unless me -%>
+    <li><%= get_friend_link @p, @profile %></li>
+    <%- end -%>
+    <%- unless can_send -%>
+    <li><%= inline_tb_link 'Direct Message', "new_direct_message", {:title => "New Message To #{h @profile.f}"}, {:height => 380} %></li>
+    <li><%= inline_tb_link 'Leave a Comment', "new_comment", {:title => "Leaving A Comment On #{h @profile.f}'s Wall"}, {:heingt => 370, :width => 430} if @p %></li>
+    <%- end 
+    if can_send && !me && @p.has_wall_with(@profile) -%>
+    <li><%= link_to 'Our Wall-to-Wall', profile_comments_path(@profile) %></li>
+    <%- end -%>
+  </ul>
+  <%= render :partial => 'friends/list', :locals => {:type => 'friends'} %>
+  <%= render :partial => 'friends/list', :locals => {:type => 'followers'} %>
+  <%= render :partial => 'friends/list', :locals => {:type => 'followings'} %> 
+</div>

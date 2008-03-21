@@ -1,0 +1,10 @@
+<%
+#locals
+label ||= 'Reading a Message'
+@title = label
+%>
+
+<h1><%= sanitize label %></h1>
+
+
+<%= render :partial => "messages/message" %>

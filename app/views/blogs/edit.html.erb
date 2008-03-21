@@ -1,0 +1,6 @@
+<h1>Edit Post</h1>
+  <div id="sub_nav">
+    	<%= link_to('&larr; Back to Dashboard', @p) if @p %>  
+      <%= link_to '&larr; Back to Blogs', profile_blogs_path(@p) if @p %>
+  </div>
+<%= render :partial => 'form' %>

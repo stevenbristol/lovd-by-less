@@ -1,0 +1,29 @@
+<%
+#locals
+comments ||= @comments
+parent ||= @parent
+profile ||= @profile
+
+@count = comments.total_entries
+%>
+
+
+<% content_for :head do  -%>  
+  <%= auto_discovery_link_tag(:rss, formatted_profile_comments_url(@profile, :rss), :title=>"Wall to wall with #{profile.f}") %>
+<% end -%>
+
+
+
+<h1>Wall-to-Wall</h1>
+<div id="sub_nav">
+  <%= link_to "&larr; Back to Profile", profile %>
+  <%= inline_tb_link 'Add A Comment', "new_comment", :title => "Adding A Comment" %>
+</div>
+
+<%= render :partial => 'comments/form' %>
+  
+<div id="<%= "#{dom_id(parent)}_comments" %>">
+	<%= render :partial => 'comments/comment', :collection => comments %>
+	
+	<%= william_paginate %>
+</div>

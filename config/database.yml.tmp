@@ -1,0 +1,14 @@
+
+development:
+  adapter: mysql
+  database: lovdbyless_development
+  username: root
+  password:
+  encoding: utf8
+
+test:
+  adapter: mysql
+  database: lovdbyless_test
+  username: root
+  password:
+  encoding: utf8

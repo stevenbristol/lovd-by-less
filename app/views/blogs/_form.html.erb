@@ -1,0 +1,17 @@
+<%
+#locals
+blog ||= @blog
+%>
+
+
+
+
+<div id="blog">
+  <% less_form_for [@profile, blog] do |f| %>
+    <%= f.text_field :title %>
+    <%= f.text_area :body %>
+	  <div class="row button">
+    	<%= f.submit 'Save', :class=>'button' %>
+  	</div>
+  <% end %>
+</div>

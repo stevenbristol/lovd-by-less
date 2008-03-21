@@ -1,0 +1,29 @@
+<%-
+comment ||= @comment
+truncate = truncate.nil? ? true : truncate
+
+
+youtube_videos = comment.comment.scan(/\[youtube:+.+\]/)
+c = comment.comment.dup.gsub(/\[youtube:+.+\]/, '')
+-%>
+
+
+<div id="<%= comment.dom_id %>" class="comment_holder">
+  <%= icon comment.profile, :small, :class => 'left avatar_on_comment' %> 
+  <div class="date_details_white">
+    <%= time_ago_in_words comment.created_at %> ago, <%= link_to h(comment.profile.f), comment.profile %> wrote: 
+  </div>
+  <div class="comment_message jstruncate">
+      <%= sanitize(textilize(c)) %>
+  </div>
+  <% unless youtube_videos.empty? %>
+    <strong><%= pluralize youtube_videos.size, 'video' %>:</strong><br/>
+    <% youtube_videos.each do |o| %>
+    <%= tb_video_link(o.gsub!(/\[youtube\:|\]/, '')) %>
+  <% end
+  end %>
+  <div class="clear"></div>
+</div>
+
+
+

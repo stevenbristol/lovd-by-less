@@ -1,0 +1,30 @@
+
+<% content_for :head do  -%>
+<%= auto_discovery_link_tag :rss, formatted_profile_blogs_url(@profile, :rss), :title=>"#{@profile.f}'s Blogs" %>
+<% end -%>
+
+
+<!-- BEGIN CURRENT POST -->
+<div class="left" id="column_l">
+
+  <h1><%= icon @profile %> <%= @profile.f %>'s Blog</h1>
+  <!-- BEGIN POST LINKS -->
+  <div id="sub_nav">
+    <%- if @p == @profile -%>
+    <%= link_to '&larr; Back to Dashboard', profile_path(@profile) %>
+    <%= link_to 'Write a new post', new_profile_blog_path(@profile) %>
+    <%- else -%>
+    <%= link_to "&larr; Back to #{h @profile.f}'s Profile", profile_path(@profile) %>
+    <%- end -%>
+  </div>
+  <!-- END POST LINKS -->
+
+  <% if @blogs.empty? %>
+  <%= @profile.f %> has no blog posts.
+  <% else %>
+  <%= render :partial => 'blogs/blog', :collection => @blogs %>
+  <% end %>
+</div>
+<!-- END CURRENT POST -->
+
+<%= render :partial => 'history' %>

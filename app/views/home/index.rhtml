@@ -1,0 +1,40 @@
+
+
+<% content_for :head do%>
+<%= auto_discovery_link_tag(:rss, "http://#{SITE}/latest_comments.rss", :title=>"Latest Comments") %>
+<%= auto_discovery_link_tag(:rss, "http://#{SITE}/newest_members.rss", :title=>"Newest Members") %>
+<% end%>
+
+<div>
+  <img src="/images/main_graphic.jpg" class="left" title="main graphic" alt="main graphic" />
+  <div class="front_right_column right" style="margin-top: 0px;">
+    <%= render :partial => 'profiles/featured', :locals => {:profile => Profile.featured_profile[:profile]} %>
+    <div class="clear"></div>   
+  </div>
+
+  <div>
+    <div id="front_left_column" class="left"> 
+      <h2>Latest Comments</h2>
+      <%= render :partial => 'comments/comment', :collection => recent_comments %>
+    </div>  
+
+    <div id="front_middle_column" class="left"> 
+      <h2>Newest Members</h2>
+      <%= render :partial => 'profiles/newest_member', :collection => new_members %>
+    </div>
+
+    <div class="front_right_column right">
+      <h2>Newest Pictures</h2>
+      <% newest_pictures.each do |picture|%>
+      <div class="image left small_down_image">
+        <div>
+          <%= link_to image(picture, :small), profile_photos_path(picture.profile) %>
+        </div>
+      </div>
+      <% end %>
+      <div class="clear"></div>  
+    </div>
+
+    <div class="clear"></div>
+  </div>
+</div>

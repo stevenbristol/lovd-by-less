@@ -1,0 +1,18 @@
+<%
+profile ||= @profile
+%>
+<div class="activity_box learn">
+  <div class="left avatar"><%= icon profile, :big %></div>
+  <div class="right bio_stuff">
+    <h1><%= h profile.f %></h1> 
+	  <h3><%= location_link profile %></h3>
+		<% unless profile.about_me.blank? %><div><strong>About:</strong> <%= sanitize(textilize(profile.about_me)) %></div><% end %>
+		<% unless profile.website.blank? %><div><strong>Website:</strong> <%= link_to h(profile.website), h(profile.website) %></div><% end %>
+		<% unless profile.blog.blank? %><div><strong>Blog:</strong> <%= link_to h(profile.blog), h(profile.blog) %></div><% end %>
+		<% unless profile.flickr.blank? %><div><strong>Flickr:</strong> <%= link_to h(profile.flickr), h(profile.flickr) %></div><% end %>
+		<% unless profile.aim_name.blank? %><div><strong>AIM:</strong> <a href="aim:goim?screenname=<%= h profile.aim_name %>"><%= h profile.aim_name %></a></div><% end %>
+		<% unless profile.gtalk_name.blank? %><div><strong>GTalk:</strong> <a href="xmpp:<%= h profile.gtalk_name %>"><%=h profile.gtalk_name %></a></div><% end %>
+		<% unless profile.ichat_name.blank? %><div><strong>iChat:</strong> <a href="ichat:<%= h profile.ichat_name %>"><%=h profile.ichat_name %></a></div><% end %>
+	</div>
+    <div class="clear"></div>
+</div>

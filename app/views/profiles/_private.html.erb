@@ -1,0 +1,34 @@
+<h1>Your Dashboard</h1>
+<div id="sub_nav">
+  <%= link_to 'View Public Profile', profile_path(@p).add_param(:public_view => true) %>
+  <%= link_to 'Messages Center', messages_path unless @p.received_messages.empty? && !@p.has_network? %>
+  <%= link_to 'Manage Photos', profile_photos_path(@p) %>
+  <%= link_to 'My Network', profile_friends_path(@p) if @p.has_network? %>
+  <%= link_to 'The Blog', profile_blogs_path(@p) %>
+  <%= link_to 'Account Settings', edit_profile_path(@p) %>
+</div>
+
+<%= render :partial => 'profiles/getting_started' %>
+
+
+<div class="half left">
+  <%= render :partial => 'profiles/recent_activity' %>
+</div>
+
+
+
+
+
+
+<div class="half right">
+
+<%= render :partial => 'friends/list', :locals => {:type => 'friends'} %>
+<%= render :partial => 'friends/list', :locals => {:type => 'followers'} %>
+<%= render :partial => 'friends/list', :locals => {:type => 'followings'} %>
+
+</div>
+
+
+  <div class="clear"></div>
+
+

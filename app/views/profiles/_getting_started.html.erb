@@ -1,0 +1,77 @@
+<%
+photos_empty = @p.photos.empty?
+friends_empty = (@p.followings + @p.friends).empty?
+messages_empty = @p.sent_messages.empty?
+profile_empty = @p.no_data?
+blog_empty = @p.blogs.empty?
+return unless photos_empty && friends_empty && messages_empty && profile_empty && blog_empty
+%>
+
+<div>
+	<h2 class="getting_started">How to Get Started</h2>
+
+	<div class="half left">
+		<%- if profile_empty -%>  
+		<div class="blurp">
+			<img src="/images/blurp_profile.png" class="left png" title="Profile Icon" alt="Profile Icon" />
+			<strong>Set up your profile</strong>
+			Your public profile is the way your friends will learn about you and keep up-to-date on your life. Upload a profile photo, add an "about me" connect with new and old friends.  
+			<%= link_to 'Setup my profile', edit_profile_path %>
+			
+			<div class="clear"></div>
+		</div>
+		<%- end -%>
+	
+		<%- if photos_empty -%>
+		<div class="blurp">
+			<img src="/images/blurp_photos.png" class="png left" title="Share Icon"  alt="Share Icon" />
+			<strong>Share Photos</strong>
+			<%= SITE_NAME %> allows users to upload images with captions on to their profile.  We love someone to build albums, tagging and commenting on photos for this open source project!
+			<%= link_to 'Start Uploading Pictures', profile_photos_path(@p) %>
+			
+			<div class="clear"></div>
+		</div>
+		<%- end -%>
+	
+		<div class="clear"></div>
+	</div>
+
+
+
+
+	<div class="half right">
+		<%- if friends_empty -%>
+		<div class="blurp">
+			<img src="/images/blurp_friends.png" class="png left" title="Friend Icon" alt="Friend Icon" />
+			<strong>Find Friends</strong>
+			Donec consectetuer egestas libero. Ut placerat ullamcorper libero. Suspendisse potenti. Nullam porttitor aliquet risus. Donec at eros. Maecenas sed lorem ut quam convallis consectetuer. In hac habitasse platea dictumst. Donec enim augue,
+			<div class="clear"></div>
+		</div>
+		<%- end -%>
+	
+		<%- if messages_empty -%>
+		<div class="blurp">
+			<img src="/images/blurp_message.png" class="png left" title="Message Icon" alt="Message Icon" />
+			<strong>Message Friends</strong>
+			<%= SITE_NAME %> allows users to upload images with captions on to their profile.  We love someone to build albums, tagging and commenting on photos!
+			
+			<div class="clear"></div>
+		</div>
+		<%- end -%>
+	
+		<%- if blog_empty -%>
+		<div class="blurp">
+			<img src="/images/blurp_comment.png" class="left png" title="Comment Icon" alt="Comment Icon" />
+			<strong>Start Blogging!</strong>
+			Your public profile is the way your friends will learn about you and keep up-to-date on your life. Upload a profile photo, add an "about me" connect with new and old friends.  
+			<%= link_to 'Get Started Blogging', profile_blogs_path(@p) %>
+			
+			<div class="clear"></div>
+		</div>
+		<%- end -%>
+	
+		<div class="clear"></div>
+	</div>
+	
+	<div class="clear"></div>
+</div>

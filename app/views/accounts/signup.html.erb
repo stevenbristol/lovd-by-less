@@ -1,0 +1,33 @@
+<%
+terms_of_service_label = "Accept #{link_to 'Terms of Service', tos_path, :target => 'blank'}"
+%>
+
+<div id="login_form">
+  <% less_form_for :user, :url => signup_path, :method => :post do |f| 	%>
+    <h1><%= "Sign-up Now" %></h1>
+	
+    <div class="instruction">Welcome to <%= SITE_NAME %>, we are currently in private beta.</div>
+    
+    <div class="instruction"><%= link_to "Oh yeah, I already have an account, duh.", login_url %></div>
+
+    <%= f.text_field :login %>
+    <%= f.text_field :email %>
+    <%= f.password_field :password %>
+    <%= f.password_field :password_confirmation, :label => 'Confirm Password' %>
+    <% f.wrap :label=>"" do  %> 
+    <div class="row">    
+      <%= captcha_field(:user)  unless RAILS_ENV == 'test'%>
+      </div>
+    <% end %>  
+    
+    <div class='row clear'>
+      <label><%= terms_of_service_label %>:</label>
+      <%= check_box_tag :user_terms_of_service, 1, params[:terms_of_service], :class => 'checkbox', :name => 'user[terms_of_service]' %>
+    </div>
+    
+    <%= f.wrap(:label => 'Remember Me'){ check_box_tag :remember_me, 1, params[:remember_me], :class=>"checkbox"} %>
+	  <div class="button">
+	  <%= f.submit 'Sign-up Now', :class => 'button' %>
+	  </div>
+	<% end %>
+</div>

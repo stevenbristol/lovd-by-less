@@ -1,0 +1,125 @@
+How to get LovdByLess up and running
+
+    * Lovd runs on Ruby on Rails, so first you need to get rails running. Go download rails (http://rubyonrails.org/down) and follow it's instructions to get rails running.
+    * The directions in this README file assume some knowledge of rails, but I'll go through it a bit here first.
+    * The first thing to do is install the ruby gems that are required. For each gem listed in the README, at the command line, do something like "gem install [gem name]" or "sudo gem install [gem name]".
+    * The next thing to do is set up your database (steps 1-4 in the README). Lovd is setup to use MySQL by default, so just follow the instructions in the README and configure the files for your computer.
+    * Skip step 5.
+    * Now setup global variable (site name and url and stuff) (steps 6-13) and change the (r)html and css to suit your taste.
+    * In dev mode, search (steps 14-16) should work right out of the box (assuming you install the gems). The search instructions are really for a production environment.
+    * Start lovd with the typical "./script/server" and point your browser to "http://localhost:3000".
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Instructions:
+
+Install the Required Gems:
+
+- youtube-g
+- rflickr
+- uuidtools
+- acts_as_ferret
+- ferret
+- colored
+- hpricot
+- tzinfo
+- mocha
+- redgreen
+- RedCloth
+- imagick
+- win32console (windows only)
+
+
+Setup the databases:
+
+1. Edit config/database.yml.tmo to reflect the database names you would like to use.
+2. cp config/database.yml.tmp config/database.yml
+3. rake db:create:all
+4. rake mig a=no
+
+All tests pass:
+
+5. rake
+
+Setup default values:
+
+6. Edit config/initializers/exception_notifier.rb
+7. Edit the config/environment.rb file and change the config.action_controller.session data
+8. Edit config/environments/development.rb and production.rb to suit your tastes. (Specifically config.action_mailer.delivery_method)
+9. Change the values in config/initializers/global_variables.rb to match your site and domain. (Specifically SITE_NAME, SITE, MAILER_TO_ADDRESS, MAILER_FROM_ADDRESS, REGISTRATION_RECIPIENTS)
+10. Go to the section "About flickr integration" and follow the steps to either use flickr or not.
+
+11. Edit public/404.html, public/500.html, app/views/account_mailer/*
+12. Edit application.css to suite your tastes.
+13. Edit app/views/home/terms.
+
+Configure Ferret:
+
+14. Feel free to replace ferret with the search engine of your choice.
+15. Acts_s_ferret home page: http://projects.jkraemer.net/acts_as_ferret/wiki.
+16. We recommend using the drb server as described here: http://projects.jkraemer.net/acts_as_ferret/wiki/DrbServer.
+
+Start Lovd By Less:
+
+17. ./script/server
+18. Go to the home page http://localhost:3000
+19. Go to the signup page and create an account.
+20. Go into the database and turn the is_admin flag to true on your new account.
+
+
+
+About flickr integration
+
+If you WANT to have flickr integration in your Lovd By Less project, follow these setup instructions:
+1. Go http://flickr.com/services/api/keys/apply/ to apply for a flickr api key.
+2. Copy the Key and Secret into config/flickr.rb
+3. From the command line, run "ruby script/authorize_flickr.rb" and follow the instructions. 
+  This stores the flickr auth stuff into config/flickr.cache. If you add this cache file to your source control, then you shouldn't have to repeat this in production. Alternatively, you can get a different key for production, if you'd like.
+  
+If you DO NOT WANT to have flickr integration in your Lovd By Less project, follow these setup instructions:
+1. Delete line 15 from app/controllers/profiles_controller.rb [@flickr = @profile.flickr_username.blank? ? [] : flickr_images(flickr.people.findByUsername(@profile.flickr_username))]
+2. Delete lines 22-35 in app/views/profiles/_public.html.erb
+
+
+
+
+
+
+
+
+Is there a google group for this project?
+
+Yes. It can be found here: http://groups.google.com/group/lovdbyless
+
+
+
+
+How to change the page a user is redirected to after login or singup:
+
+In AccountController.rb, look for lines that contain: redirect_back_or_default home_path and change either home_path to the path you want to send them to, or change redirect_back_or_default to redirect_to, or both.
+
+
+
+
+Why is public/javascripts/less_routes.js always modified and needing to be checked in? I swear I didn't touch it.
+
+less_routes.js is automatically generate when your app starts. Any changes to this app will be lost the next time it's generated.

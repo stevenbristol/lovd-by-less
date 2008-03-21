@@ -1,0 +1,19 @@
+
+<% content_for :head do  -%>
+<%= auto_discovery_link_tag :rss, formatted_profile_url(@profile, :rss), :title=>"#{@profile.f}'s recent activity" %>
+<%= auto_discovery_link_tag :rss, formatted_profile_blogs_url(@profile, :rss), :title=>"#{@profile.f}'s Blogs" %>
+<%= auto_discovery_link_tag :rss, formatted_profile_photos_url(@profile, :rss), :title=>"#{@profile.f}'s Photos" %>
+<% end -%>
+
+<% if params[:public_view].blank? && @p && @p == @profile %>
+
+<%= render :partial => "profiles/private" %>
+
+
+<% else %>
+
+
+<%= render :partial => "profiles/public" %>
+
+
+<% end %>
