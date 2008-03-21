@@ -23,13 +23,6 @@ How to get LovdByLess up and running
 
 
 
-
-
-
-
-
-
-
 Instructions:
 
 Install the Required Gems:
@@ -37,8 +30,6 @@ Install the Required Gems:
 - youtube-g
 - rflickr
 - uuidtools
-- acts_as_ferret
-- ferret
 - colored
 - hpricot
 - tzinfo
@@ -46,8 +37,15 @@ Install the Required Gems:
 - redgreen
 - RedCloth
 - imagick
+- acts_as_ferret
+- ferret
 - win32console (windows only)
 
+TIP:
+Installing ferret on Windows
+1. Running gem install ferret does not work. Instead, download the gem directly from http://rubyforge.org/frs/?group_id=1028
+2. Download file: ferret-0.11.6-mswin32.gem
+3. From the directory you downloaded the gem to: gem install ferret-0.11.6-mswin32.gem
 
 Setup the databases:
 
