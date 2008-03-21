@@ -72,4 +72,8 @@ module ApplicationHelper
     id = Digest::SHA1.hexdigest("--#{Time.now}--#{video.title}--")
     inline_tb_link(video.title, h(id), {}, {:height => 355, :width => 430}) + %(<div id="#{h id}" style="display:none;">#{video.embed_html}</div>)
   end
+  
+  def me
+    @p == @profile
+  end
 end
