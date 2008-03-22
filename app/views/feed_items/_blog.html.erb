@@ -10,7 +10,7 @@ blog ||= feed_item.item
 	<%= link_to h(blog.profile.f), blog.profile %> blogged <%= time_ago_in_words blog.created_at %> ago <%= link_to sanitize(textilize(blog.title)), profile_blog_path(blog.profile, blog) %>
 	</div> 
   	<div class="right">
-    	<%= x_feed_link feed_item %>
+    	<%= x_feed_link(feed_item) if me %>
   	</div>
 	<div class="clear"></div>
 </div>

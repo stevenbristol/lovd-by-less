@@ -10,7 +10,7 @@ comment = feed_item.item
     <%= commentable_text comment %>
   </div>
   <div class="right">
-    <%= x_feed_link feed_item %>
+    <%= x_feed_link(feed_item) if me %>
   </div>
   <div class="clear"></div>
 </div>
