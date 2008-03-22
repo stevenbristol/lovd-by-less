@@ -4,11 +4,18 @@ namespace :gems do
     task :install do
       windoz = /win32/ =~ RUBY_PLATFORM
       gems = %w[
-          uuidtools colored redgreen
-          RedCloth mocha
+          youtube-g
+          rflickr
+          uuidtools
+          colored
+          hpricot
           tzinfo
-          flickr youtube-g
-          acts_as_ferret ferret 
+          mocha
+          redgreen
+          RedCloth
+          imagick
+          acts_as_ferret
+          ferret
         ]
       gems << 'win32console' if windoz
       sudo = windoz ? '' : 'sudo '
