@@ -12,18 +12,20 @@ How to get LovdByLess up and running
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 Instructions:
+
+Quick Setup (currently for non-Windows users only - due to ferret gem issues):
+
+  1. Edit config/database.yml.tmp to reflect the database names you would like to use.
+  2. cp config/database.yml.tmp config/database.yml
+  3. rake lovdbyless:getting_started
+  4. rake test
+  5. See step #6 below to continue setup (near "Setup default values")
+
+The getting_started rake task will install all required gems, create the databases in database.yml, 
+and migrate the development and test databases.
+
+Manual Setup:
 
 Install the Required Gems:
 
@@ -49,7 +51,7 @@ Installing ferret on Windows
 
 Setup the databases:
 
-1. Edit config/database.yml.tmo to reflect the database names you would like to use.
+1. Edit config/database.yml.tmp to reflect the database names you would like to use.
 2. cp config/database.yml.tmp config/database.yml
 3. rake db:create:all
 4. rake mig a=no
@@ -90,9 +92,9 @@ About flickr integration
 If you WANT to have flickr integration in your Lovd By Less project, follow these setup instructions:
 1. Go http://flickr.com/services/api/keys/apply/ to apply for a flickr api key.
 2. Copy the Key and Secret into config/flickr.rb
-3. From the command line, run "ruby script/authorize_flickr.rb" and follow the instructions. 
+3. From the command line, run "ruby script/authorize_flickr.rb" and follow the instructions.
   This stores the flickr auth stuff into config/flickr.cache. If you add this cache file to your source control, then you shouldn't have to repeat this in production. Alternatively, you can get a different key for production, if you'd like.
-  
+
 If you DO NOT WANT to have flickr integration in your Lovd By Less project, follow these setup instructions:
 1. Delete line 15 from app/controllers/profiles_controller.rb [@flickr = @profile.flickr_username.blank? ? [] : flickr_images(flickr.people.findByUsername(@profile.flickr_username))]
 2. Delete lines 22-35 in app/views/profiles/_public.html.erb
