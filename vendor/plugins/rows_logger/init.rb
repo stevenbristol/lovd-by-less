@@ -1,9 +1,11 @@
 # Include hook code here
 
-ActiveRecord::ConnectionAdapters::MysqlAdapter.class_eval do
-  protected
-  def count_result(result)
-    result.num_rows
+if defined? ActiveRecord::ConnectionAdapters::MysqlAdapter
+  ActiveRecord::ConnectionAdapters::MysqlAdapter.class_eval do
+    protected
+    def count_result(result)
+      result.num_rows
+    end
   end
 end
 

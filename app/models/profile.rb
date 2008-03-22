@@ -107,11 +107,11 @@ class Profile < ActiveRecord::Base
   
   
   def self.featured
-    find(:first, {
+    find_options = {
       :include => :user,
       :conditions => ["is_active = ? and about_me IS NOT NULL and user_id is not null", true],
-      :order => 'RAND()'
-    })
+    }
+    find(:first, find_options.merge(:offset => rand( count(find_options) - 1)))
   end  
   
   def no_data?
