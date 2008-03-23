@@ -1,8 +1,8 @@
 class FeedItemsController < ApplicationController
   skip_filter :store_location
+  before_filter :setup
   
   def destroy
-    @profile = Profile[params[:profile_id]]
     @profile.feeds.find(:first, :conditions => {:feed_item_id=>params[:id]}).destroy
     
     respond_to do |wants|
@@ -19,5 +19,18 @@ class FeedItemsController < ApplicationController
   
   def allow_to
     super :user, :only => [:destroy]
+  end
+  
+  def setup
+    @profile = Profile[params[:profile_id]]
+    if @p != @profile
+      respond_to do |wants|
+        wants.html do
+          flash[:notice] = "Sorry, you can't do that."
+          redirect_back_or_default @profile
+        end
+        wants.js { render(:update){|page| page.alert "Sorry, you can't do that."}}
+      end
+    end
   end
 end
