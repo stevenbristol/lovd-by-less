@@ -19,7 +19,7 @@ class SpiderTest < ActionController::IntegrationTest
     puts 'test_spider_user'
     get "/login"
     assert_response :success
-    post "/login", :login => users(:user).login, :password => 'test'
+    post "/login", :user=>{:login => users(:user).login, :password => 'test'}
     assert_response :redirect
     assert session[:user]
     assert_redirected_to '/'
@@ -36,7 +36,7 @@ class SpiderTest < ActionController::IntegrationTest
     puts 'test_spider_admin'
     get "/login"
     assert_response :success
-    post "/login", :login => users(:admin).login, :password => 'test'
+    post "/login", :user=>{:login => users(:admin).login, :password => 'test'}
     assert_response :redirect
     assert session[:user]
     assert_redirected_to '/'
