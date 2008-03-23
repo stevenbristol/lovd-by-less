@@ -4,3 +4,4 @@ tmp
 config/database.yml
 index
 public/system
+vendor/rails
