@@ -12,8 +12,8 @@ class AccountsController < ApplicationController
     
     
     #plays double duty login/forgot (due to the ajax nature of the login/forgot form)
-    if params[:email] && params[:email].size > 0
-      u = Profile.find_by_email(params[:email]).user rescue nil
+    if params[:user][:email] && params[:user][:email].size > 0
+      u = Profile.find_by_email(params[:user][:email]).user rescue nil
       flash.now[:error] = "Could not find that email address. Try again." and return if u.nil?
 
       @pass = u.forgot_password #must be @ variable for function tests
