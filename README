@@ -38,7 +38,7 @@ Install the Required Gems:
 - mocha
 - redgreen
 - RedCloth
-- rmagick
+- imagick
 - acts_as_ferret
 - ferret
 - win32console (windows only)
