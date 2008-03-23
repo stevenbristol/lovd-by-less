@@ -31,14 +31,14 @@ class AccountsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_login_and_redirect
-    post :login, :login => 'user', :password => 'test'
+    post :login, :user=>{:login => 'user', :password => 'test'}
     assert session[:user]
     assert assigns['u']
     assert_response :redirect
   end
 
   def test_should_fail_login_and_not_redirect
-    post :login, :login => 'user', :password => 'bad password'
+    post :login, :user=>{:login => 'user', :password => 'bad password'}
     assert_nil session[:user]
     assert_response :success
   end
@@ -48,7 +48,7 @@ class AccountsControllerTest < Test::Unit::TestCase
   
   def test_forgot_no_email
     flashback
-    post :login, :email=>'asdf'
+    post :login, :user=>{:email=>'asdf'}
     assert_nil session[:user]
     assert_response :success
     assert_equal nil, flash[:notice]
@@ -60,7 +60,7 @@ class AccountsControllerTest < Test::Unit::TestCase
   def test_forgot_good_email
     assert u = users(:user)
     assert p = u.crypted_password
-    post :login, :email=>profiles(:user).email
+    post :login, :user=>{:email=>profiles(:user).email}
     assert_nil session[:user]
     assert_response :success
     assert_equal nil, flash[:error] 
@@ -137,12 +137,12 @@ class AccountsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_remember_me
-    post :login, {:login => 'user', :password => 'test', :remember_me => "1"}
+    post :login, :user=>{:login => 'user', :password => 'test', :remember_me => "1"}
     assert_not_nil @response.cookies["auth_token"]
   end
 
   def test_should_not_remember_me
-    post :login, {:login => 'quentin', :password => 'test', :remember_me => "0"}
+    post :login, :user=>{:login => 'quentin', :password => 'test', :remember_me => "0"}
     assert_nil @response.cookies["auth_token"]
   end
   
