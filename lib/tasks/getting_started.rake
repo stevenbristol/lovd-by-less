@@ -14,6 +14,7 @@ namespace :gems do
           redgreen
           RedCloth
           imagick
+          rmagick
           acts_as_ferret
           ferret
         ]
