@@ -1,8 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class FriendTest < Test::Unit::TestCase
-  # fixtures :friends, :users, :profiles
-  # 
+class FriendTest < ActiveSupport::TestCase
   # 
   # context "A Friend instance" do
   #   should_belong_to :inviter
@@ -50,12 +48,6 @@ class FriendTest < Test::Unit::TestCase
   #   _test_associations
   # end
   
-  
-  
-  
-  
-  
-  fixtures :users, :profiles, :friends
   
   
   should "not create an association with the same user" do

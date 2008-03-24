@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class AccountMailerTest < Test::Unit::TestCase
-  fixtures :users, :profiles
+class AccountMailerTest < ActiveSupport::TestCase
+
   FIXTURES_PATH = File.dirname(__FILE__) + '/../fixtures'
   CHARSET = "utf-8"
 

@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class ProfileTest < Test::Unit::TestCase
-  fixtures :profiles, :users, :friends, :comments
+class ProfileTest < ActiveSupport::TestCase
 
   context 'A Profile instance' do
     should_belong_to :user

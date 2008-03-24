@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class PhotoTest < Test::Unit::TestCase
-  fixtures :users, :photos
+class PhotoTest < ActiveSupport::TestCase
   
   context "A Photo instance" do
     

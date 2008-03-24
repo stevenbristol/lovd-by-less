@@ -1,8 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class BlogTest < Test::Unit::TestCase
-  fixtures :blogs, :profiles, :users, :comments, :friends
-  
+class BlogTest < ActiveSupport::TestCase
 
   should 'create new feed_item and feeds after creating a blog post' do
     assert_difference "FeedItem.count" do
@@ -12,9 +10,9 @@ class BlogTest < Test::Unit::TestCase
       end
     end
   end
-  
-  
-  
+
+
+
   def test_associations
     _test_associations
   end
