@@ -39,6 +39,7 @@ Install the Required Gems:
 - redgreen
 - RedCloth
 - imagick
+- rmagick (will require ImageMagick, which is not a gem)
 - acts_as_ferret
 - ferret
 - win32console (windows only)

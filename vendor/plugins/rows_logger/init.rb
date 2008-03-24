@@ -1,11 +1,10 @@
 # Include hook code here
 
-if defined? ActiveRecord::ConnectionAdapters::MysqlAdapter
-  ActiveRecord::ConnectionAdapters::MysqlAdapter.class_eval do
-    protected
-    def count_result(result)
-      result.num_rows
-    end
+Dir["#{ File.dirname(__FILE__) }/adapters/*.rb"].each do |path|
+  adapter = File.basename(path, '.rb')
+  if ActiveRecord::Base.respond_to?("#{adapter}_connection")
+    ActiveRecord::Base.logger.debug "RowsLogger plugin enables #{adapter}"
+    require path
   end
 end
 
@@ -56,6 +55,3 @@ ActiveRecord::ConnectionAdapters::AbstractAdapter.class_eval do
           " (%s %s)" % [count, unit]
         end
 end
-
-
-

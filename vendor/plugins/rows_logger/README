@@ -84,7 +84,22 @@ we check whether it is implemented or not in current adapter by using
 'respond_to?' method.
 
 
+Supported Databases
+===================
+
+Currently these databases are supported.
+
+* PostgreSQL
+* MySQL
+
+
+For Other Databases
+===================
+
+Put a new adapter file that contains 'count_result' method for
+your database adapter into adatpers directory.
+
+
 Author
 ======
-Maiha <anna@wota.jp>
-
+Maiha <maiha@wota.jp>
