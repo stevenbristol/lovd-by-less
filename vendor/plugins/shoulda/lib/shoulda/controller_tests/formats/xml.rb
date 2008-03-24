@@ -91,7 +91,9 @@ module ThoughtBot # :nodoc:
                 end
               else
                 should "destroy record" do
-                  assert_raises(::ActiveRecord::RecordNotFound) { @record.reload }
+                  assert_raises(::ActiveRecord::RecordNotFound, "@#{res.object} was not destroyed.") do
+                    @record.reload
+                  end
                 end
               end
             end
@@ -117,7 +119,7 @@ module ThoughtBot # :nodoc:
                 should_assign_to res.object
 
                 should "not have errors on @#{res.object}" do
-                  assert_equal [], assigns(res.object).errors.full_messages, "@#{res.object} has errors:"            
+                  assert_equal [], pretty_error_messages(assigns(res.object)), "@#{res.object} has errors:"            
                 end
               end      
             end
@@ -153,7 +155,13 @@ module ThoughtBot # :nodoc:
         
         # Asserts that the controller's response was 'application/xml'
         def assert_xml_response
-          assert_equal "application/xml; charset=utf-8", @response.headers['Content-Type'], "Body: #{@response.body.first(100)} ..."
+          content_type = (@response.headers["Content-Type"] || @response.headers["type"]).to_s
+          regex = %r{\bapplication/xml\b}
+
+          msg = "Content Type '#{content_type.inspect}' doesn't match '#{regex.inspect}'\n"
+          msg += "Body: #{@response.body.first(100).chomp} ..." 
+
+          assert_match regex, content_type, msg
         end
         
       end

@@ -37,7 +37,7 @@ module ThoughtBot # :nodoc:
       # controller responds restfully to a variety of requested formats.
       module ClassMethods
         # Formats tested by #should_be_restful.  Defaults to [:html, :xml]
-        VALID_FORMATS = Dir.glob(File.join(File.dirname(__FILE__), 'formats', '*')).map { |f| File.basename(f, '.rb') }.map(&:to_sym) # :doc:
+        VALID_FORMATS = Dir.glob(File.join(File.dirname(__FILE__), 'formats', '*.rb')).map { |f| File.basename(f, '.rb') }.map(&:to_sym) # :doc:
         VALID_FORMATS.each {|f| require "shoulda/controller_tests/formats/#{f}.rb"}
 
         # Actions tested by #should_be_restful
@@ -244,12 +244,14 @@ module ThoughtBot # :nodoc:
             @parent        ||= []
             @parent          = [@parent] unless @parent.is_a? Array
 
-            singular_args = @parent.map {|n| "@#{object}.#{n}"}
-            @destroy.redirect ||= "#{@object.pluralize}_url(#{singular_args.join(', ')})" 
+            collection_helper = [@parent, @object.to_s.pluralize, 'url'].flatten.join('_')
+            collection_args   = @parent.map {|n| "@#{object}.#{n}"}.join(', ')
+            @destroy.redirect ||= "#{collection_helper}(#{collection_args})"
 
-            singular_args << "@#{object}"
-            @create.redirect  ||= "#{@object}_url(#{singular_args.join(', ')})"
-            @update.redirect  ||= "#{@object}_url(#{singular_args.join(', ')})"
+            member_helper = [@parent, @object, 'url'].flatten.join('_')
+            member_args   = [@parent.map {|n| "@#{object}.#{n}"}, "@#{object}"].flatten.join(', ')
+            @create.redirect  ||= "#{member_helper}(#{member_args})"
+            @update.redirect  ||= "#{member_helper}(#{member_args})"
             @denied.redirect  ||= "new_session_url"
           end
           
