@@ -2,7 +2,6 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class HomeControllerTest < ActionController::TestCase
 
-
   should 'render contact form' do
     assert_nothing_raised do
       get :contact      

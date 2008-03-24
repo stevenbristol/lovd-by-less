@@ -1,17 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'feed_items_controller'
-
-# Re-raise errors caught by the controller.
-class FeedItemsController; def rescue_action(e) raise e end; end
 
 class FeedItemsControllerTest < ActionController::TestCase
-  fixtures :users, :profiles, :feeds, :feed_items, :blogs, :photos, :comments
-  
-  def setup
-    @controller = FeedItemsController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-  end
   
   context 'on DELETE to :destroy while logged in as :owner' do
     should 'remove the feed_item from the database using html' do

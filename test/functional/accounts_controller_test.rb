@@ -1,11 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'accounts_controller'
 
-# Re-raise errors caught by the controller.
-class AccountsController; def rescue_action(e) raise e end; end
+class AccountsControllerTest < ActionController::TestCase
 
-class AccountsControllerTest < Test::Unit::TestCase
-  fixtures :profiles, :users
   VALID_USER = {
     :login => 'lquire',
     :email => 'lquire@example.com',

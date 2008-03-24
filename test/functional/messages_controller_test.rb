@@ -1,8 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
+
 class MessagesControllerTest < ActionController::TestCase
-  fixtures :users, :profiles, :messages, :friends
-  
-  
+
   should "get the index" do
     assert_nothing_raised do
       get :index, {}, {:user => profiles(:user).id}
@@ -10,7 +9,7 @@ class MessagesControllerTest < ActionController::TestCase
       assert_template 'index'
     end
   end
-  
+
   should "get the index as :admin" do
     assert_nothing_raised do
       get :index, {}, {:user => profiles(:admin).id}
@@ -18,8 +17,8 @@ class MessagesControllerTest < ActionController::TestCase
       assert_template 'index'
     end
   end
-  
-  
+
+
   should "not get the index (security redirect)" do
     assert_nothing_raised do
       get :index
@@ -27,8 +26,8 @@ class MessagesControllerTest < ActionController::TestCase
       assert_redirected_to login_path
     end
   end
-  
-  
+
+
   should "get the show message page" do
     assert_nothing_raised do
       get :show, {:id => messages(:user_to_user2).id}, {:user => profiles(:user).id}
@@ -36,8 +35,8 @@ class MessagesControllerTest < ActionController::TestCase
       assert_template 'show'
     end
   end
-  
-  
+
+
   should "get the show message page (security redirect)" do
     assert_nothing_raised do
       get :show, {:id => messages(:user_to_user2)}
@@ -45,8 +44,8 @@ class MessagesControllerTest < ActionController::TestCase
       assert_redirected_to login_path
     end
   end
-  
-  
+
+
   should "get sent messages" do
     assert_nothing_raised do
       get :sent, {}, {:user => profiles(:user).id}
@@ -54,8 +53,8 @@ class MessagesControllerTest < ActionController::TestCase
       assert_template 'sent'
     end
   end
-  
-  
+
+
   should "not get sent messages" do
     assert_nothing_raised do
       get :sent
@@ -63,8 +62,8 @@ class MessagesControllerTest < ActionController::TestCase
       assert_redirected_to login_path
     end
   end
-  
-  
+
+
   should "create a new message" do
     assert_nothing_raised do
       assert_difference "Message.count" do
@@ -73,8 +72,8 @@ class MessagesControllerTest < ActionController::TestCase
       end
     end
   end
-  
-  
+
+
   should "not create a new message (redirect to login)" do
     assert_nothing_raised do
       assert_no_difference "Message.count" do
@@ -84,8 +83,8 @@ class MessagesControllerTest < ActionController::TestCase
       end
     end
   end
-  
-  
+
+
   should "not create a new message (missing data)" do
     assert_nothing_raised do
       assert_no_difference "Message.count" do
@@ -94,8 +93,8 @@ class MessagesControllerTest < ActionController::TestCase
       end
     end
   end
-  
-  
+
+
   should "not create a new message (no can_send)" do
     assert_nothing_raised do
       assert_no_difference "Message.count" do

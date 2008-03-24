@@ -1,11 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'blogs_controller'
 
-# Re-raise errors caught by the controller.
-class BlogsController; def rescue_action(e) raise e end; end
+class BlogsControllerTest < ActionController::TestCase
 
-class BlogsControllerTest < Test::Unit::TestCase
-  fixtures :blogs, :profiles, :users, :comments
   VALID_BLOG_POST = {
     :title => 'Valid Blog Post',
     :body => 'This is a valid blog post.'

@@ -27,6 +27,8 @@ class Test::Unit::TestCase
   # then set this back to true.
   self.use_instantiated_fixtures  = false
   
+  fixtures :all
+  
   include LessAuthenticationTestHelper
 
   # Add more helper methods to be used by all tests here...
