@@ -13,7 +13,6 @@ namespace :gems do
           mocha
           redgreen
           RedCloth
-          imagick
           rmagick
           acts_as_ferret
           ferret
