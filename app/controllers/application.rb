@@ -70,7 +70,6 @@ class ApplicationController < ActionController::Base
       next unless (l[0] == :all) || 
         (l[0] == :non_user && !@u) ||
         (l[0] == :user && @u) ||
-        (l[0] == :user_admin && @u.is_user_admin) ||
         (l[0] == :owner && @p && @p.id==(params[:profile_id] || params[:id]).to_i)
       args = l[1]
       @level = [] and return true if args[:all] == true
