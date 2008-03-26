@@ -1,7 +1,9 @@
 .DS_Store
+db/*.db
 log/*.log
 tmp
 config/database.yml
 index
 public/system
+test/public/system
 vendor/rails
