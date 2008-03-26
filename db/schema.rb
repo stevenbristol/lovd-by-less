@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(:version => 1) do
     t.string   "email"
     t.boolean  "is_active",        :default => false
     t.string   "youtube_username"
-    t.string   "flickr_username"
+    t.string   "flickr_username",  :default => "",    :null => false
   end
 
   add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"

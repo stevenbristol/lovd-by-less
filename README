@@ -38,7 +38,6 @@ Install the Required Gems:
 - mocha
 - redgreen
 - RedCloth
-- imagick
 - rmagick (will require ImageMagick, which is not a gem)
 - acts_as_ferret
 - ferret
