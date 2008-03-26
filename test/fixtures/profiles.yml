@@ -25,13 +25,14 @@
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
 user:
     user: user
     first_name: De
     last_name: Veloper
     email: user@example.com
     is_active: true
-    icon: Photo_2.jpg
+    icon: user.png
 
 user2:
     user: user2

@@ -112,6 +112,33 @@ class ProfilesControllerTest < ActionController::TestCase
     should_render_template :edit
     should_render_a_form
     should_not_set_the_flash
+  end  
+  
+  context 'rendering an avatar' do
+    
+    should 'use the user\'s icon if it exists' do
+      p =  profiles(:user)
+      p.icon = File.new(File.join(RAILS_ROOT, ['test', 'public','images','user.png']))
+      p.save!
+      #raise (p.send :icon_state).inspect
+      assert_not_nil p.icon
+      get :show, {:id => p.id, :public_view => true}, {:user => p.id}
+      assert_tag :img, :attributes => { :src => /\/system\/profile\/icon\/\d*\/big\/user.png/ }
+    end
+    
+    should 'use gravatar otherwise' do
+      p =  profiles(:user2)
+      assert_nil p.icon
+      get :show, {:id => p.id}, {:user => p.id, :public_view => true}
+      assert_tag :img, :attributes => {:src => /www\.gravatar\.com/}
+    end
+    
+    should 'send the app\'s internal default as the default to gravatar' do
+      p =  profiles(:user2)
+      assert_nil p.icon
+      get :show, {:id => p.id}, {:user => p.id, :public_view => true}
+      assert_tag :img, :attributes => {:src => /www\.gravatar\.com.*default=http:\/\/test.host\/images\/avatar_default_.*\.png/}
+    end
   end
 
 

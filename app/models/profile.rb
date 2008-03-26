@@ -68,11 +68,11 @@ class Profile < ActiveRecord::Base
   
   acts_as_ferret :fields => [ :location, :f, :about_me ], :remote=>true
   
-  file_column :icon, :root_path => File.join(RAILS_ROOT, "public/system"), :web_root => 'system/', :magick => {
+  file_column :icon, :magick => {
     :versions => { 
-    :big => {:crop => "1:1", :size => "150x150", :name => "big"},
-    :medium => {:crop => "1:1", :size => "100x100", :name => "medium"},
-    :small => {:crop => "1:1", :size => "50x50", :name => "small"}
+      :big => {:crop => "1:1", :size => "150x150", :name => "big"},
+      :medium => {:crop => "1:1", :size => "100x100", :name => "medium"},
+      :small => {:crop => "1:1", :size => "50x50", :name => "small"}
     }
   }
   

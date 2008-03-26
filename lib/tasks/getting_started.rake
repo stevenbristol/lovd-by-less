@@ -16,6 +16,7 @@ namespace :gems do
           imagick
           acts_as_ferret
           ferret
+          avatar
         ]
       gems << 'win32console' if windoz
       sudo = windoz ? '' : 'sudo '

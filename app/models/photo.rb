@@ -24,9 +24,8 @@ class Photo < ActiveRecord::Base
     feed_item = FeedItem.create(:item => self)
     ([profile] + profile.friends + profile.followers).each{ |p| p.feed_items << feed_item }
   end
-  
-  
-  file_column :image, :root_path => File.join(RAILS_ROOT, "public/system"), :web_root => 'system/', :magick => {
+
+  file_column :image, :magick => {
     :versions => { 
       :square => {:crop => "1:1", :size => "50x50", :name => "square"},
       :small => "175x250>"
