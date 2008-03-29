@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   validates_length_of :password, :within => 4..40, :if => :password_required?
   validates_length_of :login, :within => 3..40
   validates_uniqueness_of :login, :case_sensitive => false
-  validates_format_of :email, :with => /^([^@\s]{1}+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :on => :create, :must=>"Invalid email address."
+  validates_format_of :email, :with => /^([^@\s]{1}+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :on => :create, :message=>"Invalid email address."
 
   before_save :encrypt_password
   validates_captcha unless ENV['RAILS_ENV'] == 'test'
