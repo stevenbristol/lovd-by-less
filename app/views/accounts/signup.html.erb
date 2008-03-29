@@ -14,18 +14,17 @@ terms_of_service_label = "Accept #{link_to 'Terms of Service', tos_path, :target
     <%= f.text_field :email %>
     <%= f.password_field :password %>
     <%= f.password_field :password_confirmation, :label => 'Confirm Password' %>
-    <% f.wrap :label=>"" do  %> 
+    <% f.wrap nil, :label=>"" do  %> 
     <div class="row">    
       <%= captcha_field(:user)  unless RAILS_ENV == 'test'%>
       </div>
     <% end %>  
     
-    <div class='row clear'>
-      <label><%= terms_of_service_label %>:</label>
+	<%= f.front :terms_of_service, :label => terms_of_service_label %>
       <%= check_box_tag :user_terms_of_service, 1, params[:terms_of_service], :class => 'checkbox', :name => 'user[terms_of_service]' %>
     </div>
     
-    <%= f.wrap(:label => 'Remember Me'){ check_box_tag :remember_me, 1, params[:remember_me], :class=>"checkbox"} %>
+    <%= f.wrap(:remember_me, :for => :remember_me){ check_box_tag :remember_me, 1, params[:remember_me], :class=>"checkbox"} %>
 	  <div class="button">
 	  <%= f.submit 'Sign-up Now', :class => 'button' %>
 	  </div>

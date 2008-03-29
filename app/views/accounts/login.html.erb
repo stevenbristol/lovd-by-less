@@ -9,7 +9,7 @@
 
   <%= f.text_field :login, :class => "focus_first" %>
   <%= f.password_field :password %>
-  <%= f.wrap(:label => 'Remember Me'){ check_box_tag 'remember_me',1,false, :class=>"checkbox" } %>
+  <%= f.wrap(:remember_me, :for => :remember_me){ check_box_tag 'remember_me',1,false, :class=>"checkbox" } %>
 
   <div class="button">
     <%= f.submit 'Log-in Now', :class=>'button' %>

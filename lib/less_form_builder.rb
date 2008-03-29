@@ -8,50 +8,61 @@ class LessFormBuilder < ActionView::Helpers::FormBuilder
   end
   
   
-  def wrap options = {}
-    label = options[:label]
-    s = front(label) 
+  def wrap method, options = {}
+    s = front(method, options) 
     s += yield if block_given?
-    s += back(label)
+    s += back(method, options)
   end
   
-  def select method, options = []
-    label = get_label method, options
-    front(label) + super + back(method)
+  # Generates a label
+  #
+  # If +options+ includes :for,
+  # that is used as the :for of the label.  Otherwise,
+  # "#{this form's object name}_#{method}" is used.
+  #
+  # If +options+ includes :label,
+  # that value is used for the text of the label.  Otherwise,
+  # "#{method titleized}: " is used.
+  def label method, options = {}
+    text = options[:label] ||  "#{method.to_s.titleize}: "
+    if options[:for]
+      "<label for='#{options.delete(:for)}'>#{text}</label>"
+    else
+      #need to use InstanceTag to build the correct ID for :for
+      ActionView::Helpers::InstanceTag.new(@object_name, method, self, nil, @object).to_label_tag(text, options)
+    end
+  end
+  
+  def select method, options = {}
+    front(method, options) + super + back(method, options)
   end
   
   def text_field method, options = {}
-    label = get_label method, options
-    front(label) + super + back(method)
+    front(method, options) + super + back(method, options)
   end
   
   def password_field method, options = {}
-    label = get_label method, options
-    front(label) + super + back(method)
+    front(method, options) + super + back(method, options)
   end
   
   
   def text_area method, options = {}
-    label = get_label method, options
-    front(label) + super + back(method)
+    front(method, options) + super + back(method, options)
   end
   
   def check_box method, options = {}
-    label = get_label method, options
-    front(label) + super + back(method)
+    front(method, options) + super + back(method, options)
   end
   
   
   def calendar_field method, options = {}
     expired = options.delete(:expired) || false
-    label = get_label method, options
     if not expired; options.merge!(:class => 'calendar'); else; options.merge!(:disabled => true); end
     text_field method, options
   end
   
-  
-  def front label = '', options = {}
-    "<div class='row clear'><label>#{label.to_s.titleize}:</label> "
+  def front method = '', options = {}
+    "<div class='row clear'>#{label(method, options)}"
   end
   
   def back method = '', options = {}
@@ -60,13 +71,6 @@ class LessFormBuilder < ActionView::Helpers::FormBuilder
   	<div class='clear'></div>
     </div>
     EOS
-  end
-  
-  
-  protected
-  def get_label method, options
-    label = options.delete(:label) || method
-    label.to_s.titleize
   end
   
 end

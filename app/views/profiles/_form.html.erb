@@ -53,7 +53,7 @@
     <% less_form_for @p, :html=>{:method=>:put, :multipart=>true, :class=>"box no_top"} do |p| %>
       <h2><%= "Upload Icon:" %></h2>
     
-      <%= p.front 'Upload your Icon' %>
+      <%= p.front :icon, :label => 'Upload your Icon' %>
       <%= file_column_field( "profile", "icon", :size => 15)%>
       <div class="clear"></div>
       <% unless @p.icon.blank? %>
@@ -79,17 +79,17 @@
     <% less_form_for @p, :html=>{:method=>:put, :class=>"box no_top"} do |p| %>
       <h2><%= "Change Password" %></h2>
 
-      <%= p.front 'Current Password' %>
+      <%= p.front :current_password, :for => :verify_password %>
         <input type="password" name="verify_password" id="verify_password" />
         <%= error_messages_on(:user, :password) %>
       <%= p.back %>
 
-      <%= p.front 'New Password' %>
+      <%= p.front :new_password, :for => :new_password %>
         <input type="password" name="new_password" id="new_password" />
         <%= error_messages_on(:user, :new_password) %>
       <%= p.back %>
 
-      <%= p.front 'Confirm Password' %>
+      <%= p.front :confirm_password, :for => :confirm_password %>
         <input type="password" name="confirm_password" id="confirm_password" />
       <%= p.back %>
 

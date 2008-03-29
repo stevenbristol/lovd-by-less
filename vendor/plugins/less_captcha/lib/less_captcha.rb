@@ -56,22 +56,24 @@ module Less
       #
       # the following HTML will be generated. The hidden field contains an encrypted version of the answer
       #
-      #   <p class="less_captcha">Challenge Question</p>
-      #   <input type="hidden" name="entry[captcha_answer]" value="..." />
-      #   <input type="text" name="entry[captcha]" />
+      #   <label for="entry_captcha">What is ...</label>
+      #   <input type="hidden" id="entry_captcha_answer" name="entry[captcha_answer]" value="..." />
+      #   <input type="text" id="entry_captcha" name="entry[captcha]" />
       #
       # You can use the +options+ argument to pass additional options to the text-field tag.
-      def captcha_field(object, options={})
+      def captcha_field(object_name, options={})
         b = rand(10) + 1
         a = b + rand(10)
         op = ['+', '-'][rand(2)]
         question = "What is #{a} #{op} #{b}?"
         answer = a.send(op, b)
-        eval("@"+object.to_s).setup_captcha(answer)
+        eval("@"+object_name.to_s).setup_captcha(answer)
 
-        result = "<label class=\"less_captcha\">#{question}</label>"
-        result << ActionView::Helpers::InstanceTag.new(object, PREFIX + SUFFIX, self).to_input_field_tag("hidden", {})
-        result << ActionView::Helpers::InstanceTag.new(object, PREFIX, self).to_input_field_tag("text", options)
+        returning("") do |result|
+          result << ActionView::Helpers::InstanceTag.new(object_name, PREFIX, self).to_label_tag(question, {})
+          result << ActionView::Helpers::InstanceTag.new(object_name, PREFIX + SUFFIX, self).to_input_field_tag("hidden", {})
+          result << ActionView::Helpers::InstanceTag.new(object_name, PREFIX, self).to_input_field_tag("text", options)
+        end
       end
     end
   end
