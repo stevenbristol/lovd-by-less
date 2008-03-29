@@ -1,26 +1,28 @@
+gem 'avatar', '>= 0.0.4'
+
 require 'avatar'
 require 'avatar/source/file_column_source'
+require 'avatar/source/rails_asset_source'
 require 'avatar/source/source_chain'
-require 'avatar/source/string_substitution_source'
 require 'sized_gravatar_source'
 
 # order:
 # 1.  FileColumn(Profile.icon)
 # 2.  Gravatar(nil_source, Profile.email)
+# 3.  RailsAsset('/images/avatar_default_#{size}.png)
 #
-# Gravatar accepts a default if no gravatar exists for the
-# email address passed.  Unfortunately, it needs to be
-# a full URL (not just a path relative to the request).
-# Thus, this won't work:
-#   gravatar.default_source = Avatar::Source::StringSubstitutionSource.new('/images/avatar_default_#{size}.png')
-# Instead, we have to pass in a default in the avatar_url_for
-# call in app/helpers/profiles_helper
+# GravatarSource doesn't understand size replacement
+# by default, so we create a subclass that does
+# (see /lib/sized_gravatar_source.rb).
 #
-# Additionally, Gravatar does not understand :small, :medium, and :big,
-# so we must translate using SizedGravatarSource
+# The RailsAssetSource requires ActionController::Base::asset_host to be set.
+# It doesn't need to be set until an avatar is generated, though, so
+# it's fine to set it in a later initializer.
+
+last_resort = Avatar::Source::RailsAssetSource.new('/images/avatar_default_#{size}.png')
 
 chain = Avatar::Source::SourceChain.new
 chain << Avatar::Source::FileColumnSource.new(:icon)
-chain << SizedGravatarSource.new(nil, :email)
+chain << SizedGravatarSource.new(last_resort, :email)
 
 Avatar::source = chain
