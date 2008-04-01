@@ -17,10 +17,11 @@ Instructions:
 Quick Setup (currently for non-Windows users only - due to ferret gem issues):
 
   1. Edit config/database.yml.tmp to reflect the database names you would like to use.
-  2. cp config/database.yml.tmp config/database.yml
-  3. rake lovdbyless:getting_started
-  4. rake test
-  5. See step #6 below to continue setup (near "Setup default values")
+  2. Edit config/environments/production.rb so asset_host reflects the name of the production asset server
+  3. cp config/database.yml.tmp config/database.yml
+  4. rake lovdbyless:getting_started
+  5. rake test
+  6. See step #6 below to continue setup (near "Setup default values")
 
 The getting_started rake task will install all required gems, create the databases in database.yml, 
 and migrate the development and test databases.
