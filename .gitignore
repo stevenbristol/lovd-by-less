@@ -1,9 +1,11 @@
 .DS_Store
 db/*.db
+db/schema.rb
 log/*.log
 tmp
 config/database.yml
 index
 public/system
+public/javascripts/less_routes.js
 test/public/system
 vendor/rails

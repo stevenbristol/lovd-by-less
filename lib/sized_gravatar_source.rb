@@ -9,8 +9,12 @@ class SizedGravatarSource < Avatar::Source::GravatarSource
   end
   
   def parse_options(profile, options)
-    options[:size] = self.class.sizes[options[:size]] if self.class.sizes.has_key?(options[:size])
-    parse_options_without_size(profile, options)
+    #pass :gravatar_size through, but translate :size or :s to a number if possible
+    parsed_options = parse_options_without_size(profile, options)
+    [:size, :s].each do |k|
+      parsed_options[k] = self.class.sizes[options[k]] if self.class.sizes.has_key?(options[k])
+    end
+    parsed_options
   end
   
 end

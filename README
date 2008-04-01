@@ -42,7 +42,7 @@ Install the Required Gems:
 - acts_as_ferret
 - ferret
 - win32console (windows only)
-- avatar
+- avatar (version 0.0.5 or greater)
 
 TIP:
 Installing ferret on Windows

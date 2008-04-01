@@ -10,7 +10,7 @@ config.cache_classes = true
 # Full error reports are disabled and caching is turned on
 config.action_controller.consider_all_requests_local = false
 config.action_controller.perform_caching             = true
-#config.action_controller.asset_host                  = "http://assets%d.yoursite.com"
+config.action_controller.asset_host                  = "http://assets%d.yoursite.com"
 
 # Disable delivery errors, bad email addresses will be ignored
 # config.action_mailer.raise_delivery_errors = false
