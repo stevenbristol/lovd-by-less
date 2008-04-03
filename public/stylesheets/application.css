@@ -121,7 +121,7 @@ h2 a			{text-transform: capitalize; font-weight: normal; font-size: 11px;}
 
 .avatar_on_comment	{margin: 0 10px 10px 0;}
 
-.comment_message	{padding: 0 0 10px 0; margin: 0 0 5px 0;}
+.comment_message	{overflow: hidden; padding: 0 0 10px 0; margin: 0 0 5px 0; max-height: 100px;}
 .comment_holder		{padding-top: 10px;}
 .comments 			{padding: 0px 10px 0px 10px;}
 
