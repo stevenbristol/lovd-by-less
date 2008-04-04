@@ -1,0 +1,11 @@
+= Query Stats Change Log
+
+* February 14, 2007
+  * Fixed test_helper.rb so tests run without having the plugin in a Rails project.
+  * No longer need to include QueryStats in ApplicationController
+  * Depend on Rails >= 1.2
+  * Add query count to log.
+
+* September 22, 2006
+  * Fixed bug causing project test methods to fail when using assigns(:variable)
+  * Fixed bug which set label to :select after :columns, QueryStatsHolder#with_label will successfully ignore column queries.

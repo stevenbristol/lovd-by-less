@@ -1,0 +1,5 @@
+postgresql:
+  adapter: postgresql
+  database: plugin_test
+  host: localhost
+  min_messages: ERROR

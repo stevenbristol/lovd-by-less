@@ -1,0 +1,125 @@
+<h1>Edit Profile <%= 'or '+link_to('Skip This Step', profile_path(@p)) if flash[:notice]=="Thanks for signing up!" %></h1>
+
+
+<div id="sub_nav">
+<%= link_to 'View Public Profile', profile_path(@p).add_param(:public_view=>true)%>
+<%= link_to('&larr; Jump to Dashboard', @p) if @p %>  
+</div>
+
+<div class="left half">
+  <div id="general_info">
+    <% less_form_for @p, :html=>{:method=>:put, :class=>"box no_top"} do |p| %>
+      <h2><%= "General info" %></h2>
+
+      <%= p.front :email %>
+      <input type="text" name="profile[email]" id="profile_email" value="<%= params[:profile].blank? || params[:profile][:email].blank? ? @p.email : params[:profile][:email] %>">
+      <%= error_messages_on(:profile, :email) %>
+      <%= p.back %>
+
+      <%= p.text_field :first_name %>   
+      <%= p.text_field :last_name %>
+      <%= p.text_field :location %>    
+      <%= p.text_field :website %>
+      <%= p.text_field :flickr %>  
+      <%= p.text_field :youtube_username %>    
+      <%= p.text_field :flickr_username %>    
+      <%= p.text_field :blog %>    
+      <%= p.text_field :aim_name, :label=>'AIM Name' %>
+      <%= p.text_field :gtalk_name, :label=>'GTalk Name' %>
+      <%= p.text_field :ichat_name, :label=>'iChat Name' %>
+      <%= p.text_area :about_me %>
+      
+      <div class="row button">
+      <%= p.submit 'Save', :class => 'button' %>
+      </div>
+    
+      <input type="hidden" name="switch" value="name" />
+    <% end %>
+  </div>
+
+  <div class="clear"></div>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="right half">
+  <div id="upload_icon">
+    <% less_form_for @p, :html=>{:method=>:put, :multipart=>true, :class=>"box no_top"} do |p| %>
+      <h2><%= "Upload Icon:" %></h2>
+    
+      <%= p.front :icon, :label => 'Upload your Icon' %>
+      <%= file_column_field( "profile", "icon", :size => 15)%>
+      <div class="clear"></div>
+      <% unless @p.icon.blank? %>
+      <div id="avatar_edit">
+        <span id="profile_icon_picture">
+          <%= icon @p %>
+          <%= link_to_remote 'delete icon', :url=>delete_icon_profile_path(@p), :confirm=>DELETE_CONFIRM  %>
+        </span>
+      </div>
+      <% end %>
+      <%= p.back :icon %>
+
+      <div class="row button">
+      <%= p.submit 'Save', :class => 'button' %>
+      </div>
+
+      <input type="hidden" name="switch" value="image" />
+    <% end %>
+  </div>
+
+
+  <div id="change_passwords">
+    <% less_form_for @p, :html=>{:method=>:put, :class=>"box no_top"} do |p| %>
+      <h2><%= "Change Password" %></h2>
+
+      <%= p.front :current_password, :for => :verify_password %>
+        <input type="password" name="verify_password" id="verify_password" />
+        <%= error_messages_on(:user, :password) %>
+      <%= p.back %>
+
+      <%= p.front :new_password, :for => :new_password %>
+        <input type="password" name="new_password" id="new_password" />
+        <%= error_messages_on(:user, :new_password) %>
+      <%= p.back %>
+
+      <%= p.front :confirm_password, :for => :confirm_password %>
+        <input type="password" name="confirm_password" id="confirm_password" />
+      <%= p.back %>
+
+      <div class="row button">
+      <%= p.submit 'Save', :class => 'button' %>
+      </div>
+      
+      <input type="hidden" name="switch" value="password" />
+    <% end %>
+  </div>
+
+
+  <div id="delete_account">
+        <form>
+      <h2><%= "Change Password" %></h2>
+      
+      <%= link_to_remote 'Delete my user account and all my data.', :url=>profile_path(@p), :method=>:delete, :confirm=>DELETE_CONFIRM  %>
+        </form>
+  </div>
+
+  <div class="clear"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,54 @@
+<% less_form_for @user, :url => login_path, :method => :post do |f| %>
+
+<div id="login_form">
+  <h1>Log-in your Account</h1>
+
+  <div class="instruction">
+    <%= link_to "Oops, I need an account!", signup_url  %>
+  </div>
+
+  <%= f.text_field :login, :class => "focus_first" %>
+  <%= f.password_field :password %>
+  <%= f.wrap(:remember_me, :for => :remember_me){ check_box_tag 'remember_me',1,false, :class=>"checkbox" } %>
+
+  <div class="button">
+    <%= f.submit 'Log-in Now', :class=>'button' %>
+  </div>
+
+</div>
+
+<div class="instruction">
+  <span>I <span id="forgot_text">forgot</span> my <a href="javascript:void(0);" id="forgot_password_clicker" style="display: inline;">password</a></span>
+</div>
+
+<div id="forgot_form" class="hidden">	
+  <h1>Retrieve My Password</h1>
+  <div class="instruction">Enter email address and your password will be sent to you.</div>
+  <div id="forgot_password">
+    <%= f.text_field :email, :label => "Enter Email Address" %>
+  </div>
+  <div class="button">
+    <%= f.submit 'Retrieve Password', :class => 'button' %>
+  </div>
+</div>
+<% end %>
+
+
+
+
+<script type="text/javascript" charset="utf-8">
+//<![CDATA[
+jQuery(function(){
+  tog("#forgot_password_clicker", "#login_form");
+  tog("#forgot_password_clicker", "#forgot_form", forgot_text);
+
+});
+function forgot_text(){
+  if (jQuery("#forgot_text").html() == "forgot")
+  jQuery("#forgot_text").html("remember");
+  else
+  jQuery("#forgot_text").html("forgot");
+
+}
+//]]>
+</script>

@@ -1,0 +1,12 @@
+<% 
+#locals
+photo ||= wall
+photo ||= @photo
+%>
+
+<div class="left image">
+	<div>
+	<a href="<%= image_path(photo, nil) %>" title="<%= photo.caption %>" alt="<%= photo.caption %>" class="thickbox" rel="user_gallery"><%= image photo, :small %></a>
+	</div>
+	<%= link_to '(delete)', profile_photo_path(photo.profile, photo), :method => :delete if me %>
+</div>

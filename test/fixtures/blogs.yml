@@ -1,0 +1,85 @@
+# == Schema Information
+# Schema version: 1
+#
+# Table name: blogs
+#
+#  id         :integer(11)   not null, primary key
+#  title      :string(255)   
+#  body       :text          
+#  profile_id :integer(11)   
+#  created_at :datetime      
+#  updated_at :datetime      
+#
+
+first:
+  title: "blog 1"
+  body: "blah blah blah blah blah"
+  profile: user
+
+second:
+  title: "blog 2"
+  body: "blah blah blah blah blah"
+  profile: user2
+
+third:
+  title: "blog 3"
+  body: "blah blah blah blah blah"
+  profile: user
+
+four:
+  title: "blog 4"
+  body: "blah blah blah blah blah"
+  profile: user
+
+five:
+  title: "blog 5"
+  body: "blah blah blah blah blah"
+  profile: user
+
+six:
+  title: "blog 6"
+  body: "blah blah blah blah blah"
+  profile: user
+
+seven:
+  title: "blog 7"
+  body: "blah blah blah blah blah"
+  profile: user
+
+eight:
+  title: "blog 8"
+  body: "blah blah blah blah blah"
+  profile: user
+
+nine:
+  title: "blog 9"
+  body: "blah blah blah blah blah"
+  profile: user
+ten:
+  title: "blog 10"
+  body: "blah blah blah blah blah"
+  profile: user
+eleven:
+  title: "blog 11"
+  body: "blah blah blah blah blah"
+  profile: user
+twelve:
+  title: "blog 7"
+  body: "blah blah blah blah blah"
+  profile: user
+thirteen:
+  title: "blog 8"
+  body: "blah blah blah blah blah"
+  profile: user
+fourteen:
+  title: "blog 9"
+  body: "blah blah blah blah blah"
+  profile: user
+fifteen:
+  title: "blog 10"
+  body: "blah blah blah blah blah"
+  profile: user
+sixteen:
+  title: "blog 11"
+  body: "blah blah blah blah blah"
+  profile: user

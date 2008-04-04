@@ -1,0 +1,48 @@
+<%-
+#locals
+list ||= @list
+sub ||= 'inbox'
+label ||= 'Inbox Messages'
+sent = params[:action]=='sent'
+-%>
+
+<h1>Message Center</h1>	
+<div id="sub_nav">
+	<%= link_to '&larr; Back to Dashboard', @p %>  
+	<%= link_to "Inbox", messages_path if sent %>
+	<%= link_to "Sent", sent_messages_path, :class=>"selected"  unless sent || @p.sent_messages.empty? %>
+	<%= inline_tb_link 'New Message', "new_direct_message", {:title => "New Message"}, {:height => 380} %>
+</div>
+
+<div class="activity_box" id="comment">
+	<h2><%= sanitize label %></h2>
+</div>
+ 
+<%- if list.empty? -%>
+<p>No Messages</p>
+<%- else -%>
+<table id="messages" border="0" cellspacing="0" cellpadding="0">
+ 	<tr>
+   		<th><%= sent ? "To" : "From" %></th>
+    	<th><%= "When" %></th>
+    	<th><%= "Subject" %></th>
+	</tr>
+	<% list.each do |m|
+		mail_user = (@p == m.sender ? m.receiver : m.sender)%>
+	<tr>
+		<td><%= link_to mail_user.f,  mail_user %></td>
+		<td><%= time_ago_in_words m.created_at %></td>
+		<td><%= link_to h( m.subject), message_path(m) %></td>
+	</tr>
+	<% end %>
+</table>
+<%- end -%>
+
+
+
+
+
+
+<div id="new_direct_message" class="hidden">
+	<%= render :partial => 'messages/form', :locals => {:hide_header => true} %>
+</div>

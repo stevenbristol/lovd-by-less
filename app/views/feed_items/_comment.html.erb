@@ -1,0 +1,16 @@
+<%-
+#locals
+comment = feed_item.item
+-%>
+
+
+<div class="feed_item comment_feed" id="<%= feed_item.dom_id %>">
+  <div class="left">
+    <img src="/images/blurp_comment.png" class="png icon_small" title="User Comment Icon" alt="User Comment Icon" />
+    <%= commentable_text comment %>
+  </div>
+  <div class="right">
+    <%= x_feed_link(feed_item) if me %>
+  </div>
+  <div class="clear"></div>
+</div>

@@ -1,0 +1,41 @@
+<% 
+#locals
+blog ||= @blog 
+
+%>
+
+<div id="blog_<%= blog.id %>" class="border_top">
+
+    Posted <%= time_ago_in_words blog.created_at  %>
+		<%- if @p == @profile -%>
+			<%= link_to '(edit)', edit_profile_blog_path(@profile, blog) %>
+			<%= link_to '(delete)', profile_blog_path(@profile, blog), :method => :delete %>
+		<%- end -%>
+
+	<h1><%= sanitize textilize(blog.title) %></h1>
+	<div>
+	  <%= blog_body_content blog %>
+	</div>
+	<div id="border_top"><%= "Comments (#{blog.comments.size})" %> | <%= inline_tb_link('Add a Comment', "#{dom_id(blog)}_new_comment", :title => "Leaving A Comment On #{h blog.title}") if @p %>
+  </div>
+	
+	<div id="<%= dom_id(blog) %>_comment_div" class="comments">
+		<div id="<%= dom_id(blog) %>_comments">
+		<% blog.comments.each do |c| %>
+			<%= render :partial => 'comments/comment', :locals => { :comment => c } %>
+		<% end %>
+		</div>
+	
+    
+		<div id="<%= dom_id(blog) %>_new_comment" class="hidden">
+			<% less_remote_form_for :comment, :url => blog_comments_path(blog), :html => { :id => "#{dom_id(blog)}_comment_form"} do |f| %>
+				<%= f.text_area :comment %>
+				<div class="row button">
+				<%= f.submit 'Add Comment', :class=>'button' %>
+				<div class="clear"></div>
+				</div>
+			<% end %>
+		</div>
+		<span id="<%= dom_id(blog) %>_comment_messages"></span>
+	</div>
+</div>

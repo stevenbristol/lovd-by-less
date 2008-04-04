@@ -1,0 +1,369 @@
+/* 
+You're looking at CSS written by Allan Branch of LessEverything.com 
+If you have questions email me at Allan(at)LessEverything(dot)com
+To be able to read the rhtml better I use default classes (right, left, clear)
+div class=clear is your friend, horizontal lists aren't
+*/
+
+body  {
+	font: normal 11px "Lucida Grande", Helvetica, Arial, sans-serif;
+	background: url(/images/bg.jpg);
+	margin: 0px auto;
+	padding: 0px; 
+	color: #eee; 
+	text-align: center;
+	line-height: 160%;
+}	
+div, img, form, ul {
+	margin: 0px;
+	padding: 0px;
+	border: 0px; 
+}
+small			{font-size: 9px;}
+div, span, td, .text_l {text-align: left;}	
+.clear 			{clear: both;}	
+.text_r 		{text-align: right;}
+.text_c,
+div .text_c 		{text-align: center;}
+a 				{font: normal  "Arial", sans-serif; text-decoration: none; color: #f9f2a1; }
+a:hover 		{text-decoration: underline; }	
+.left 			{float: left;}
+.right 			{float: right;}
+.hidden			{display: none;}
+li				{list-style: none;}
+#wrapper 		{width: 870px; margin: 0px auto; padding: 0px;}
+#plain_wrapper 	{width: 450px; margin: 0px auto; padding: 0px; background: black url(/images/top_hearts_black.png) no-repeat; border: 10px solid #666;}
+
+
+#content		{color: #d2d2d2; background: #0a1c34 url(/images/site_bg.png) repeat-x; padding: 0 0 0 0; min-height: 600px; height:auto !important; height:600px;}
+#just_for_hearts{background:  url(/images/top_hearts_black.png) no-repeat;}
+#main			{padding: 0 25px 25px 25px; }
+#content_top	{padding: 10px;  margin: 0 15px 5px 15px;}
+
+#search input	{border: none; padding: 2px; font-size: 15px; width: 250px;}
+#search input.button	{background: url(/images/search_button.png) no-repeat; width: 30px; height: 30px; margin: 0 0 -1px 2px;}
+
+#welcome img	{width: 17px; margin: 0 5px -5px 0; border: 1px solid #666;}
+#demo_links	a	{float: right; padding: 5px; background: #222; color: #f9f2a1; margin: 0 3px 0 3px;}
+#demo_links	a:hover	{background: #999; color: #333;}
+#top a			{font-size: 20px;  font-weight: bold; color: #e185a7; margin: 0 8px;}
+#top img		{margin: 0 0 0 10px;}
+#top .right		{margin: 20px 0 0 0;}
+#top			{padding: 30px 0 20px 0;}
+
+#front_left_column		{width: 285px; margin: 25px 35px 15px 0;}
+#front_middle_column	{width: 195px; margin: 25px 25px 15px 0; }
+.front_right_column		{width: 268px; margin: 25px 0 0 0;}
+.front_right_column img	{margin: 0 15px 0px 0; font-size: 12px;}
+.image			{background: #222; margin: 0 12px 20px 0; }
+.image img		{margin: 10px;}
+.small_down_image div		{width: 100px; overflow: hidden; height: 100px;}
+.small_down_image 	{width: 110px; height: 110px;}
+.image:hover	{background: #313131;}
+.image a 		{font-size: 9px;}
+.pad2			{margin: 30px;}
+#login_form,
+#forgot_form		{padding: 5px 0 25px 0;}
+.comment		{padding: 0 0 5px 0; margin: 3px 0 5px 0;}
+.newest_member	{margin: 5px 0 18px 0;}
+.newest_member a{display: block;}
+
+
+.row input.checkbox	{width: auto; border: none; background: none; padding: 0 0 0 0;}
+.row 			{padding: 7px 5px;}
+.row label		{width: 140px; float: left;}
+textarea,
+.row input,
+.row select		{float: left; width: 220px; background: #ddd; border: none; padding: 2px;}
+.row textarea	{height: 200px;}
+input.button	{background: #666; color: #ddd; font-weight: bold; font-size: 10px; width: auto; height: auto; padding: 5px;}
+input.button:hover	{background: #2ab769; }
+div.button		{background: #1a1a1a; border-top: 1px dotted #666; padding: 10px; height: 25px; margin-top: 15px;}
+h1				{font-size: 28px;  letter-spacing: -1.2pt; color: white; font-weight: bold; margin: 25px 0 20px 0;}
+h2				{font-size: 14px; color: white; font-weight: bold; margin: 0 0 10px 0; text-transform: capitalize;}
+form h2			{margin: 30px 0 10px 0; border-bottom: 1px dotted #666; padding-bottom: 7px; clear: both;}
+h3				{font-size: 13px; margin-bottom: 10px;}
+#general_info,
+#upload_icon,
+#change_passwords	{padding-bottom: 30px;}
+.instruction	{padding: 5px; font-weight: bold;}
+.half			{width: 46%;}
+#avatar_edit	{padding: 3px; background: black; border: 1px solid #ddd; clear: both; margin: 10px 0;}
+
+#column_r		{width: 220px; padding: 8px 0 0 0;}
+#column_l		{width: 555px;}
+#column_r li a	{font-size: 20px; text-transform: capitalize; display: block;}
+#column_r li,
+#column_r ul	{padding: 14px 0;}
+.activity_box	{border-top: 4px solid #6a1534; clear: both; padding: 5px 0 0 0; margin: 15px 0 25px 0;}
+.activity_box strong	{color: white;}
+.learn			{border-top: none;}
+a.big_link		{display: block; font-size: 12px;}
+
+.bio_stuff		{width: 370px;}
+.bio_stuff h1	{margin-top: 0px;}
+h2 a			{text-transform: capitalize; font-weight: normal; font-size: 11px;}
+
+.inside_box		{margin: 0 10px 0 10px;}
+#sub_nav a		{margin: 0 9px 0 0; padding: 5px; background: #1a1a1a; border: 1px solid #333;}
+#sub_nav 		{margin: 0 0 20px 0; padding-top: 10px;}
+.avatar			{margin: 0 15px 5px 5px; width: 160px;}
+.avatar img		{border: 1px solid #666;}
+.box			{padding: 0 0 45px 0; clear: both;}
+.activity_box h2	{border-bottom: 1px dotted #971d4a; padding-bottom: 5px;}
+
+.upload_form	{margin: 0 0 0 0;}
+.upload_form textarea	{height: 100px; width: 100%;}
+.upload_form label	{display: block; float: none;}
+
+#thickbox_form label	{display: block; color: #eee;}
+#thickbox_form textarea	{display: block; height: 200px; width: 96%;}
+
+.avatar_on_comment	{margin: 0 10px 10px 0;}
+
+.comment_message	{overflow: hidden; padding: 0 0 10px 0; margin: 0 0 5px 0; max-height: 100px;}
+.comment_holder		{padding-top: 10px;}
+.comments 			{padding: 0px 10px 0px 10px;}
+
+.pagination a,
+.pagination .current{padding: 2px; background: #222; margin: 0 2px;}
+.pagination select	{padding: 0px; font-size: 10px; margin: 0 5px;}
+.pagination			{padding: 10px 0;}
+
+#messages td, 
+#messages th	{padding: 3px;}
+#messages th	{background: #971d4a; font-size: 10px;}
+#messages		{width: 100%;}
+
+.blurp			{padding: 0 0 15px 0;}
+.blurp strong	{display: block; color: white;}
+.blurp img		{margin: 5px 15px 45px 0; float: left;}
+h2.getting_started	{border-bottom: 1px dotted #333; padding: 15px 0 3px 0;}
+
+h1 img			{width: 34px; border: 1px solid #333; margin-bottom: -5px;}
+
+.flashnotice	{padding: 3px;  margin-bottom: 10px; clear: both; background: #555;}
+.flasherror		{padding: 3px;  margin-bottom: 10px;  clear: both; background: #e22c6f; color: white;}
+
+#blog .row textarea	{height: 400px; width: 400px;}
+#blog .row input	{width: 400px;}
+#blog .row input.button	{width: auto;}
+
+.feed_item		{padding: 3px 0;}
+.feed_item p	{display: inline;}
+.feed_item .right		{border-left: 1px solid #666; padding-left: 3px;margin-left: 3px; float: right; width: 15px;}
+.feed_item .left		{width: 85%; }
+img.icon_small	{width: 20px; margin: 0 1px -5px 0;}
+
+.inside_box li	{padding: 2px;}
+.inside_box ul	{padding-left: 15px;}
+
+.my_network		{width: 52px; text-align: center; padding: 5px; margin: 0 10px 10px 0; border: 1px solid #333;}
+.my_network:hover		{border: 1px solid #ccc;}
+.my_network	img	{margin: 0 5px 0 0; border: 1px solid black; }
+.my_network	img:hover	{border: 1px solid #ccc;}
+
+.my_network	a	{margin-top: 5px; font-size: 9px; line-height: 12px;}
+
+#comment_link	{border-top: 1px dotted #333;}
+
+#border_top,
+.border_top		{padding: 5px 0 5px 0;  margin: 11px 0 11px 0;}
+#post_history li a {font-size: 12px;}
+#post_history li  {padding: 0 0 14px 0;}
+ul#post_history	{padding: 0 0 0 0;}
+.date_details_white {color: white;}
+
+.search_row		{width: 90px; height: 100px; overflow: hidden; padding: 5px; margin: 0 10px 15px 0;}
+.search_row img	{margin-bottom: 5px;}
+.search_row a	{font-size: 10px;}
+.search_row div {text-align: center; }
+
+.flickr_image {padding:15px;}
+.flickr			{width: 125px; height: 125px;}
+
+h2 span			{font-weight: normal; font-size: 11px; margin-left: 5px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#message				{padding: 4px; z-index: 100000; position: fixed; top: 38%; left: 40%; display: none; background: black; color: white; font-size: 18px;}
+#waiter 				{z-index:100000; position:fixed; background:white; display: none; height:13px; width:208px; border:0px; top: 50%; left: 50%; margin: -6px 0 0 -104px;}
+
+/* ----------------------------------------------------------------------------------------------------------------*/
+/* ---------->>> global settings needed for thickbox <<<-----------------------------------------------------------*/
+/* ----------------------------------------------------------------------------------------------------------------*/
+*{padding: 0; margin: 0;}
+/* ----------------------------------------------------------------------------------------------------------------*/
+/* ---------->>> thickbox specific link and font settings <<<------------------------------------------------------*/
+/* ----------------------------------------------------------------------------------------------------------------*/
+#TB_window {
+  font: 12px Arial, Helvetica, sans-serif;
+  color: #eee;
+}
+#TB_secondLine {
+  font: 10px Arial, Helvetica, sans-serif;
+  color:#666666;
+}
+#TB_window a:link {color: #666666;}
+#TB_window a:visited {color: #666666;}
+#TB_window a:hover {color: #000;}
+#TB_window a:active {color: #666666;}
+#TB_window a:focus{color: #666666;}
+/* ----------------------------------------------------------------------------------------------------------------*/
+/* ---------->>> thickbox settings <<<-----------------------------------------------------------------------------*/
+/* ----------------------------------------------------------------------------------------------------------------*/
+#TB_overlay {
+  position: fixed;
+  z-index:100;
+  top: 0px;
+  left: 0px;
+  height:100%;
+  width:100%;
+}
+
+.TB_overlayMacFFBGHack {background: url(/images/macFFBgHack.png) repeat;}
+.TB_overlayBG {
+  background-color:#000;
+  filter:alpha(opacity=75);
+  -moz-opacity: 0.75;
+  opacity: 0.75;
+}
+* html #TB_overlay { /* ie6 hack */
+     position: absolute;
+     height: expression(document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight + 'px');
+}
+#TB_window {
+  position: fixed;
+background: black url(/images/top_hearts_black.png) no-repeat; 
+border: 10px solid #666;
+  z-index: 102;
+  color:white;
+  display:none;
+
+  text-align:left;
+  top:50%;
+  left:50%;
+}
+#TB_window a	{color: #e22c6f; font-weight: bold; text-decoration: underline;}
+#TB_window a:hover	{color: #eee;}
+* html #TB_window { /* ie6 hack */
+position: absolute;
+margin-top: expression(0 - parseInt(this.offsetHeight / 2) + (TBWindowMargin = document.documentElement && document.documentElement.scrollTop || document.body.scrollTop) + 'px');
+}
+#TB_window img#TB_Image {
+  display:block;
+  margin: 15px 0 0 15px;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #666;
+  border-left: 1px solid #666;
+}
+#TB_caption{
+  height:25px;
+  padding:7px 30px 10px 25px;
+  float:left;
+}
+#TB_closeWindow{
+  height:25px;
+  padding:11px 25px 10px 0;
+  float:right;
+}
+#TB_closeAjaxWindow{
+  padding:7px 10px 5px 0;
+  margin-bottom:1px;
+  text-align:right;
+  float:right;
+}
+#TB_ajaxWindowTitle{
+  float:left;
+  padding:7px 0 5px 10px;
+  margin-bottom:1px;
+}
+#TB_title{
+  background-color:#999;
+  height:27px;
+color: #555;
+margin-bottom: 15px;
+}
+
+#TB_ajaxContent{
+  clear:both;
+  padding:2px 15px 15px 15px;
+  overflow:auto;
+  text-align:left;
+  line-height:1.4em;
+}
+#TB_ajaxContent.TB_modal{
+  padding:15px;
+}
+#TB_ajaxContent p{
+  padding:5px 0px 5px 0px;
+}
+#TB_load{
+  position: fixed;
+  display:none;
+  height:13px;
+  width:208px;
+  z-index:103;
+  top: 50%;
+  left: 50%;
+  margin: -6px 0 0 -104px; /* -height/2 0 0 -width/2 */
+}
+* html #TB_load { /* ie6 hack */
+position: absolute;
+margin-top: expression(0 - parseInt(this.offsetHeight / 2) + (TBWindowMargin = document.documentElement && document.documentElement.scrollTop || document.body.scrollTop) + 'px');
+}
+#TB_HideSelect{
+  z-index:99;
+  position:fixed;
+  top: 0;
+  left: 0;
+  background-color:#fff;
+  border:none;
+  filter:alpha(opacity=0);
+  -moz-opacity: 0;
+  opacity: 0;
+  height:100%;
+  width:100%;
+}
+* html #TB_HideSelect { /* ie6 hack */
+     position: absolute;
+     height: expression(document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight + 'px');
+}
+#TB_iframeContent{
+  clear:both;
+  border:none;
+  margin-bottom:-1px;
+  margin-top:1px;
+  _margin-bottom:1px;
+}

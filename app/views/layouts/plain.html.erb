@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; utf-8" />
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <title><%= @title || SITE_NAME %></title>
+  <%= javascript_include_tag :defaults, 'jquery', 'thickbox', 'less_routes', 'truncator', :cache=>true %>
+  <%= stylesheet_link_tag 'reset', 'ie', 'application', :cache=>true %>
+  <!--[if lt IE 7.]>
+    <script defer type="text/javascript" src="/javascripts/pngfix.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div style="height: 50px;"></div>
+    <%= link_to image_tag("logo.png", :class=>"png", :style=>"margin-bottom: 20px;"), home_url %>
+    <div id="plain_wrapper">
+      <div class="pad2">
+        <%= display_standard_flashes %>
+        <%= yield %>
+      </div>
+      <div class="clear"></div>            
+    </div>
+
+
+  </body>
+  </html>

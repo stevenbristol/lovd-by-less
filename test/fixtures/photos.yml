@@ -1,0 +1,29 @@
+# == Schema Information
+# Schema version: 1
+#
+# Table name: photos
+#
+#  id         :integer(11)   not null, primary key
+#  caption    :string(1000)  
+#  created_at :datetime      
+#  updated_at :datetime      
+#  profile_id :integer(11)   
+#  image      :string(255)   
+#
+
+--- 
+
+first:
+    caption: this is just a test photo.
+    profile: user
+    image: photo_1.jpg
+
+second:
+    caption: this is just a test photo.
+    profile: user
+    image: photo_2.jpg
+
+third:
+    caption: this is just a test photo.
+    profile: user
+    image: photo_3.jpg

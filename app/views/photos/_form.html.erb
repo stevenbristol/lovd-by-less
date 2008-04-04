@@ -1,0 +1,14 @@
+<div id="upload_a_photo">
+  <h2>Upload A Photo</h2>
+
+  <% less_form_for [@p,@photo], :html => {:multipart=>true} do |f| %>
+  	<%= f.wrap(:image, :label => 'Photo: '){file_column_field "photo", "image", :size => 15} %>
+  	<%= f.text_area :caption %>
+	
+  	<div class="row button">
+    	<%= f.submit 'Upload Photo', :class=>"button" %>
+  	</div>
+  <% end %>
+
+  <div class="clear"></div>
+</div>

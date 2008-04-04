@@ -1,0 +1,25 @@
+<%-
+profile ||= @profile
+with_form ||= false
+with_wall_to_wall ||= false
+
+comments ||= @comments
+@count = comments.total_entries
+
+parent ||= @parent
+parent = @blog || @profile || nil
+-%>
+  
+<div class="activity_box" id="comment">
+	<h2>Comments
+	<%= link_to '(Our Wall-to-Wall)', profile_comments_path(profile) if @p && with_wall_to_wall && !me && @p.has_wall_with(profile) %>
+	<%= inline_tb_link('(Leave a Comment)', "new_comment", :title => "Leaving A Comment On #{profile.f}'s Wall") if with_form and @p %>
+    </h2>
+	<div id="<%= "#{dom_id(parent)}_comments" %>" class="inside_box">
+		<%= render :partial => 'comments/comment', :collection => comments %>
+	</div>
+	
+	<%= william_paginate %>
+</div>
+
+<%= render :partial => 'comments/form' if with_form && @p %>

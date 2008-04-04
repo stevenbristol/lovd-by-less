@@ -1,0 +1,34 @@
+<%
+#locals
+message ||= @message
+message ||= Message.new params[:message]
+to_list ||= @to_list
+to_list ||= [@profile] #used on someone's profile page
+hide_header ||= false
+
+unless message.new_record?
+  message.subject = "RE: " + message.subject
+  message.body = "\n\n\n\n\n\n\n\n\n" + message.body.gsub(/^/, '> ')
+end
+%>
+
+<% unless hide_header %>
+  <h1>Compose New Message</h1>
+  <div id="sub_nav">
+  	<%= link_to '&larr; Back to Dashboard', @p %>  
+  	<%= link_to "Inbox", messages_path unless @p.received_messages.empty? %>
+  	<%= link_to "Sent", sent_messages_path, :class=>"selected"  unless @p.sent_messages.empty? %>
+  </div>
+<% end %>
+
+<div class="thickbox_form">
+	<% less_remote_form_for :message, :url => messages_path do |f| %>
+	<%= f.wrap(:label=>'To') {to_list.to_select :message, :receiver_id, :selected=>(params[:message][:receiver_id].to_i rescue ''), :name => :f} %>
+	<%= f.text_field :subject %>
+	<%= f.text_area :body %>
+
+	<div class="row button">
+	  <%= submit_tag 'Send Message', :class=>'button' %>
+	</div>
+	<%end %>
+</div>

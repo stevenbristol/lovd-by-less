@@ -1,0 +1,68 @@
+# == Schema Information
+# Schema version: 1
+#
+# Table name: comments
+#
+#  id               :integer(11)   not null, primary key
+#  comment          :text          
+#  created_at       :datetime      not null
+#  updated_at       :datetime      not null
+#  profile_id       :integer(11)   
+#  commentable_type :string(255)   default(""), not null
+#  commentable_id   :integer(11)   not null
+#  is_denied        :integer(11)   default(0), not null
+#  is_reviewed      :boolean(1)    
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+first:
+    profile: user2
+    commentable: first
+    commentable_type: Blog
+    comment: "<object width=\"425\" height=\"355\"><param name=\"movie\" value=\"http://www.youtube.com/v/vSb-nV8l2QY&rel=1\" /><param name=\"wmode\" value=\"transparent\" /><embed src=\"http://www.youtube.com/v/vSb-nV8l2QY&rel=1\" type=\"application/x-shockwave-flash\" wmode=\"transparent\" width=\"425\" height=\"355\"></embed></object>"
+
+second:
+    commentable: first
+    commentable_type: Blog
+    comment: A comment
+    profile: user
+
+third:
+    commentable: user2
+    commentable_type: Profile
+    comment: A comment
+    profile: user
+
+fourth:
+    commentable: first
+    commentable_type: Blog
+    comment: A comment
+    profile: user2
+
+fifth:
+    commentable: first
+    commentable_type: Blog
+    comment: A comment
+    profile: user2
+
+sixth:
+    commentable: first
+    commentable_type: Blog
+    comment: A comment
+    profile: user
+
+seven:
+    commentable: user
+    commentable_type: Profile
+    comment: A comment
+    profile: user
+eight:
+    commentable: user3
+    commentable_type: Profile
+    comment: A comment
+    profile: admin
+nine:
+    profile: user
+    commentable: first
+    commentable_type: Blog
+    comment: "<object width=\"425\" height=\"355\"><param name=\"movie\" value=\"http://www.youtube.com/v/vSb-nV8l2QY&rel=1\" /><param name=\"wmode\" value=\"transparent\" /><embed src=\"http://www.youtube.com/v/vSb-nV8l2QY&rel=1\" type=\"application/x-shockwave-flash\" wmode=\"transparent\" width=\"425\" height=\"355\"></embed></object>"

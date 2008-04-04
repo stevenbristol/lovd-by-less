@@ -1,0 +1,14 @@
+<div class="activity_box">
+<h2>Search Results</h2>
+
+
+	<% @results.each do |r| %>
+		<div class="search_row left text_c">
+			<div><%= icon r %></div>
+			<div><%= link_to h(r.f), r %></div>
+		</div>
+	<% end %>
+
+
+<%= william_paginate @results.total_entries, @per_page, @page %>
+</div>

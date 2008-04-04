@@ -1,0 +1,62 @@
+# == Schema Information
+# Schema version: 1
+#
+# Table name: users
+#
+#  id                        :integer(11)   not null, primary key
+#  login                     :string(255)   
+#  crypted_password          :string(40)    
+#  salt                      :string(40)    
+#  created_at                :datetime      
+#  updated_at                :datetime      
+#  remember_token            :string(255)   
+#  remember_token_expires_at :datetime      
+#  is_admin                  :boolean(1)    
+#  can_send_messages         :boolean(1)    default(TRUE)
+#  time_zone                 :string(255)   default("UTC")
+#  email_verification        :string(255)   
+#  email_verified            :boolean(1)    
+#
+
+user:
+    login: user
+    crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+    salt:  7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+    is_admin: false
+    can_send_messages: true
+
+user2:
+    login: user2
+    crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+    salt:  7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+    is_admin: false
+    can_send_messages: true
+
+user3:
+    login: user3
+    crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+    salt:  7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+    is_admin: false
+    can_send_messages: true
+
+inactive:
+    login: inactive
+    crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+    salt:  7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+    is_admin: false
+    can_send_messages: true
+
+cant_message:
+    login: cant_message
+    crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+    salt:  7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+    is_admin: false
+    can_send_messages: false
+
+    
+admin:
+    login: admin
+    crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+    salt:  7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+    is_admin: true
+    can_send_messages: true

@@ -1,0 +1,11 @@
+<% p = feed_item.item %>
+<div class="feed_item photo_feed" id="<%= feed_item.dom_id %>">
+  <div class="left">
+	<img src="/images/blurp_photos.png" class="png icon_small" title="User Photo Icon"  alt="User Photo Icon" /> 
+	<%= link_to h(p.profile.f), p.profile %> uploaded a <a href="<%= image_path p, nil %>" title="<%= p.caption %>" class="thickbox">new photo</a>
+	</div> 
+  	<div class="right">
+    	<%= x_feed_link(feed_item) if me %>
+  	</div>
+	<div class="clear"></div>
+</div>

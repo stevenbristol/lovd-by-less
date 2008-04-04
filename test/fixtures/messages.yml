@@ -1,0 +1,28 @@
+# == Schema Information
+# Schema version: 1
+#
+# Table name: messages
+#
+#  id          :integer(11)   not null, primary key
+#  subject     :string(255)   
+#  body        :text          
+#  created_at  :datetime      
+#  updated_at  :datetime      
+#  sender_id   :integer(11)   
+#  receiver_id :integer(11)   
+#  read        :boolean(1)    not null
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+user_to_user2:
+  subject: first body
+  body: blah, blah
+  created_at: 2007-01-02
+  sender: user
+  receiver: user2
+user2_to_user:
+  subject: second
+  body: blan2
+  created_at: 2007-01-01
+  sender: user2
+  receiver: user

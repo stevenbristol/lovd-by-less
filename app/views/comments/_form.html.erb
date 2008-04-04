@@ -1,0 +1,15 @@
+<% 
+#locals
+comment ||= @comment
+%>
+
+<div id="new_comment" class="hidden">    
+	<% less_remote_form_for(:comment, :url => profile_comments_path(@profile), :html => { :id => "#{dom_id(@profile)}_comment_form"} ) do |f| %>
+	<div id="thickbox_form">
+		<%= f.text_area :comment  %>
+		To include a youtube video use: [youtube: address_of_video]
+		<div class="row button"><%= f.submit 'Add Comment', :class=>"button" %></div>
+		<div class="clear"></div>
+    </div>
+	<% end %>
+</div>

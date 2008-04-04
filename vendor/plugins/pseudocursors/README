@@ -1,0 +1,23 @@
+This plugin is designed to add bring some of the functionality of SQL cursors to ActiveRecord. One of the most useful reason for using cursors is when you are iterating over a large data set and you don't want to blow up your memory. ActiveRecord makes iterating over your data so easy that you might not think about what's going on with a large amount of data.
+
+For example, suppose for a migration you want to scan through all the rows in a table for a model that has a belongs_to association called parent to update some data:
+
+  Model.find(:all, :conditions => "name IS NOT NULL").each do |record|
+	  record.name = record.parent.name
+	  record.save!
+  end
+
+Now if Model has less than a few hundred rows you'll be fine. However, if Model has 50,000 rows in it, you may run into some problems. Each row in the table will be serialized into a Model object. On top of that, you'll serialize each records parent object into memory as well. While the iteration is being performed, these objects will all be in scope and not reclaimable by the garbage collector. After a while your process can use up a lot of memory and cause a lot of memory swapping and slow down the whole box. Since this sort of behavior only appears with large data sets, you'll of course not notice there's a problem until you get to production.
+
+== Pseudo Cursors
+
+The way pseudo_cursors works is to add the method :cursor_each to ActiveRecord. This method takes all the same arguments as :find and will iterate over the results. However, it will run a query first that only gets the row ids. This will stay in memory, but since it's only an array of integers, the memory consumption should be reasonable. The it will iterate over the rows it found in batches (either 100 or specified in a :batch_size argument to the method). If a :transaction argument is provided to the method, each batch will be wrapped in a transaction. This can be useful if your database is clustered to cut down on the number of writes propagating across the cluster. If the :order argument was provided to the method, it will be honored.
+
+The above block would then be written as:
+
+  Model.find_each(:conditions => "name IS NOT NULL") do |record|
+	  record.name = record.parent.name
+	  record.save!
+  end
+
+Requires Rails 1.2 or higher.
