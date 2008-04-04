@@ -3,14 +3,14 @@ module PhotosHelper
 
   def image photo, size = :square, img_opts = {}
     return image_tag(image_path( photo, size), :class => size) if photo.image.blank?
-    img_tag = image_tag(image_path( photo, size), {:title=>photo.caption, :alt=>photo.caption, :class=>size}.merge(img_opts))
+    img_tag = image_tag(photo_path( photo, size), {:title=>photo.caption, :alt=>photo.caption, :class=>size}.merge(img_opts))
     img_tag
   end
 
-  def photo_path photo = nil, size = nil
+  def photo_path photo = nil, size = :square
     path = nil
     unless photo.nil? || photo.image.blank?
-      path = url_for_file_column(photo, :image, size) rescue nil
+      path = url_for_file_column(photo, :image, size.to_s) rescue nil
     end
     path = missing_photo_path(size) if path.nil?
     return path
