@@ -250,6 +250,8 @@ h2 span			{font-weight: normal; font-size: 11px; margin-left: 5px;}
   height:100%;
   width:100%;
 }
+
+.TB_overlayMacFFBGHack {background: url(/images/macFFBgHack.png) repeat;}
 .TB_overlayBG {
   background-color:#000;
   filter:alpha(opacity=75);
