@@ -26,7 +26,7 @@ class AccountsController < ApplicationController
       if @u
         remember_me if params[:user][:remember_me] == "1"
         flash[:notice] = "Hello #{@u.f}"
-        redirect_back_or_default home_path
+        redirect_back_or_default profile_url(@u.profile)
       else
         flash.now[:error] = "Uh-oh, login didn't work. Do you have caps locks on? Try it again."
       end
@@ -73,7 +73,7 @@ class AccountsController < ApplicationController
       remember_me if params[:remember_me] == "1"
       flash[:notice] = "Thanks for signing up!"
       AuthMailer.deliver_registration(:subject=>"new #{SITE_NAME} registration", :body => "username = '#{@u.login}', email = '#{@u.profile.email}'", :recipients=>REGISTRATION_RECIPIENTS)
-      redirect_to home_url
+      redirect_to profile_url(@u.profile)
     else  
       @user = @u
       params[:user][:password] = params[:user][:password_confirmation] = ''

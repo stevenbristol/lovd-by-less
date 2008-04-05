@@ -20,7 +20,8 @@ class AccountsControllerTest < ActionController::TestCase
       assert_difference "User.count" do
         post :signup, {:user => VALID_USER}
         assert_response :redirect
-        assert_redirected_to home_path
+        assert assigns['u']
+        assert_redirected_to profile_path(assigns['u'].profile)
         assert_equal 'Thanks for signing up!', flash[:notice]
       end
     end
@@ -31,6 +32,7 @@ class AccountsControllerTest < ActionController::TestCase
     assert session[:user]
     assert assigns['u']
     assert_response :redirect
+    assert_redirected_to profile_path(assigns['u'].profile)
   end
 
   def test_should_fail_login_and_not_redirect
@@ -130,6 +132,7 @@ class AccountsControllerTest < ActionController::TestCase
     get :logout
     assert_nil session[:user]
     assert_response :redirect
+    assert_redirected_to home_url
   end
 
   def test_should_remember_me
