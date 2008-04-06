@@ -23,7 +23,7 @@ end
 
 <div class="thickbox_form">
 	<% less_remote_form_for :message, :url => messages_path do |f| %>
-	<%= f.wrap(:label=>'To') {to_list.to_select :message, :receiver_id, :selected=>(params[:message][:receiver_id].to_i rescue ''), :name => :f} %>
+	<%= f.wrap('To') {to_list.to_select :message, :receiver_id, :selected=>(params[:message][:receiver_id].to_i rescue ''), :name => :f} %>
 	<%= f.text_field :subject %>
 	<%= f.text_area :body %>
 
