@@ -93,7 +93,7 @@ About flickr integration
 
 If you WANT to have flickr integration in your Lovd By Less project, follow these setup instructions:
 1. Go http://flickr.com/services/api/keys/apply/ to apply for a flickr api key.
-2. Copy the Key and Secret into config/flickr.rb
+2. Copy the Key and Secret into config/initializers/flickr.rb
 3. From the command line, run "ruby script/authorize_flickr.rb" and follow the instructions.
   This stores the flickr auth stuff into config/flickr.cache. If you add this cache file to your source control, then you shouldn't have to repeat this in production. Alternatively, you can get a different key for production, if you'd like.
 

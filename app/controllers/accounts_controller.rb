@@ -18,7 +18,7 @@ class AccountsController < ApplicationController
 
       @pass = u.forgot_password #must be @ variable for function tests
       AccountMailer.deliver_forgot_password(u.profile.email, u.f, u.login, @pass)
-      flash[:notice] = "A new password has been mailed to you."
+      flash.now[:notice] = "A new password has been mailed to you."
     else
       params[:login] ||= params[:user][:login] if params[:user]
       params[:password] ||= params[:user][:password] if params[:user]
