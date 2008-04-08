@@ -45,11 +45,16 @@ Install the Required Gems:
 - win32console (windows only)
 - avatar (version 0.0.5 or greater)
 
-TIP:
+TIPS:
 Installing ferret on Windows
 1. Running gem install ferret does not work. Instead, download the gem directly from http://rubyforge.org/frs/?group_id=1028
 2. Download file: ferret-0.11.6-mswin32.gem
 3. From the directory you downloaded the gem to: gem install ferret-0.11.6-mswin32.gem
+
+Installing ImageMagick and RMagick
+See these posts for tips:
+http://b.lesseverything.com/2007/9/26/installing-imagemagick-and-rmagick-on-mac-os-x
+http://www.randycullom.com/chatterbox/archives/2006/12/installing_imag.html
 
 Setup the databases:
 
