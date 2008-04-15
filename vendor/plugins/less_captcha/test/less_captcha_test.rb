@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), '../../../../test/test_helper')
 require 'test/unit'
 
 class Thing < ActiveRecord::Base
-  validates_captcha
+  validates_captcha :if => Proc.new {|o| o.name != 'stevebristol'}
   
   attr_accessor :name
   
@@ -21,6 +21,15 @@ class LessCaptchaTest < Test::Unit::TestCase
     assert @thing.respond_to?('captcha_answer')
   end
   
+  def test_captcha_with_if
+    @thing = Thing.new('stevebristol')
+
+    @thing.setup_captcha 'foo'
+    @thing.captcha = nil
+    assert @thing.valid? 
+
+  end
+
   def test_question_validation
     @thing.setup_captcha 'foo'
     
