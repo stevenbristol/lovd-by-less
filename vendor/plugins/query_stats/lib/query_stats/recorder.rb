@@ -23,9 +23,9 @@ module QueryStats
             queries.query_type = method
             send "#{method}_without_query_stats", *args
           end
-          alias_method_chain method, :query_stats
+          alias_method_chain_unless_defined method, :query_stats
         end
-        alias_method_chain :execute, :query_stats
+        alias_method_chain_unless_defined :execute, :query_stats
       end
     end
     

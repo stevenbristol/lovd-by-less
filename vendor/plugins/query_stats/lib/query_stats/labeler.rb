@@ -26,8 +26,8 @@ module QueryStats
     
     def self.included(base) #:nodoc:
       base.class_eval do
-        alias_method_chain :log_processing, :query_stats
-        alias_method_chain :render, :query_stats
+        alias_method_chain_unless_defined :log_processing, :query_stats
+        alias_method_chain_unless_defined :render, :query_stats
       end
     end
 

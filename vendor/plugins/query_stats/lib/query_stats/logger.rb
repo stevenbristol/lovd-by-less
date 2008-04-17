@@ -11,7 +11,7 @@ module QueryStats
   
     def self.included(base) #:nodoc:
       base.class_eval do
-        alias_method_chain :active_record_runtime, :query_stats
+        alias_method_chain_unless_defined :active_record_runtime, :query_stats
       end
     end
   end
