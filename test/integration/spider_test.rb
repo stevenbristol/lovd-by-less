@@ -22,7 +22,7 @@ class SpiderTest < ActionController::IntegrationTest
     post "/login", :user=>{:login => users(:user).login, :password => 'test'}
     assert_response :redirect
     assert session[:user]
-    assert_redirected_to '/'
+    assert_redirected_to profile_url(users(:user).profile)
     follow_redirect!
   
     #   puts @response.body
@@ -39,7 +39,7 @@ class SpiderTest < ActionController::IntegrationTest
     post "/login", :user=>{:login => users(:admin).login, :password => 'test'}
     assert_response :redirect
     assert session[:user]
-    assert_redirected_to '/'
+    assert_redirected_to profile_url(users(:admin).profile)
     follow_redirect!
   
     #   puts @response.body
