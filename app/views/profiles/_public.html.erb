@@ -52,7 +52,7 @@ can_send = !@p.blank?
 	    <li><%= get_friend_link @p, @profile %></li>
 	    <%- if can_send -%>
 	    <li><%= inline_tb_link 'Direct Message', "new_direct_message", {:title => "New Message To #{h @profile.f}"}, {:height => 380} %></li>
-	    <li><%= inline_tb_link 'Leave a Comment', "new_comment", {:title => "Leaving A Comment On #{h @profile.f}'s Wall"}, {:heingt => 370, :width => 430} if @p %></li>
+	    <li><%= inline_tb_link 'Leave a Comment', "new_comment", {:title => "Leaving A Comment On #{h @profile.f}'s Wall"}, {:height => 330, :width => 430} if @p %></li>
 	    <%- end -%>
 	    <%- if can_send && !me && @p.has_wall_with(@profile) -%>
 	    <li><%= link_to 'Our Wall-to-Wall', profile_comments_path(@profile) %></li>

@@ -26,10 +26,12 @@ blog ||= @blog
 		<% end %>
 		</div>
 	
+	
     
 		<div id="<%= dom_id(blog) %>_new_comment" class="hidden">
 			<% less_remote_form_for :comment, :url => blog_comments_path(blog), :html => { :id => "#{dom_id(blog)}_comment_form"} do |f| %>
 				<%= f.text_area :comment %>
+    		To include a youtube video use: [youtube: address_of_video]
 				<div class="row button">
 				<%= f.submit 'Add Comment', :class=>'button' %>
 				<div class="clear"></div>
