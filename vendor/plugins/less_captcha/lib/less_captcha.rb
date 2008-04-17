@@ -28,9 +28,10 @@ module Less
 
           configuration = { :message => ' did not match valid answer', :on => :create }
 
-          configuration.merge(options)
+          configuration.merge!(options)
 
           validates_each(PREFIX, configuration) do |record, attr_name, value|
+            value ||= ''
             record.errors.add(attr_name, configuration[:message]) unless record.send(PREFIX + SUFFIX) == Digest::SHA1.hexdigest(SALT + value)
           end
         end
