@@ -1,0 +1,24 @@
+
+
+2008-04-17
+  Fixed bug in less_captcha
+
+2008-04-17
+  Added you tube instructions.
+
+2008-04-07
+  Adding tips to the README.
+
+2008-04-07
+  Fixed bug on forgot password (flash/flash.now).
+  Fixed bug where avatars did not link properly.
+  Fixed bug in public profile with messaging links.
+  Corrected error in README.
+
+2008-04-07 
+  Adding this change log file.
+  Adding thickbox image for mac firefox.
+  Fixing spider test.
+  
+2008-04-07 
+  After login, user is redirected to their home page instead of the site home page.

@@ -10,6 +10,8 @@ blog ||= @blog
   <% less_form_for [@profile, blog] do |f| %>
     <%= f.text_field :title %>
     <%= f.text_area :body %>
+    
+		To include a youtube video use: [youtube: address_of_video]
 	  <div class="row button">
     	<%= f.submit 'Save', :class=>'button' %>
   	</div>
