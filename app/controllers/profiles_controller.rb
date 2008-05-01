@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   include ApplicationHelper
-    
+  prepend_before_filter :get_profile, :except => [:new, :create, :index, :search]  
   before_filter :setup, :except => [:index, :search]
   before_filter :search_results, :only => [:index, :search]
   skip_filter :login_required, :only=>[:show, :index, :feed, :search]
@@ -106,8 +106,11 @@ class ProfilesController < ApplicationController
     super :all, :only => [:show, :index, :search]
   end
   
-  def setup
+  def get_profile
     @profile = Profile[params[:id]]
+  end
+  
+  def setup
     @user = @profile.user
   end
   

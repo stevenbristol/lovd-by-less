@@ -1,5 +1,6 @@
 class PhotosController < ApplicationController
   skip_filter :login_required
+  prepend_before_filter :get_profile
   before_filter :setup
   
   
@@ -54,9 +55,11 @@ class PhotosController < ApplicationController
     super :all, :only => [:index, :show]
   end
   
+  def get_profile
+    @profile = Profile[params[:profile_id] || params[:id]]
+  end
   
   def setup
-    @profile = Profile[params[:profile_id] || params[:id]]
     @user = @profile.user
     @photos = @profile.photos.paginate(:all, :page => @page, :per_page => @per_page)
     @photo = Photo.new

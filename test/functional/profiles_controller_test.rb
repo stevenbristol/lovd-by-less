@@ -54,7 +54,6 @@ class ProfilesControllerTest < ActionController::TestCase
     end
 
     should_not_assign_to :user
-    should_not_assign_to :profile
     should_respond_with :redirect
     should_redirect_to 'login_path'
     should_not_set_the_flash
