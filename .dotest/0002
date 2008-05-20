@@ -1,0 +1,23 @@
+From 71ca11856cf13da6076a8c80f42d9fbee064799e Mon Sep 17 00:00:00 2001
+From: Les Freeman <leslief@sunquake.net>
+Date: Wed, 4 Jun 2008 13:29:24 -0700
+Subject: added sqlite3 dbs to gitignore
+
+---
+ .gitignore |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/.gitignore b/.gitignore
+index 521fd7d48b661c714c7de8f7bd1f51b529b7e585..b62bcc7700557ed686690a3f20b21996c82223fa 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,5 +1,6 @@
+ .DS_Store
+ db/*.db
++db/*.sqlite3
+ db/schema.rb
+ log/*.log
+ tmp
+-- 
+1.5.4.4
+
