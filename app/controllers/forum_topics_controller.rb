@@ -28,7 +28,7 @@ class ForumTopicsController < ApplicationController
       @post = @topic.posts.new
     end
     
-    @posts = @topic.posts.paginate(:all, :page => params[:page])
+    @posts = @topic.posts.paginate(:all, :page => params[:page], :order => 'created_at DESC')
     
     respond_to do |format|
       format.html # show.html.erb

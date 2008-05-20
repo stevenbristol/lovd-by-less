@@ -23,7 +23,7 @@ class ForumsController < ApplicationController
   # GET /forums/1.xml
   def show
     @forum = Forum.find(params[:id])
-    @topics = @forum.topics.paginate(:all, :page => params[:page])
+    @topics = @forum.topics.paginate(:all, :page => params[:page], :order => 'created_at DESC')
     # @topics = ForumTopic.paginate_by_forum_id @forum.id, :page => params[:page]
 
     respond_to do |format|
