@@ -38,7 +38,7 @@ class ProfilesControllerTest < ActionController::TestCase
   context 'on GET to :show.rss while not logged in' do
     setup do
       get :show, {:id => profiles(:user).id, :format=>'rss'}
-      assert_match "<rss version=\"2.0\">\n  <channel>\n    <title>Lovd By Less Activity Feed</title>", @response.body
+      assert_match "<rss version=\"2.0\">\n  <channel>\n    <title>#{SITE_NAME} Activity Feed</title>", @response.body
     end
 
     should_assign_to :user
