@@ -339,6 +339,84 @@ function blog_comment_ajaxx(blog_id, id, verb, params, options){ return less_aja
 function formatted_blog_comment_path(blog_id, id, format, verb){ return '/blogs/' + blog_id + '/comments/' + id + '.' + format + '';}
 function formatted_blog_comment_ajax(blog_id, id, format, verb, params, options){ return less_ajax('/blogs/' + blog_id + '/comments/' + id + '.' + format + '', verb, params, options);}
 function formatted_blog_comment_ajaxx(blog_id, id, format, verb, params, options){ return less_ajaxx('/blogs/' + blog_id + '/comments/' + id + '.' + format + '', verb, params, options);}
+function update_positions_forums_path(verb){ return '/forums/update_positions';}
+function update_positions_forums_ajax(verb, params, options){ return less_ajax('/forums/update_positions', verb, params, options);}
+function update_positions_forums_ajaxx(verb, params, options){ return less_ajaxx('/forums/update_positions', verb, params, options);}
+function formatted_update_positions_forums_path(format, verb){ return '/forums/update_positions.' + format + '';}
+function formatted_update_positions_forums_ajax(format, verb, params, options){ return less_ajax('/forums/update_positions.' + format + '', verb, params, options);}
+function formatted_update_positions_forums_ajaxx(format, verb, params, options){ return less_ajaxx('/forums/update_positions.' + format + '', verb, params, options);}
+function forums_path(verb){ return '/forums';}
+function forums_ajax(verb, params, options){ return less_ajax('/forums', verb, params, options);}
+function forums_ajaxx(verb, params, options){ return less_ajaxx('/forums', verb, params, options);}
+function formatted_forums_path(format, verb){ return '/forums.' + format + '';}
+function formatted_forums_ajax(format, verb, params, options){ return less_ajax('/forums.' + format + '', verb, params, options);}
+function formatted_forums_ajaxx(format, verb, params, options){ return less_ajaxx('/forums.' + format + '', verb, params, options);}
+function new_forum_path(verb){ return '/forums/new';}
+function new_forum_ajax(verb, params, options){ return less_ajax('/forums/new', verb, params, options);}
+function new_forum_ajaxx(verb, params, options){ return less_ajaxx('/forums/new', verb, params, options);}
+function formatted_new_forum_path(format, verb){ return '/forums/new.' + format + '';}
+function formatted_new_forum_ajax(format, verb, params, options){ return less_ajax('/forums/new.' + format + '', verb, params, options);}
+function formatted_new_forum_ajaxx(format, verb, params, options){ return less_ajaxx('/forums/new.' + format + '', verb, params, options);}
+function edit_forum_path(id, verb){ return '/forums/' + id + '/edit';}
+function edit_forum_ajax(id, verb, params, options){ return less_ajax('/forums/' + id + '/edit', verb, params, options);}
+function edit_forum_ajaxx(id, verb, params, options){ return less_ajaxx('/forums/' + id + '/edit', verb, params, options);}
+function formatted_edit_forum_path(id, format, verb){ return '/forums/' + id + '/edit.' + format + '';}
+function formatted_edit_forum_ajax(id, format, verb, params, options){ return less_ajax('/forums/' + id + '/edit.' + format + '', verb, params, options);}
+function formatted_edit_forum_ajaxx(id, format, verb, params, options){ return less_ajaxx('/forums/' + id + '/edit.' + format + '', verb, params, options);}
+function forum_path(id, verb){ return '/forums/' + id + '';}
+function forum_ajax(id, verb, params, options){ return less_ajax('/forums/' + id + '', verb, params, options);}
+function forum_ajaxx(id, verb, params, options){ return less_ajaxx('/forums/' + id + '', verb, params, options);}
+function formatted_forum_path(id, format, verb){ return '/forums/' + id + '.' + format + '';}
+function formatted_forum_ajax(id, format, verb, params, options){ return less_ajax('/forums/' + id + '.' + format + '', verb, params, options);}
+function formatted_forum_ajaxx(id, format, verb, params, options){ return less_ajaxx('/forums/' + id + '.' + format + '', verb, params, options);}
+function forum_topics_path(forum_id, verb){ return '/forums/' + forum_id + '/topics';}
+function forum_topics_ajax(forum_id, verb, params, options){ return less_ajax('/forums/' + forum_id + '/topics', verb, params, options);}
+function forum_topics_ajaxx(forum_id, verb, params, options){ return less_ajaxx('/forums/' + forum_id + '/topics', verb, params, options);}
+function formatted_forum_topics_path(forum_id, format, verb){ return '/forums/' + forum_id + '/topics.' + format + '';}
+function formatted_forum_topics_ajax(forum_id, format, verb, params, options){ return less_ajax('/forums/' + forum_id + '/topics.' + format + '', verb, params, options);}
+function formatted_forum_topics_ajaxx(forum_id, format, verb, params, options){ return less_ajaxx('/forums/' + forum_id + '/topics.' + format + '', verb, params, options);}
+function new_forum_topic_path(forum_id, verb){ return '/forums/' + forum_id + '/topics/new';}
+function new_forum_topic_ajax(forum_id, verb, params, options){ return less_ajax('/forums/' + forum_id + '/topics/new', verb, params, options);}
+function new_forum_topic_ajaxx(forum_id, verb, params, options){ return less_ajaxx('/forums/' + forum_id + '/topics/new', verb, params, options);}
+function formatted_new_forum_topic_path(forum_id, format, verb){ return '/forums/' + forum_id + '/topics/new.' + format + '';}
+function formatted_new_forum_topic_ajax(forum_id, format, verb, params, options){ return less_ajax('/forums/' + forum_id + '/topics/new.' + format + '', verb, params, options);}
+function formatted_new_forum_topic_ajaxx(forum_id, format, verb, params, options){ return less_ajaxx('/forums/' + forum_id + '/topics/new.' + format + '', verb, params, options);}
+function edit_forum_topic_path(forum_id, id, verb){ return '/forums/' + forum_id + '/topics/' + id + '/edit';}
+function edit_forum_topic_ajax(forum_id, id, verb, params, options){ return less_ajax('/forums/' + forum_id + '/topics/' + id + '/edit', verb, params, options);}
+function edit_forum_topic_ajaxx(forum_id, id, verb, params, options){ return less_ajaxx('/forums/' + forum_id + '/topics/' + id + '/edit', verb, params, options);}
+function formatted_edit_forum_topic_path(forum_id, id, format, verb){ return '/forums/' + forum_id + '/topics/' + id + '/edit.' + format + '';}
+function formatted_edit_forum_topic_ajax(forum_id, id, format, verb, params, options){ return less_ajax('/forums/' + forum_id + '/topics/' + id + '/edit.' + format + '', verb, params, options);}
+function formatted_edit_forum_topic_ajaxx(forum_id, id, format, verb, params, options){ return less_ajaxx('/forums/' + forum_id + '/topics/' + id + '/edit.' + format + '', verb, params, options);}
+function forum_topic_path(forum_id, id, verb){ return '/forums/' + forum_id + '/topics/' + id + '';}
+function forum_topic_ajax(forum_id, id, verb, params, options){ return less_ajax('/forums/' + forum_id + '/topics/' + id + '', verb, params, options);}
+function forum_topic_ajaxx(forum_id, id, verb, params, options){ return less_ajaxx('/forums/' + forum_id + '/topics/' + id + '', verb, params, options);}
+function formatted_forum_topic_path(forum_id, id, format, verb){ return '/forums/' + forum_id + '/topics/' + id + '.' + format + '';}
+function formatted_forum_topic_ajax(forum_id, id, format, verb, params, options){ return less_ajax('/forums/' + forum_id + '/topics/' + id + '.' + format + '', verb, params, options);}
+function formatted_forum_topic_ajaxx(forum_id, id, format, verb, params, options){ return less_ajaxx('/forums/' + forum_id + '/topics/' + id + '.' + format + '', verb, params, options);}
+function forum_topic_posts_path(forum_id, topic_id, verb){ return '/forums/' + forum_id + '/topics/' + topic_id + '/posts';}
+function forum_topic_posts_ajax(forum_id, topic_id, verb, params, options){ return less_ajax('/forums/' + forum_id + '/topics/' + topic_id + '/posts', verb, params, options);}
+function forum_topic_posts_ajaxx(forum_id, topic_id, verb, params, options){ return less_ajaxx('/forums/' + forum_id + '/topics/' + topic_id + '/posts', verb, params, options);}
+function formatted_forum_topic_posts_path(forum_id, topic_id, format, verb){ return '/forums/' + forum_id + '/topics/' + topic_id + '/posts.' + format + '';}
+function formatted_forum_topic_posts_ajax(forum_id, topic_id, format, verb, params, options){ return less_ajax('/forums/' + forum_id + '/topics/' + topic_id + '/posts.' + format + '', verb, params, options);}
+function formatted_forum_topic_posts_ajaxx(forum_id, topic_id, format, verb, params, options){ return less_ajaxx('/forums/' + forum_id + '/topics/' + topic_id + '/posts.' + format + '', verb, params, options);}
+function new_forum_topic_post_path(forum_id, topic_id, verb){ return '/forums/' + forum_id + '/topics/' + topic_id + '/posts/new';}
+function new_forum_topic_post_ajax(forum_id, topic_id, verb, params, options){ return less_ajax('/forums/' + forum_id + '/topics/' + topic_id + '/posts/new', verb, params, options);}
+function new_forum_topic_post_ajaxx(forum_id, topic_id, verb, params, options){ return less_ajaxx('/forums/' + forum_id + '/topics/' + topic_id + '/posts/new', verb, params, options);}
+function formatted_new_forum_topic_post_path(forum_id, topic_id, format, verb){ return '/forums/' + forum_id + '/topics/' + topic_id + '/posts/new.' + format + '';}
+function formatted_new_forum_topic_post_ajax(forum_id, topic_id, format, verb, params, options){ return less_ajax('/forums/' + forum_id + '/topics/' + topic_id + '/posts/new.' + format + '', verb, params, options);}
+function formatted_new_forum_topic_post_ajaxx(forum_id, topic_id, format, verb, params, options){ return less_ajaxx('/forums/' + forum_id + '/topics/' + topic_id + '/posts/new.' + format + '', verb, params, options);}
+function edit_forum_topic_post_path(forum_id, topic_id, id, verb){ return '/forums/' + forum_id + '/topics/' + topic_id + '/posts/' + id + '/edit';}
+function edit_forum_topic_post_ajax(forum_id, topic_id, id, verb, params, options){ return less_ajax('/forums/' + forum_id + '/topics/' + topic_id + '/posts/' + id + '/edit', verb, params, options);}
+function edit_forum_topic_post_ajaxx(forum_id, topic_id, id, verb, params, options){ return less_ajaxx('/forums/' + forum_id + '/topics/' + topic_id + '/posts/' + id + '/edit', verb, params, options);}
+function formatted_edit_forum_topic_post_path(forum_id, topic_id, id, format, verb){ return '/forums/' + forum_id + '/topics/' + topic_id + '/posts/' + id + '/edit.' + format + '';}
+function formatted_edit_forum_topic_post_ajax(forum_id, topic_id, id, format, verb, params, options){ return less_ajax('/forums/' + forum_id + '/topics/' + topic_id + '/posts/' + id + '/edit.' + format + '', verb, params, options);}
+function formatted_edit_forum_topic_post_ajaxx(forum_id, topic_id, id, format, verb, params, options){ return less_ajaxx('/forums/' + forum_id + '/topics/' + topic_id + '/posts/' + id + '/edit.' + format + '', verb, params, options);}
+function forum_topic_post_path(forum_id, topic_id, id, verb){ return '/forums/' + forum_id + '/topics/' + topic_id + '/posts/' + id + '';}
+function forum_topic_post_ajax(forum_id, topic_id, id, verb, params, options){ return less_ajax('/forums/' + forum_id + '/topics/' + topic_id + '/posts/' + id + '', verb, params, options);}
+function forum_topic_post_ajaxx(forum_id, topic_id, id, verb, params, options){ return less_ajaxx('/forums/' + forum_id + '/topics/' + topic_id + '/posts/' + id + '', verb, params, options);}
+function formatted_forum_topic_post_path(forum_id, topic_id, id, format, verb){ return '/forums/' + forum_id + '/topics/' + topic_id + '/posts/' + id + '.' + format + '';}
+function formatted_forum_topic_post_ajax(forum_id, topic_id, id, format, verb, params, options){ return less_ajax('/forums/' + forum_id + '/topics/' + topic_id + '/posts/' + id + '.' + format + '', verb, params, options);}
+function formatted_forum_topic_post_ajaxx(forum_id, topic_id, id, format, verb, params, options){ return less_ajaxx('/forums/' + forum_id + '/topics/' + topic_id + '/posts/' + id + '.' + format + '', verb, params, options);}
 function login_path(verb){ return '/login';}
 function login_ajax(verb, params, options){ return less_ajax('/login', verb, params, options);}
 function login_ajaxx(verb, params, options){ return less_ajaxx('/login', verb, params, options);}
