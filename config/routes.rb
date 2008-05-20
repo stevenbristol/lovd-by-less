@@ -12,7 +12,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :blogs do |blog|
     blog.resources :comments
   end
-
+  
+  map.resources :forums, :collection => {:update_positions => :post} do |forum|
+    forum.resources :topics, :controller => :forum_topics do |topic|
+      topic.resources :posts, :controller => :forum_posts
+    end
+  end
 
   map.with_options(:controller => 'accounts') do |accounts|
     accounts.login   "/login",   :action => 'login'

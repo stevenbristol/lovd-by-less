@@ -1,0 +1,55 @@
+
+<div class="forum">
+  
+  <%= link_to 'Forums', forums_path %> > <%=h @forum.name %>
+  <h1 class="forum_name"><%=h @forum.name %></h1>
+   <%= forum_details(@forum)%>
+   <p class="forum_description">
+     <%=h @forum.description %>
+   </p>
+
+   <div id="sub_nav">
+     <%- if @u %>
+       <%= link_to 'Start a new topic', new_forum_topic_path(@forum) %>
+     <%- end %>
+
+     <%= link_to "&larr; Back to Forums", forums_path %>
+   </div>
+
+
+   <%- unless @u %>
+       <h2>Please <%= link_to "login", login_path %> or <%= link_to "sign-up", signup_path %> to post a new topic!</h2>
+   <%- end %>
+
+   <%= will_paginate @topics %>
+   <table class="forum_topics">
+
+     <tr class="labels">
+       <td class="">Topic</td>
+
+       <td class="posts">Posts</td>
+
+       <td class="last_post">Last Post</td>
+
+       <%- if @u and @u.is_admin %>
+       <td class="controls"></td>
+       <% end %>
+     </tr>
+
+     <%= render :partial => 'forum_topics/topic', :collection => @topics%>
+     <%- if @forum.topics.empty? and @u %>
+       <td colspan="5">
+         There are no topics in this forum yet. <%= link_to( "Start a topic!", new_forum_topic_path(@forum)) %>
+       </td>
+     <%- elsif @forum.topics.empty? and !@u %>
+       <td colspan="5">
+         There are no topics in this forum yet. Please <%= link_to "login", login_path %> or <%= link_to "sign-up", signup_path %> to post a new topic!
+       </td>
+     <%-end%>
+   </table>
+
+   <%= will_paginate @topics %>
+  
+
+</div>
+

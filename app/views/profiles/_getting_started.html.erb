@@ -21,6 +21,15 @@ return unless photos_empty && friends_empty && messages_empty && profile_empty &
 			<div class="clear"></div>
 		</div>
 		<%- end -%>
+		
+		<div class="blurp">
+			<img src="/images/blurp_forum.png" class="left png" title="Forum Icon" alt="Forum Icon" />
+			<strong>Chat in the forums!</strong>
+			The forums are a great place to meet new friends and have stimulating conversations!
+			<%= link_to 'Go to the forums', forums_path %>
+			
+			<div class="clear"></div>
+		</div>
 	
 		<%- if photos_empty -%>
 		<div class="blurp">
@@ -69,6 +78,7 @@ return unless photos_empty && friends_empty && messages_empty && profile_empty &
 			<div class="clear"></div>
 		</div>
 		<%- end -%>
+		
 	
 		<div class="clear"></div>
 	</div>

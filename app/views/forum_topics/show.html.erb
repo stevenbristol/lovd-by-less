@@ -1,0 +1,41 @@
+<div class="forum_topic">
+  <%= link_to 'Forums', forums_path %> > <%= link_to h(@forum.name), forum_path(@forum) %> > <%=h @topic.title%>
+
+  <h1><%=h @topic.title %></h1>
+  <%= topic_details(@topic)%>
+
+  
+
+  <div id="sub_nav">
+    <%= link_to "&larr; Back to #{@forum.name}", forum_path(@forum) %>
+  </div>
+
+  <%= will_paginate @posts %>
+
+  <ul id="posts_list">
+    <%= render :partial => 'forum_posts/post', :collection => @posts %>
+  </ul>
+
+  <div id="<%= dom_id(@topic)%>_new_post" class="topic_followup post">
+    <div class="info"><h2>Post a followup</h2></div>
+    <div class="body">
+      <%- if @u %>
+        <%= error_messages_for :post %>
+        <% form_for(@post, :url => forum_topic_post_path(@forum, @topic, @post)) do |f| %>
+          <%= f.text_area :body%>
+          <div class="clear">
+          </div>
+          <div class="row button">
+            <%= f.submit "Post", :class => 'button' %>
+          </div>
+        <% end %>
+      <%- else %>
+        <h1>Please <%= link_to "login", login_path %> or <%= link_to "sign-up", signup_path %> to participate!</h1>
+      <%- end %>
+    </div>
+  </div>
+
+    <%= will_paginate @posts %>
+
+
+</div>

@@ -1,0 +1,24 @@
+<h1>New topic in <%=h @forum.name %></h1>
+
+<div id="sub_nav">
+  <%= link_to "&larr; Back to #{@forum.name}", forum_path(@forum) %>
+</div>
+
+<%= error_messages_for :topic %>
+<%= error_messages_for :post %>
+
+<% less_form_for(@topic) do |f| %>
+    <%= f.text_field :title %>
+
+   <% fields_for @post do |post_fields|%>
+        
+        <%= f.front nil, :label => "Body:"%>
+        <%= post_fields.text_area :body %>
+        <%= f.back %>
+    
+    <% end %>
+    
+    <div class="row button">
+      <%= f.submit "Create", :class => 'button' %>
+    </div>
+<% end %>

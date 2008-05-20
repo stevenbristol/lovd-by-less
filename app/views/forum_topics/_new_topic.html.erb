@@ -1,0 +1,21 @@
+<%
+#locals
+
+topic ||= new_topic
+truncate = truncate.nil? ? true : truncate
+
+%>
+
+<div id="<%= topic.dom_id %>" class="topic_holder">
+  <%= icon topic.owner, :small, :class => 'left avatar_on_comment' %> 
+  <div class="date_details_white">
+    <%= time_ago_in_words topic.created_at %> ago, <%= link_to h(topic.owner.f), profile_path(topic.owner) %> posted
+    <%= link_to h(topic.title), forum_topic_path(topic.forum, topic) %> in <%= link_to h(topic.forum.name), forum_path(topic.forum) %>
+  </div>
+  <%- if topic.posts.first %>
+  <div class="comment_message jstruncate">
+      <%= sanitize(textilize(topic.posts.first.body)) %>
+  </div>
+  <%- end %>
+  <div class="clear"></div>
+</div>

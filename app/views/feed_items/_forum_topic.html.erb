@@ -1,0 +1,16 @@
+<%
+#locals
+topic ||= feed_item.item
+%>
+
+
+<div class="feed_item photo_feed" id="<%= feed_item.dom_id %>">
+  <div class="left">
+	<img src="/images/blurp_forum.png" class="png icon_small" title="User Forum Icon"  alt="User Forum Icon" /> 
+	<%= link_to h(topic.owner.f), topic.owner %> posted <%= link_to sanitize(textilize(topic.title)), forum_topic_path(topic.forum, topic) %> in <%= link_to sanitize(textilize(topic.forum.name)), forum_path(topic.forum) %> <%= time_ago_in_words topic.created_at %> ago
+	</div> 
+  	<div class="right">
+    	<%= x_feed_link(feed_item) if me %>
+  	</div>
+	<div class="clear"></div>
+</div>

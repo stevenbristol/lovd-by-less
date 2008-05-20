@@ -1,0 +1,23 @@
+<%-
+#locals
+profile ||= @profile
+size ||= 10
+posts ||= profile.forum_posts.find :all, :limit => size
+
+
+total = profile.forum_posts.count
+-%>
+
+<% unless posts.empty? %>
+<div class="activity_box">
+	<h2>Most Recent Forum Posts
+	  <span>(latest <%= posts.size %> of <%=total%>)</span>
+	</h2>
+	<div class="inside_box">
+	<ul>       
+	<%= forum_posts_li posts %>
+	</ul>
+		<div class="clear"></div>    
+	</div>
+</div>
+<% end %>

@@ -1,0 +1,39 @@
+<h1><%= SITE_NAME %> Forums</h1>
+
+<div id="forum_list_header">
+  <div class="last_post">Last Post</div>
+  <div class="info">Forum</div>
+</div>
+
+<ul id="forums_list">
+<% for forum in @forums %>
+  <li id="<%= dom_id(forum) %>" class="forum">
+    
+    <div class="last_post">
+      <%= forum_last_post_info(forum)%>
+    </div>
+    
+    <div class="info">
+      <h2><%=link_to h(forum.name), forum_path(forum) %></h2>
+      <span class="details"><%= forum_details(forum) %></span>
+      <%=h forum.description %><br/>
+  
+      <%- if @u and @u.is_admin %>
+        <%= link_to 'Edit', edit_forum_path(forum) %> : 
+        <%= link_to 'Destroy', forum, :confirm => 'Are you sure?', :method => :delete, :class=> "destroy" %>
+      <% end %>
+    </div>
+    
+
+    
+  </li>
+<% end %>
+</ul>
+<br />
+<%- if @u and @u.is_admin%>
+Drag forum rows to reorder.<br/>
+<%= link_to 'New forum', new_forum_path %>
+<%= sortable_element('forums_list', :url => {:action => :update_positions}) %>
+
+
+<%- end%>

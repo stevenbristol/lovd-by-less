@@ -1,0 +1,20 @@
+<a name="<%= dom_id(post)%>" href=""></a>
+<div class="post" id="<%= dom_id(post)%>">
+  
+  <div class="info">
+  <%= icon post.owner %><br/>
+  Posted by <%=link_to h(post.owner.f), profile_path(post.owner) %><br/>
+  Posted <%= time_ago_in_words post.created_at %> ago<br/>
+  <%- if @u and @u.is_admin %>
+    <%= link_to 'Edit', edit_forum_topic_post_path(@forum, @topic, post) %> : 
+    <%= link_to 'Destroy', forum_topic_post_path(@forum, @topic, post), :confirm => 'Are you sure?', 
+                                                                   :method => :delete, 
+                                                                   :class=> "destroy" %>
+  <%- end %>
+  </div>
+  
+  <div class="body">
+    <%= textilize(post.body)%>
+  </div>
+  
+</div>
