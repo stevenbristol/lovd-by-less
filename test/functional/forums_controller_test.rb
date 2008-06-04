@@ -20,7 +20,7 @@ class ForumsControllerTest < ActionController::TestCase
       assert_response 200
       assert_template 'index'
       
-      assert_no_tag :tag => 'a', :attributes => {:href => new_forum_path}
+      assert_no_tag :tag => 'a', :content => "Create a new forum"
       forums.each do |forum|
         assert_no_tag :tag => "a", :attributes => {:href => forum_url(forum), :class => "destroy"},
                                    :parent => {:tag => "div", :attributes => {:id => dom_id(forum)}}
@@ -35,7 +35,7 @@ class ForumsControllerTest < ActionController::TestCase
       get :index, {}, {:user => profiles(:user).id}
       assert_response 200
       assert_template 'index'
-      assert_no_tag :tag => 'a', :attributes => {:href => new_forum_path}
+      assert_no_tag :tag => 'a', :content => "Create a new forum"
       forums.each do |forum|
         assert_no_tag :tag => "a", :attributes => {:href => forum_url(forum), :class => "destroy"},
                                    :parent => {:tag => "div", :attributes => {:id => dom_id(forum)}}
@@ -50,7 +50,7 @@ class ForumsControllerTest < ActionController::TestCase
       get :index, {}, {:user => profiles(:admin).id}
       assert_response 200
       assert_template 'index'
-      assert_tag :tag => 'a', :attributes => {:href => new_forum_path}
+      assert_tag :tag => 'a', :content => "Create a new forum"
       forums.each do |forum|
         assert_tag :tag => "a", :attributes => {:href => forum_url(forum), :class => "destroy"},
                                 :parent => {:tag => "div", :attributes => {:id => dom_id(forum)}}

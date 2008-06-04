@@ -1,3 +1,10 @@
+##
+# ForumTopicsController
+# Author: Les Freeman (lesliefreeman3@gmail.com)
+# Created on: 5/16/08
+# Updated on: 6/4/08
+#
+
 class ForumTopicsController < ApplicationController
   
   helper ForumsHelper
@@ -5,19 +12,6 @@ class ForumTopicsController < ApplicationController
   skip_filter :login_required, :only => [:show, :index]
   before_filter :setup
   
-  # GET /@topics
-  # GET /@topics.xml
-  # def index
-  #   @topics = ForumTopic.find(:all)
-  # 
-  #   respond_to do |format|
-  #     format.html # index.html.erb
-  #     format.xml  { render :xml => @topics }
-  #   end
-  # end
-
-  # GET /@topics/1
-  # GET /@topics/1.xml
   def show
     ##
     # if the validation of a followup post failed, it is stored in the session by the ForumPostsController
@@ -36,10 +30,7 @@ class ForumTopicsController < ApplicationController
     end
   end
 
-  # GET /@topics/new
-  # GET /@topics/new.xml
   def new
-    @topic = ForumTopic.new
     @post = @topic.posts.new
 
     respond_to do |format|
@@ -48,12 +39,9 @@ class ForumTopicsController < ApplicationController
     end
   end
 
-  # GET /@topics/1/edit
   def edit
   end
 
-  # POST /@topics
-  # POST /@topics.xml
   def create
     @topic = @forum.topics.build(params[:forum_topic])
     @topic.owner = @p
@@ -76,10 +64,7 @@ class ForumTopicsController < ApplicationController
     end
   end
 
-  # PUT /@topics/1
-  # PUT /@topics/1.xml
   def update
-
     respond_to do |format|
       if @topic.update_attributes(params[:forum_topic])
         flash[:notice] = 'ForumTopic was successfully updated.'
@@ -92,8 +77,6 @@ class ForumTopicsController < ApplicationController
     end
   end
 
-  # DELETE /@topics/1
-  # DELETE /@topics/1.xml
   def destroy
     @topic.destroy
 
@@ -107,7 +90,11 @@ private
 
   def setup
     @forum = Forum.find(params[:forum_id])
-    @topic = @forum.topics.find(params[:id]) if params[:id]
+    if params[:id]
+      @topic = @forum.topics.find(params[:id])
+    else
+      @topic = ForumTopic.new
+    end
   end
 
   def allow_to

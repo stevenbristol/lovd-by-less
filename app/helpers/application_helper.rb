@@ -76,4 +76,8 @@ module ApplicationHelper
   def me
     @p == @profile
   end
+  
+  def is_admin user = nil
+    user && user.is_admin
+  end
 end

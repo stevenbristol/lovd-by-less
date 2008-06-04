@@ -31,7 +31,7 @@
 
        <td class="last_post">Last Post</td>
 
-       <%- if @u and @u.is_admin %>
+       <%- if is_admin @u %>
        <td class="controls"></td>
        <% end %>
      </tr>

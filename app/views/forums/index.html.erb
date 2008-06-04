@@ -6,33 +6,18 @@
 </div>
 
 <ul id="forums_list">
-<% for forum in @forums %>
-  <li id="<%= dom_id(forum) %>" class="forum">
-    
-    <div class="last_post">
-      <%= forum_last_post_info(forum)%>
-    </div>
-    
-    <div class="info">
-      <h2><%=link_to h(forum.name), forum_path(forum) %></h2>
-      <span class="details"><%= forum_details(forum) %></span>
-      <%=h forum.description %><br/>
-  
-      <%- if @u and @u.is_admin %>
-        <%= link_to 'Edit', edit_forum_path(forum) %> : 
-        <%= link_to 'Destroy', forum, :confirm => 'Are you sure?', :method => :delete, :class=> "destroy" %>
-      <% end %>
-    </div>
-    
-
-    
-  </li>
-<% end %>
+  <%= render :partial => 'forum', :collection => @forums%>
 </ul>
 <br />
-<%- if @u and @u.is_admin%>
+<%- if is_admin @u%>
 Drag forum rows to reorder.<br/>
-<%= link_to 'New forum', new_forum_path %>
+<%= inline_tb_link('Create a new forum', "new_forum", :title => "Creating a new forum") %>
+<div id="new_forum" class="hidden">
+  <% less_remote_form_for(@forum) do |f| %>
+    <%= render :partial => 'form', :locals => {:f => f} %>
+  <% end %>
+</div>
+
 <%= sortable_element('forums_list', :url => {:action => :update_positions}) %>
 
 
