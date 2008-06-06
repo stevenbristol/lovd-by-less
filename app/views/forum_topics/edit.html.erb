@@ -9,11 +9,7 @@
 
 <% less_form_for(@topic, :url => forum_topic_url(@topic.forum, @topic)) do |f| %>
 
-    <%= f.text_field :title %>
-
-    <div class="row button">
-      <%= f.submit "Update", :class => 'button' %>
-    </div>
+    <%= render :partial => 'form', :locals => {:f => f }%>
 
 <% end %>
 

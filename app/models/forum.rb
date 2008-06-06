@@ -11,7 +11,7 @@ class Forum < ActiveRecord::Base
   
   validates_presence_of :name
   
-  has_many :topics, :class_name => "ForumTopic"
+  has_many :topics, :class_name => "ForumTopic", :order => "updated_at DESC"
   
   has_many :posts, :through => :topics
   

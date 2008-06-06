@@ -1,42 +1,67 @@
+##
+# ForumPostsController
+# Author: Les Freeman (lesliefreeman3@gmail.com)
+# Created on: 5/16/08
+# Updated on: 6/4/08
+#
+
 class ForumPostsController < ApplicationController
 
   before_filter :setup
 
-  # GET /forum_posts/1/edit
   def edit
   end
 
-  # POST /forum_posts
-  # POST /forum_posts.xml
   def create
     @post = @topic.posts.build(params[:forum_post])
     @post.owner = @p
 
     respond_to do |format|
       if @post.save
-        flash[:notice] = 'ForumPost was successfully created.'
-        format.html { redirect_to(forum_topic_url(@forum, @topic)) }
+        format.html do
+          flash[:notice] = 'ForumPost was successfully created.' 
+          redirect_to(forum_topic_url(@forum, @topic)+"\##{dom_id(@post)}") 
+        end
         format.xml  { render :xml => @post, :status => :created, :location => @post }
+        format.js do
+          render :update do |page|
+            page.insert_html :bottom, "posts_list", :partial => 'forum_posts/post', :object => @post
+            page.visual_effect :highlight, dom_id(@post)
+            page << "$('forum_post_body').value = ''"
+          end
+        end
       else
         format.html do 
           session[:new_forum_post] = @post
-          logger.info "*** could not create new post. storing in session: #{session[:new_forum_post].to_yaml}"
           redirect_to(forum_topic_url(@forum, @topic)) 
         end
         format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
+        format.js do
+          render :update do |page|
+            page.alert @post.errors.to_s
+          end
+        end
       end
     end
   end
 
-  # PUT /forum_posts/1
-  # PUT /forum_posts/1.xml
   def update
-
     respond_to do |format|
-      if @post.update_attributes(params[:post])
-        flash[:notice] = 'ForumPost was successfully updated.'
-        format.html { redirect_to(forum_topic_url(@forum, @topic)) }
+      if @post.update_attributes(params[:forum_post])
+        format.html do
+          flash[:notice] = 'ForumPost was successfully updated.'
+          redirect_to(forum_topic_url(@forum, @topic)) 
+        end
         format.xml  { head :ok }
+        format.js do
+          render :update do |page|
+            page.replace_html dom_id(@post), :partial => 'forum_posts/post', :object => @post
+            page << "tb_init('\##{dom_id(@post)}_edit_link')"
+            page << "tb_remove()"
+            page << "$('TB_ajaxContent').innerHTML = ''" #otherwise we get double content on next show
+            page.visual_effect :highlight, dom_id(@post)
+          end
+        end
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
@@ -44,8 +69,6 @@ class ForumPostsController < ApplicationController
     end
   end
 
-  # DELETE /forum_posts/1
-  # DELETE /forum_posts/1.xml
   def destroy
     @post = ForumPost.find(params[:id])
     @post.destroy
@@ -53,6 +76,13 @@ class ForumPostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(forum_topic_url(@forum, @topic)) }
       format.xml  { head :ok }
+      format.js do
+        if @post.frozen?
+          render :update do |page|
+            page.visual_effect :puff, dom_id(@post)
+          end
+        end
+      end
     end
   end
 
@@ -61,7 +91,11 @@ private
   def setup
     @forum = Forum.find(params[:forum_id])
     @topic = @forum.topics.find(params[:topic_id])
-    @post = @topic.posts.find(params[:id]) if params[:id]
+    if params[:id]
+      @post = @topic.posts.find(params[:id])
+    else
+      @post = ForumPost.new
+    end
   end
 
   def allow_to
@@ -69,39 +103,4 @@ private
     super :user, :only => [:new, :create]
   end
   
-  
 end
-
-
-# GET /forum_posts
-# GET /forum_posts.xml
-# def index
-#     @posts = ForumPost.find(:all)
-# 
-#     respond_to do |format|
-#       format.html # index.html.erb
-#       format.xml  { render :xml => @posts }
-#     end
-#   end
-# 
-#   # GET /forum_posts/1
-#   # GET /forum_posts/1.xml
-#   def show
-#     @post = ForumPost.find(params[:id])
-# 
-#     respond_to do |format|
-#       format.html # show.html.erb
-#       format.xml  { render :xml => @post }
-#     end
-#   end
-
-# # GET /forum_posts/new
-# # GET /forum_posts/new.xml
-# def new
-#   @post = ForumPost.new
-# 
-#   respond_to do |format|
-#     format.html # new.html.erb
-#     format.xml  { render :xml => @post }
-#   end
-# end

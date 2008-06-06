@@ -5,16 +5,25 @@
   <%= icon post.owner %><br/>
   Posted by <%=link_to h(post.owner.f), profile_path(post.owner) %><br/>
   Posted <%= time_ago_in_words post.created_at %> ago<br/>
-  <%- if @u and @u.is_admin %>
-    <%= link_to 'Edit', edit_forum_topic_post_path(@forum, @topic, post) %> : 
-    <%= link_to 'Destroy', forum_topic_post_path(@forum, @topic, post), :confirm => 'Are you sure?', 
-                                                                   :method => :delete, 
-                                                                   :class=> "destroy" %>
+  <%- if is_admin @u %>
+     <%= inline_tb_link('Edit', "#{dom_id(post)}_edit", {:title => "Editing post in #{post.topic.title}",
+                                                           :id => "#{dom_id(post)}_edit_link"}, {:height => 250}) %> : 
+    <%= link_to_remote 'Destroy', {:url => forum_topic_post_path(@forum, @topic, post), :confirm => 'Are you sure?', :method => :delete}, {:class=> "destroy", :id => "#{dom_id(post)}_destroy_link"} %>
   <%- end %>
   </div>
   
   <div class="body">
     <%= textilize(post.body)%>
+  </div>
+  
+  <div id="<%= dom_id(post)%>_edit" class="hidden">
+    <% less_remote_form_for(post, :url => forum_topic_post_url(post.topic.forum, post.topic, post)) do |f| %>
+
+        <%= f.text_area :body %>
+
+        <%= f.submit "Update", :class=> "button" %>
+
+    <% end %>
   </div>
   
 </div>

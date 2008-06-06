@@ -34,9 +34,8 @@ class ForumTopicsControllerTest < ActionController::TestCase
       assert_tag :tag => "a", :attributes => {:href => login_path},
                  :ancestor => {:tag => "div", :attributes => {:class => "topic_followup post"}}
       forum_topics(:one).posts.each do |post|
-        assert_no_tag :tag => "a", :attributes => {:href => forum_topic_post_path(post.topic.forum, post.topic, post), 
-                                                :class => "destroy"}
-        assert_no_tag :tag => "a", :attributes => {:href => edit_forum_topic_post_path(post.topic.forum, post.topic, post)}
+        assert_no_tag :tag => "a", :attributes => {:id => "forum_post_#{post.id}_destroy_link"}
+        assert_no_tag :tag => "a", :attributes => {:id => "forum_post_#{post.id}_edit_link"}
       end
     end
   end
@@ -52,9 +51,8 @@ class ForumTopicsControllerTest < ActionController::TestCase
       assert_no_tag :tag => "a", :attributes => {:href => login_path},
                     :ancestor => {:tag => "div", :attributes => {:class => "topic_followup post"}}
       forum_topics(:one).posts.each do |post|
-        assert_no_tag :tag => "a", :attributes => {:href => forum_topic_post_path(post.topic.forum, post.topic, post), 
-                                                :class => "destroy"}
-        assert_no_tag :tag => "a", :attributes => {:href => edit_forum_topic_post_path(post.topic.forum, post.topic, post)}
+        assert_no_tag :tag => "a", :attributes => {:id => "forum_post_#{post.id}_destroy_link"}
+        assert_no_tag :tag => "a", :attributes => {:id => "forum_post_#{post.id}_edit_link"}
       end
     end
   end
@@ -70,9 +68,8 @@ class ForumTopicsControllerTest < ActionController::TestCase
       assert_no_tag :tag => "a", :attributes => {:href => login_path},
                     :ancestor => {:tag => "div", :attributes => {:class => "topic_followup post"}}
       forum_topics(:one).posts.each do |post|
-        assert_tag :tag => "a", :attributes => {:href => forum_topic_post_path(post.topic.forum, post.topic, post), 
-                                                :class => "destroy"}
-        assert_tag :tag => "a", :attributes => {:href => edit_forum_topic_post_path(post.topic.forum, post.topic, post)}
+        assert_tag :tag => "a", :attributes => {:id => "forum_post_#{post.id}_destroy_link"}
+        assert_tag :tag => "a", :attributes => {:id => "forum_post_#{post.id}_edit_link"}
       end
     end
   end
