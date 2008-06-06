@@ -19,7 +19,6 @@ class ForumsController < ApplicationController
   end
 
   def show
-    @topics = @forum.topics.paginate(:all, :page => params[:page], :order => 'created_at DESC')
 
     respond_to do |format|
       format.html # show.html.erb
@@ -69,8 +68,10 @@ class ForumsController < ApplicationController
 
     respond_to do |format|
       if @forum.update_attributes(params[:forum])
-        flash[:notice] = 'Forum was successfully updated.'
-        format.html { redirect_to(forums_path) }
+        format.html do 
+          flash[:notice] = 'Forum was successfully updated.'
+          redirect_to(forums_path) 
+        end
         format.xml  { head :ok }
         format.js do
           render :update do |page|
@@ -122,7 +123,10 @@ private
   
   def setup
     if params[:id]
-      @forum = Forum.find(params[:id])
+      @forum = Forum.find(params[:id], :include => :topics, :order => "forum_topics.updated_at DESC")
+      @topics = @forum.topics.paginate(:all, :page => params[:page])
+      @topic = @forum.topics.new
+      @post = ForumPost.new
     else
       @forum = Forum.new
     end

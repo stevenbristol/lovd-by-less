@@ -71,17 +71,15 @@ class ForumsControllerTest < ActionController::TestCase
       assert_response 200
       assert_template 'show'
       
-      assert_no_tag :tag => 'a', :attributes => {:href => new_forum_topic_path(forums(:one))}
+      assert_no_tag :tag => 'a', :attributes => {:id => "new_topic_link"}
       assert_tag :tag => "a", :attributes => {:href => signup_path}, 
                  :ancestor => {:tag => "div", :attributes => {:class => "forum"}}
       assert_tag :tag => "a", :attributes => {:href => login_path},
                  :ancestor => {:tag => "div", :attributes => {:class => "forum"}}
                     
       forums(:one).topics.each do |topic|
-        assert_no_tag :tag => "a", :attributes => {:href => forum_topic_path(topic.forum, topic), :class => "destroy"},
-                                   :parent => {:tag => "li", :attributes => {:id => "forum_topic_#{topic.id}"}}
-        assert_no_tag :tag => "a", :attributes => {:href => edit_forum_topic_path(topic.forum, topic)},
-                                   :parent => {:tag => "li", :attributes => {:id => "forum_topic_#{topic.id}"}}
+        assert_no_tag :tag => "a", :attributes => {:id => "forum_topic_#{topic.id}_destroy_link"}
+        assert_no_tag :tag => "a", :content => "Edit", :attributes => {:id => "forum_topic_#{topic.id}_edit_link"}
       end
     end
   end
@@ -92,16 +90,14 @@ class ForumsControllerTest < ActionController::TestCase
       assert_response 200
       assert_template 'show'
       
-      assert_tag :tag => 'a', :attributes => {:href => new_forum_topic_path(forums(:one))}
+      assert_tag :tag => 'a', :attributes => {:id => "new_topic_link"}
       assert_no_tag :tag => "a", :attributes => {:href => signup_path}, 
                     :ancestor => {:tag => "div", :attributes => {:class => "forum"}}
       assert_no_tag :tag => "a", :attributes => {:href => login_path},
                     :ancestor => {:tag => "div", :attributes => {:class => "forum"}}
       forums(:one).topics.each do |topic|
-        assert_no_tag :tag => "a", :attributes => {:href => forum_topic_path(topic.forum, topic), :class => "destroy"},
-                                   :parent => {:tag => "li", :attributes => {:id => "forum_topic_#{topic.id}"}}
-        assert_no_tag :tag => "a", :attributes => {:href => edit_forum_topic_path(topic.forum, topic)},
-                                   :parent => {:tag => "li", :attributes => {:id => "forum_topic_#{topic.id}"}}
+        assert_no_tag :tag => "a", :attributes => {:id => "forum_topic_#{topic.id}_destroy_link"}
+        assert_no_tag :tag => "a", :content => "Edit", :attributes => {:id => "forum_topic_#{topic.id}_edit_link"}
       end
     end
   end
@@ -117,10 +113,10 @@ class ForumsControllerTest < ActionController::TestCase
       assert_no_tag :tag => "a", :attributes => {:href => login_path},
                     :ancestor => {:tag => "div", :attributes => {:class => "forum"}}
       
-      assert_tag :tag => 'a', :attributes => {:href => new_forum_topic_path(forums(:one))}
+      assert_tag :tag => 'a', :attributes => {:id => "new_topic_link"}
       forums(:one).topics.each do |topic|
-        assert_tag :tag => "a", :attributes => {:href => forum_topic_path(topic.forum, topic), :class => "destroy"}
-        assert_tag :tag => "a", :attributes => {:href => edit_forum_topic_path(topic.forum, topic)}
+        assert_tag :tag => "a", :attributes => {:id => "forum_topic_#{topic.id}_destroy_link"}
+        assert_tag :tag => "a", :content => "Edit", :attributes => {:id => "forum_topic_#{topic.id}_edit_link"}
       end
     end
   end

@@ -18,26 +18,50 @@ class ForumPostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        flash[:notice] = 'ForumPost was successfully created.'
-        format.html { redirect_to(forum_topic_url(@forum, @topic)) }
+        format.html do
+          flash[:notice] = 'ForumPost was successfully created.' 
+          redirect_to(forum_topic_url(@forum, @topic)+"\##{dom_id(@post)}") 
+        end
         format.xml  { render :xml => @post, :status => :created, :location => @post }
+        format.js do
+          render :update do |page|
+            page.insert_html :bottom, "posts_list", :partial => 'forum_posts/post', :object => @post
+            page.visual_effect :highlight, dom_id(@post)
+            page << "$('forum_post_body').value = ''"
+          end
+        end
       else
         format.html do 
           session[:new_forum_post] = @post
-          logger.info "*** could not create new post. storing in session: #{session[:new_forum_post].to_yaml}"
           redirect_to(forum_topic_url(@forum, @topic)) 
         end
         format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
+        format.js do
+          render :update do |page|
+            page.alert @post.errors.to_s
+          end
+        end
       end
     end
   end
 
   def update
     respond_to do |format|
-      if @post.update_attributes(params[:post])
-        flash[:notice] = 'ForumPost was successfully updated.'
-        format.html { redirect_to(forum_topic_url(@forum, @topic)) }
+      if @post.update_attributes(params[:forum_post])
+        format.html do
+          flash[:notice] = 'ForumPost was successfully updated.'
+          redirect_to(forum_topic_url(@forum, @topic)) 
+        end
         format.xml  { head :ok }
+        format.js do
+          render :update do |page|
+            page.replace_html dom_id(@post), :partial => 'forum_posts/post', :object => @post
+            page << "tb_init('\##{dom_id(@post)}_edit_link')"
+            page << "tb_remove()"
+            page << "$('TB_ajaxContent').innerHTML = ''" #otherwise we get double content on next show
+            page.visual_effect :highlight, dom_id(@post)
+          end
+        end
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
@@ -52,6 +76,13 @@ class ForumPostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(forum_topic_url(@forum, @topic)) }
       format.xml  { head :ok }
+      format.js do
+        if @post.frozen?
+          render :update do |page|
+            page.visual_effect :puff, dom_id(@post)
+          end
+        end
+      end
     end
   end
 

@@ -22,7 +22,7 @@ class ForumTopicsController < ApplicationController
       @post = @topic.posts.new
     end
     
-    @posts = @topic.posts.paginate(:all, :page => params[:page], :order => 'created_at DESC')
+    @posts = @topic.posts.paginate(:all, :page => params[:page], :order => 'created_at ASC')
     
     respond_to do |format|
       format.html # show.html.erb
@@ -50,16 +50,32 @@ class ForumTopicsController < ApplicationController
     @post.owner = @p
     @topic.posts << @post
     
-    logger.info "*** created topic:#{@topic.to_yaml}"
     
     respond_to do |format|
       if @topic.save
         flash[:notice] = 'ForumTopic was successfully created.'
         format.html { redirect_to(forum_topic_url(@forum, @topic)) }
         format.xml  { render :xml => @topic, :status => :created, :location => @topic }
+        format.js do
+          render :update do |page|
+            page.insert_html :after, "topic_labels_row", :partial => 'forum_topics/topic', :object => @topic
+            page << "tb_init('\##{dom_id(@topic)}_edit_link')"
+            page << "tb_remove()"
+            page.visual_effect :highlight, dom_id(@topic)
+          end
+        end
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @topic.errors, :status => :unprocessable_entity }
+        format.js do
+          render :update do |page|
+            if !@post.errors.empty?
+              page.alert @post.errors.to_s
+            elsif !@topic.errors.empty?
+              page.alert @topic.errors.to_s
+            end
+          end
+        end
       end
     end
   end
@@ -67,12 +83,28 @@ class ForumTopicsController < ApplicationController
   def update
     respond_to do |format|
       if @topic.update_attributes(params[:forum_topic])
-        flash[:notice] = 'ForumTopic was successfully updated.'
-        format.html { redirect_to(forum_path(@topic.forum)) }
+        format.html do 
+          flash[:notice] = 'ForumTopic was successfully updated.'
+          redirect_to(forum_path(@topic.forum)) 
+        end
         format.xml  { head :ok }
+        format.js do
+          render :update do |page|
+            page.replace dom_id(@topic), :partial => 'forum_topics/topic', :object => @topic
+            page << "tb_init('\##{dom_id(@topic)}_edit_link')"
+            page << "tb_remove()"
+            page << "$('TB_ajaxContent').innerHTML = ''" #otherwise we get double content on next show
+            page.visual_effect :highlight, dom_id(@topic)
+          end
+        end
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @topic.errors, :status => :unprocessable_entity }
+        format.js do
+          render :update do |page|
+            page.alert @topic.errors.to_s
+          end
+        end
       end
     end
   end
@@ -83,6 +115,13 @@ class ForumTopicsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(@forum) }
       format.xml  { head :ok }
+      format.js do
+        if @topic.frozen?
+          render :update do |page|
+            page.visual_effect :puff, dom_id(@topic)
+          end
+        end
+      end
     end
   end
   
