@@ -1,8 +1,6 @@
 ##
 # ForumsController
 # Author: Les Freeman (lesliefreeman3@gmail.com)
-# Created on: 5/16/08
-# Updated on: 6/4/08
 #
 
 class ForumsController < ApplicationController
