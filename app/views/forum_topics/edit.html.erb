@@ -1,0 +1,15 @@
+<h1>Editing forum_topic</h1>
+
+<div id="sub_nav">
+  <%= link_to "&larr; Back to #{@forum.name}", forum_path(@forum) %>
+</div>
+
+
+<%= error_messages_for :forum_topic %>
+
+<% less_form_for(@topic, :url => forum_topic_url(@topic.forum, @topic)) do |f| %>
+
+    <%= render :partial => 'form', :locals => {:f => f }%>
+
+<% end %>
+

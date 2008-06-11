@@ -1,0 +1,28 @@
+<h1><%= SITE_NAME %> Forums</h1>
+
+<%- if is_admin @u%>
+<div id="sub_nav">
+  <%= inline_tb_link('Create a new forum', "new_forum", :title => "Creating a new forum") %>
+</div>
+<div id="new_forum" class="hidden">
+  <% less_remote_form_for(@forum) do |f| %>
+    <%= render :partial => 'form', :locals => {:f => f} %>
+  <% end %>
+</div>
+
+<%- end%>
+
+<div id="forum_list_header">
+  <div class="last_post">Last Post</div>
+  <div class="info">Forum</div>
+</div>
+
+<ul id="forums_list">
+  <%= render :partial => 'forum', :collection => @forums%>
+</ul>
+<br />
+
+<%- if is_admin @u%>
+  <%= sortable_element('forums_list', :url => {:action => :update_positions}) %>
+  Drag forum rows to reorder.<br/>
+<%- end%>

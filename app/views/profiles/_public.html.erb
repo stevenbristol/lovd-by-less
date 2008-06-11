@@ -13,6 +13,8 @@ can_send = !@p.blank?
   <%= render :partial => 'blogs/list' %>	
   <%= render :partial => 'comments/list', :locals => {:with_form => true, :with_wall_to_wall => true} %>	
   <%= render :partial => 'photos/gallery', :locals => {:mini => true} %>
+  <%= render :partial => 'forum_posts/list' %>
+  
   <%- if @video -%>
   <div class="activity_box">
     <h2>Latest YouTube Video</h2>

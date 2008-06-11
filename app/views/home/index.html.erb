@@ -16,7 +16,10 @@
     <div id="front_left_column" class="left"> 
       <h2>Latest Comments</h2>
       <%= render :partial => 'comments/comment', :collection => recent_comments %>
-    </div>  
+      
+       <h2>Newest Forum Topics</h2>
+      <%= render :partial => 'forum_topics/new_topic', :collection => recent_forum_posts %>
+    </div>
 
     <div id="front_middle_column" class="left"> 
       <h2>Newest Members</h2>

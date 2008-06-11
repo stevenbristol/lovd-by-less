@@ -66,6 +66,9 @@ class Profile < ActiveRecord::Base
   # Photos
   has_many :photos, :order => 'created_at DESC'
   
+  #Forums
+  has_many :forum_posts, :foreign_key => 'owner_id'
+  
   acts_as_ferret :fields => [ :location, :f, :about_me ], :remote=>true
   
   file_column :icon, :magick => {

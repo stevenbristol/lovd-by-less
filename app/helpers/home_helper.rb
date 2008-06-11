@@ -13,7 +13,9 @@ module HomeHelper
     Profile.find(:all, :limit => limit, :order => 'created_at DESC', :conditions=>"user_id is not null")
   end
   
-  
+  def recent_forum_posts(limit = 10)
+    ForumTopic.find(:all, :limit => limit, :order => 'forum_posts.created_at DESC', :include => [:forum, :posts])
+  end
   
   
 end

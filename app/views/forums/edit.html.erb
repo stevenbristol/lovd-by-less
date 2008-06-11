@@ -1,0 +1,19 @@
+<h1>Editing forum</h1>
+
+<div id="sub_nav">
+  <%= link_to "&larr; Back to Forums", forums_path %>
+</div>
+
+<%= error_messages_for :forum %>
+
+<% less_form_for(@forum) do |f| %>
+
+    <%= f.text_field :name %>
+
+    <%= f.text_area :description %>
+
+    <div class="row button">
+      <%= f.submit "Update", :class => 'button' %>
+    </div>
+
+<% end %>

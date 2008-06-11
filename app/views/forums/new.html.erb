@@ -1,0 +1,11 @@
+<h1>New forum</h1>
+<div id="sub_nav">
+  <%= link_to "&larr; Back to Forums", forums_path %>
+</div>
+<%= error_messages_for :forum %>
+
+<% less_form_for(@forum) do |f| %>
+
+  <%= render :partial => 'form', :locals => {:f => f} %>
+<% end %>
+
