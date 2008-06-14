@@ -1,0 +1,12 @@
+<%
+  post ||= @post
+%>
+
+<% less_remote_form_for(post, :url => forum_topic_post_url(post.topic.forum, post.topic, post)) do |f| %>
+
+    <%= f.text_area :body %>
+    <div class="row button">
+      <%= f.submit "Update", :class=> "button" %>
+    </div>
+
+<% end %>

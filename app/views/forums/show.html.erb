@@ -3,7 +3,9 @@
   
   <%= link_to 'Forums', forums_path %> > <%=h @forum.name %>
   <h1 class="forum_name"><%=h @forum.name %></h1>
-   <%= forum_details(@forum)%>
+  <div id="forum_details">
+    <%= forum_details(@forum)%>
+  </div>
    
    <div id="sub_nav">
      <%- if @u %>
@@ -17,30 +19,12 @@
    </div>
    
    <div id="new_forum_topic" class="hidden">
-     <% less_remote_form_for(@topic, {:url => forum_topics_path(@forum)}) do |f| %>
-         <%= f.text_field :title %>
-
-        <% fields_for @post do |post_fields|%>
-
-             <%= f.front nil, :label => "Body:"%>
-             <%= post_fields.text_area :body %>
-             <%= f.back %>
-
-         <% end %>
-
-         <div class="row button">
-           <%= f.submit "Create", :class => 'button' %>
-         </div>
-     <% end %>
+     <%= render :partial => 'forum_topics/new_topic_form' %>
    </div>
    
    <p class="forum_description">
      <%=h @forum.description %>
    </p>
-
-   <%- unless @u %>
-       <h2>Please <%= link_to "login", login_path %> or <%= link_to "sign-up", signup_path %> to post a new topic!</h2>
-   <%- end %>
 
    <%= will_paginate @topics %>
    <table class="forum_topics">
@@ -52,22 +36,17 @@
 
        <td class="last_post">Last Post</td>
 
-       <%- if is_admin @u %>
+       <%- if_admin do %>
        <td class="controls"></td>
        <% end %>
      </tr>
 
      <%= render :partial => 'forum_topics/topic', :collection => @topics%>
-     <%- if @forum.topics.empty? and @u %>
-       <td colspan="5">
-         There are no topics in this forum yet. <%= link_to( "Start a topic!", new_forum_topic_path(@forum)) %>
-       </td>
-     <%- elsif @forum.topics.empty? and !@u %>
-       <td colspan="5">
-         There are no topics in this forum yet. Please <%= link_to "login", login_path %> or <%= link_to "sign-up", signup_path %> to post a new topic!
-       </td>
-     <%-end%>
+
    </table>
+   <div id="no_topics_message" style="display: <%= @topics.empty? ? 'block' : 'none' %>">
+      There are no topics in this forum yet.
+   </div>
 
    <%= will_paginate @topics %>
   

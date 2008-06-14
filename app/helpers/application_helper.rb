@@ -77,7 +77,11 @@ module ApplicationHelper
     @p == @profile
   end
   
-  def is_admin user = nil
-    user && user.is_admin
+  def is_admin? user = nil
+    user && user.is_admin?
+  end
+  
+  def if_admin
+    yield if is_admin? @u
   end
 end

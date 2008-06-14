@@ -1,5 +1,13 @@
-<%= f.text_field :title %>
+<%
+  topic ||= @topic
+%>
 
-<div class="row button">
-  <%= f.submit "Save", :class => 'button' %>
-</div>
+<% less_remote_form_for(topic, :url => forum_topic_url(topic.forum, topic)) do |f| %>
+
+  <%= f.text_field :title %>
+
+  <div class="row button">
+    <%= f.submit "Save", :class => 'button' %>
+  </div>
+
+<% end %>

@@ -1,4 +1,4 @@
-<tr id="<%= dom_id(topic)%>">
+<tr id="<%= topic.dom_id%>">
   <td class="">
     <%= link_to topic.title, forum_topic_path(@forum, topic) %>
 
@@ -12,19 +12,15 @@
     <%= topic_last_post_info topic%>
   </td>
   
-  <%- if is_admin @u %>
-  <td id="<%= dom_id(topic)%>_controls" class="controls">
-    <%= inline_tb_link('Edit', "#{dom_id(topic)}_edit", {:title => "Editing topic #{topic.title}",
-                                                         :id => "#{dom_id(topic)}_edit_link"}, {:height => 100}) %> : 
+  <%- if_admin do %>
+  <td id="<%= topic.dom_id%>_controls" class="controls">
+    <%= inline_tb_link('Edit', "#{topic.dom_id}_edit", {:title => "Editing topic #{topic.title}",
+                                                         :id => "#{topic.dom_id}_edit_link"}, {:height => 100}) %> : 
     <%= link_to_remote 'Destroy', {:url => forum_topic_url(topic.forum, topic), :confirm => 'Are you sure?', 
-                                  :method => :delete}, {:class=> "destroy", :id => "#{dom_id(topic)}_destroy_link"} %>
+                                  :method => :delete}, {:class=> "destroy", :id => "#{topic.dom_id}_destroy_link"} %>
                                                        
-    <div id="<%= dom_id(topic)%>_edit" class="hidden">
-      <% less_remote_form_for(topic, :url => forum_topic_url(topic.forum, topic)) do |f| %>
-
-          <%= render :partial => 'forum_topics/form', :locals => {:f => f }%>
-
-      <% end %>
+    <div id="<%= topic.dom_id%>_edit" class="hidden">
+      <%= render :partial => 'forum_topics/form', :locals => {:topic => topic}%>
     </div>
   </td>
   <% end %>

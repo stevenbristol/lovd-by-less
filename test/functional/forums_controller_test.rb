@@ -70,10 +70,6 @@ class ForumsControllerTest < ActionController::TestCase
       assert_template 'show'
       
       assert_no_tag :tag => 'a', :attributes => {:id => "new_topic_link"}
-      assert_tag :tag => "a", :attributes => {:href => signup_path}, 
-                 :ancestor => {:tag => "div", :attributes => {:class => "forum"}}
-      assert_tag :tag => "a", :attributes => {:href => login_path},
-                 :ancestor => {:tag => "div", :attributes => {:class => "forum"}}
                     
       forums(:one).topics.each do |topic|
         assert_no_tag :tag => "a", :attributes => {:id => "forum_topic_#{topic.id}_destroy_link"}
@@ -173,7 +169,7 @@ class ForumsControllerTest < ActionController::TestCase
     assert_nothing_raised do
       assert_difference "Forum.count" do
         post :create, {:forum => valid_forum_attributes}, {:user => profiles(:admin).id}
-        assert_redirected_to :controller => 'forums', :action => 'show'
+        assert_redirected_to :controller => 'forums', :action => 'index'
       end
     end
   end

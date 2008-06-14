@@ -1,14 +1,14 @@
-<a name="<%= dom_id(post)%>" href=""></a>
-<div class="post" id="<%= dom_id(post)%>">
+<a name="<%= post.dom_id%>" href=""></a>
+<div class="post" id="<%= post.dom_id%>">
   
   <div class="info">
   <%= icon post.owner %><br/>
   Posted by <%=link_to h(post.owner.f), profile_path(post.owner) %><br/>
   Posted <%= time_ago_in_words post.created_at %> ago<br/>
-  <%- if is_admin @u %>
-     <%= inline_tb_link('Edit', "#{dom_id(post)}_edit", {:title => "Editing post in #{post.topic.title}",
-                                                           :id => "#{dom_id(post)}_edit_link"}, {:height => 250}) %> : 
-    <%= link_to_remote 'Destroy', {:url => forum_topic_post_path(@forum, @topic, post), :confirm => 'Are you sure?', :method => :delete}, {:class=> "destroy", :id => "#{dom_id(post)}_destroy_link"} %>
+  <%- if_admin do %>
+     <%= inline_tb_link('Edit', "#{post.dom_id}_edit", {:title => "Editing post in #{post.topic.title}",
+                                                           :id => "#{post.dom_id}_edit_link"}, {:height => 290}) %> : 
+    <%= link_to_remote 'Destroy', {:url => forum_topic_post_path(@forum, @topic, post), :confirm => 'Are you sure?', :method => :delete}, {:class=> "destroy", :id => "#{post.dom_id}_destroy_link"} %>
   <%- end %>
   </div>
   
@@ -16,14 +16,8 @@
     <%= textilize(post.body)%>
   </div>
   
-  <div id="<%= dom_id(post)%>_edit" class="hidden">
-    <% less_remote_form_for(post, :url => forum_topic_post_url(post.topic.forum, post.topic, post)) do |f| %>
-
-        <%= f.text_area :body %>
-
-        <%= f.submit "Update", :class=> "button" %>
-
-    <% end %>
+  <div id="<%= post.dom_id%>_edit" class="hidden">
+    <%= render :partial => 'forum_posts/form', :locals => {:post => post}%>
   </div>
   
 </div>
