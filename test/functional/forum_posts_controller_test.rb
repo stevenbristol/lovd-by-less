@@ -134,7 +134,7 @@ class ForumPostsControllerTest < ActionController::TestCase
                     :topic_id => forum_posts(:one).topic.id,
                     :id => forum_posts(:one).id,
                     :post => valid_forum_post_attributes}, {:user => profiles(:admin).id}
-      assert_redirected_to :controller => 'forum_topics', :action => 'show', :id => forum_topics(:one).to_param
+      assert_redirected_to :controller => 'forum_topics', :action => 'show', :id => forum_topics(:one).to_param+"\##{forum_posts(:one).dom_id}"
     end
   end
   

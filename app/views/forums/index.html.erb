@@ -1,13 +1,11 @@
 <h1><%= SITE_NAME %> Forums</h1>
 
-<%- if is_admin @u%>
+<%- if_admin do%>
 <div id="sub_nav">
   <%= inline_tb_link('Create a new forum', "new_forum", :title => "Creating a new forum") %>
 </div>
 <div id="new_forum" class="hidden">
-  <% less_remote_form_for(@forum) do |f| %>
-    <%= render :partial => 'form', :locals => {:f => f} %>
-  <% end %>
+  <%= render :partial => 'form' %>
 </div>
 
 <%- end%>
@@ -20,9 +18,12 @@
 <ul id="forums_list">
   <%= render :partial => 'forum', :collection => @forums%>
 </ul>
+<div id="no_forums_message" style="display: <%= @forums.empty? ? 'block' : 'none' %>">
+  No forums exist at this time.
+</div>
 <br />
 
-<%- if is_admin @u%>
+<%- if_admin do %>
   <%= sortable_element('forums_list', :url => {:action => :update_positions}) %>
   Drag forum rows to reorder.<br/>
 <%- end%>

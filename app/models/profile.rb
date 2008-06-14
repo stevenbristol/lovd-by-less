@@ -67,7 +67,7 @@ class Profile < ActiveRecord::Base
   has_many :photos, :order => 'created_at DESC'
   
   #Forums
-  has_many :forum_posts, :foreign_key => 'owner_id'
+  has_many :forum_posts, :foreign_key => 'owner_id', :dependent => :destroy
   
   acts_as_ferret :fields => [ :location, :f, :about_me ], :remote=>true
   
