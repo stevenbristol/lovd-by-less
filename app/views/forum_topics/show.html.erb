@@ -2,8 +2,11 @@
   <%= link_to 'Forums', forums_path %> > <%= link_to h(@forum.name), forum_path(@forum) %> > <%=h @topic.title%>
 
   <h1><%=h @topic.title %></h1>
-  <%= topic_details(@topic)%>
-
+  
+  <div id="topic_details">
+    <%= topic_details(@topic)%>
+  </div>
+  
   <div id="sub_nav">
     <%= link_to "Post a follow up", "\#followup" %>
     <%= link_to "&larr; Back to #{@forum.name}", forum_path(@forum) %>
@@ -16,13 +19,13 @@
   </ul>
 
   <a href="" name="followup"></a>
-  <div id="<%= dom_id(@topic)%>_new_post" class="topic_followup post">
+  <div id="<%= @topic.dom_id%>_new_post" class="topic_followup post">
     <div class="info"><h2>Post a followup</h2></div>
     <div class="body">
       <%- if @u %>
         <%= error_messages_for :post %>
         <% remote_form_for(@post, :url => forum_topic_post_path(@forum, @topic, @post)) do |f| %>
-          <%= f.text_area :body%>
+          <%= f.text_area :body, :id => "followup_post_body"%>
           <div class="clear">
           </div>
           <div class="row button">
