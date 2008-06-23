@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 1
+# Schema version: 2
 #
 # Table name: profiles
 #
@@ -21,7 +21,7 @@
 #  email            :string(255)   
 #  is_active        :boolean(1)    
 #  youtube_username :string(255)   
-#  flickr_username  :string(255)   
+#  flickr_username  :string(255)   default(""), not null
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

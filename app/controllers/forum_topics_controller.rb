@@ -5,13 +5,16 @@ class ForumTopicsController < ApplicationController
   skip_filter :login_required, :only => [:show, :index]
   before_filter :setup
   
+  def index
+    redirect_to forum_path(@forum)
+  end
+  
   def show
-    @posts = @topic.posts.paginate(:all, :page => params[:page], :order => 'created_at ASC')
+    @posts = @topic.posts.paginate(:all, :page => params[:page], :order => 'created_at DESC')
     get_response
   end
 
   def new
-    @post = @topic.posts.new
     get_response
   end
 
@@ -20,12 +23,11 @@ class ForumTopicsController < ApplicationController
 
   def create
     @topic = @forum.build_topic(params[:forum_topic].merge({:owner => @p}))
-    @topic.build_post(params[:forum_post].merge({:owner => @p}))
-    post_response @topic.save, :create
+    post_response @topic.save
   end
 
   def update
-    post_response @topic.update_attributes(params[:forum_topic]), :update
+    post_response @topic.update_attributes(params[:forum_topic])
   end
 
   def destroy
@@ -48,31 +50,22 @@ private
 
   def setup
     @forum = Forum.find(params[:forum_id])
-    @topic = params[:id] ? @forum.topics.find(params[:id]) : ForumTopic.new
-    
-    ##
-    # if the validation of a followup post failed, it is stored in the session by the ForumPostsController
-    if session[:new_forum_post]
-      @post = session[:new_forum_post]
-      session[:new_forum_post] = nil
-    else
-      @post = @topic.posts.new
-    end
+    @topic = params[:id] ? @forum.topics.find(params[:id]) : @forum.topics.build
   end
   
-  def post_response saved, action
+  def post_response saved
     respond_to do |format|
       if saved
         format.html do 
           flash[:notice] = 'ForumTopic was successfully saved.'
-          redirect_to(action == :create ? forum_topic_url(@forum, @topic) : (forum_path(@topic.forum))) 
+          redirect_to(action_name == 'create' ? forum_topic_url(@forum, @topic) : (forum_path(@topic.forum))) 
         end
         
-        format.xml  { render :xml => @topic, :status => (action == :create ? :created : :updated), :location => @topic }
+        format.xml  { render :xml => @topic}
         
         format.js do
           render :update do |page|
-            if action == :create
+            if @controller.action_name == 'create'
               page.insert_html :after, "topic_labels_row", :partial => 'forum_topics/topic', :object => @topic
               page.visual_effect :fade, "no_topics_message"
               page.replace_html "forum_details", forum_details(@forum)
@@ -88,7 +81,7 @@ private
         end
         
       else
-        format.html { render :action => (action == :create ? "new" : "edit") }
+        format.html { render :action => (action_name == 'create' ? "new" : "edit") }
         
         format.xml  { render :xml => @topic.errors, :status => :unprocessable_entity }
         

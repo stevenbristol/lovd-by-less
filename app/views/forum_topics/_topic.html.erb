@@ -1,6 +1,6 @@
 <tr id="<%= topic.dom_id%>">
   <td class="">
-    <%= link_to topic.title, forum_topic_path(@forum, topic) %>
+    <%= link_to h(topic.title), forum_topic_path(@forum, topic) %>
 
   </td>
   

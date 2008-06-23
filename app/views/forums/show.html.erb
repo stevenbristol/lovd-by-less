@@ -11,7 +11,7 @@
      <%- if @u %>
        <%= inline_tb_link('Start a new topic', "new_forum_topic", {:title => "Starting a new topic in #{@forum.name}",
                                                                    :id => "new_topic_link"},
-                                                                  {:height => 320, :width => 800}) %>
+                                                                  {:height => 130, :width => 300}) %>
        
      <%- end %>
 
@@ -19,7 +19,7 @@
    </div>
    
    <div id="new_forum_topic" class="hidden">
-     <%= render :partial => 'forum_topics/new_topic_form' %>
+     <%= render :partial => 'forum_topics/form' %>
    </div>
    
    <p class="forum_description">

@@ -7,7 +7,7 @@
   <div class="info">
     <h2><%=link_to h(forum.name), forum_path(forum) %></h2>
     <span class="details"><%= forum_details(forum) %></span>
-    <%=h forum.description %><br/>
+    <%=sanitize textilize(forum.description) %><br/>
 
     <%- if_admin do %>
       <%= inline_tb_link('Edit', "#{forum.dom_id}_edit", {:title => "Editing forum #{forum.name}",

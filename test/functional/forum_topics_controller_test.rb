@@ -12,12 +12,6 @@ class ForumTopicsControllerTest < ActionController::TestCase
 
   include ForumsTestHelper
   
-  ##
-  # :index
-  
-  should "not respond to index" do
-    assert !ForumTopicsController.new.respond_to?(:index)
-  end
 
   ##
   # :show
@@ -118,8 +112,7 @@ class ForumTopicsControllerTest < ActionController::TestCase
     assert_nothing_raised do
       assert_difference "ForumTopic.count" do
         post :create, {:forum_id => forums(:one).id, 
-                       :forum_topic => valid_forum_topic_attributes,
-                       :forum_post => valid_forum_post_attributes}, {:user => profiles(:user).id}
+                       :forum_topic => valid_forum_topic_attributes}, {:user => profiles(:user).id}
         assert_redirected_to :controller => 'forum_topics', :action => 'show'
       end
     end
@@ -129,9 +122,31 @@ class ForumTopicsControllerTest < ActionController::TestCase
     assert_nothing_raised do
       assert_difference "ForumTopic.count" do
         post :create, {:forum_id => forums(:one).id,
-                       :forum_topic => valid_forum_topic_attributes,
-                       :forum_post => valid_forum_post_attributes}, {:user => profiles(:admin).id}
+                       :forum_topic => valid_forum_topic_attributes}, {:user => profiles(:admin).id}
         assert_redirected_to :controller => 'forum_topics', :action => 'show'
+      end
+    end
+  end
+
+
+  should "create a new forum topic for :admin js" do
+    assert_nothing_raised do
+      assert_difference "ForumTopic.count" do
+        post :create, {:format=>'js', :forum_id => forums(:one).id,
+                       :forum_topic => valid_forum_topic_attributes}, {:user => profiles(:admin).id}
+        assert_response 200
+      end
+    end
+  end
+
+
+
+  should "not create a new forum topic for :admin js" do
+    assert_nothing_raised do
+      assert_no_difference "ForumTopic.count" do
+        post :create, {:format=>'js', :forum_id => forums(:one).id,
+                       :forum_topic => unvalid_forum_topic_attributes}, {:user => profiles(:admin).id}
+        assert_response 200
       end
     end
   end
@@ -195,6 +210,15 @@ class ForumTopicsControllerTest < ActionController::TestCase
     end
   end
 
+  should "update a forum topic for :admin js" do
+    assert_nothing_raised do
+      put :update, {:format=>'js', :forum_id => forum_topics(:one).forum.id,
+                    :id => forum_topics(:one).id, 
+                    :forum => valid_forum_attributes}, {:user => profiles(:admin).id}
+      assert_response 200
+    end
+  end
+
 
   ##
   # :destroy
@@ -231,32 +255,40 @@ class ForumTopicsControllerTest < ActionController::TestCase
   end
 
 
+  should "destroy a forum topic for :admin js" do
+    assert_nothing_raised do
+      assert_difference "ForumTopic.count", -1 do
+        delete :destroy, {:format=>'js', :forum_id => forum_topics(:one).forum.id, 
+                          :id => forum_topics(:one).id}, {:user => profiles(:admin).id}
+        assert_response 200
+      end
+    end
+  end
+
+
   
   ##
   # :index (old tests)
   
-  # should "get the index as guest" do
-  #     assert_nothing_raised do
-  #       get :index, {:forum_id => forum_topics(:one).forum.id}
-  #       assert_response 200
-  #       assert_template 'index'
-  #     end
-  #   end
-  #   
-  #   should "get the index as :user" do
-  #     assert_nothing_raised do
-  #       get :index, {:forum_id => forum_topics(:one).forum.id}, {:user => profiles(:user).id}
-  #       assert_response 200
-  #       assert_template 'index'
-  #     end
-  #   end
-  # 
-  #   should "get the index as :admin" do
-  #     assert_nothing_raised do
-  #       get :index, {:forum_id => forum_topics(:one).forum.id}, {:user => profiles(:admin).id}
-  #       assert_response 200
-  #       assert_template 'index'
-  #     end
-  #   end
+  should "get the index as guest" do
+      assert_nothing_raised do
+        get :index, {:forum_id => forum_topics(:one).forum.id}
+        assert_response 302
+      end
+    end
+    
+    should "get the index as :user" do
+      assert_nothing_raised do
+        get :index, {:forum_id => forum_topics(:one).forum.id}, {:user => profiles(:user).id}
+        assert_response 302
+      end
+    end
+  
+    should "get the index as :admin" do
+      assert_nothing_raised do
+        get :index, {:forum_id => forum_topics(:one).forum.id}, {:user => profiles(:admin).id}
+        assert_response 302
+      end
+    end
 
 end

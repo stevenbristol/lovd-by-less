@@ -23,15 +23,7 @@
     <div class="info"><h2>Post a followup</h2></div>
     <div class="body">
       <%- if @u %>
-        <%= error_messages_for :post %>
-        <% remote_form_for(@post, :url => forum_topic_post_path(@forum, @topic, @post)) do |f| %>
-          <%= f.text_area :body, :id => "followup_post_body"%>
-          <div class="clear">
-          </div>
-          <div class="row button">
-            <%= f.submit "Post", :class => 'button' %>
-          </div>
-        <% end %>
+      <%= render :partial => "forum_posts/form", :locals=>{:css_class=>:followup_post_body} %>
       <%- else %>
         <h1>Please <%= link_to "login", login_path %> or <%= link_to "sign-up", signup_path %> to participate!</h1>
       <%- end %>

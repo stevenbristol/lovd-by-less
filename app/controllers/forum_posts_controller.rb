@@ -1,6 +1,14 @@
 class ForumPostsController < ApplicationController
 
   before_filter :setup
+  skip_filter :login_required, :only => [:show, :index]  
+  
+  def index
+    redirect_to forum_path @forum
+  end
+  def show
+    redirect_to forum_path @forum
+  end
 
   def edit
   end
@@ -9,11 +17,11 @@ class ForumPostsController < ApplicationController
     @post = @topic.posts.build(params[:forum_post])
     @post.owner = @p
 
-    post_response @post.save, :create
+    post_response @post.save
   end
 
   def update
-    post_response @post.update_attributes(params[:forum_post]), :update
+    post_response @post.update_attributes(params[:forum_post])
   end
 
   def destroy
@@ -40,38 +48,30 @@ private
     @post = params[:id] ? @topic.posts.find(params[:id]) : ForumPost.new
   end
   
-  def post_response saved, action
+  def post_response saved
     respond_to do |format|
       if saved
         format.html do
           flash[:notice] = 'ForumPost was successfully saved.' 
           redirect_to(forum_topic_url(@forum, @topic)+"\##{@post.dom_id}") 
         end
-        format.xml  { render :xml => @post, :status => (action == :create ? :created : :updated), :location => @post }
+        format.xml  { render :xml => @post }
         format.js do
           render :update do |page|
-            if action == :create
+            if @controller.action_name == 'create'
               page.insert_html :bottom, "posts_list", :partial => 'forum_posts/post', :object => @post
-              page << "$('followup_post_body').value = ''"
+              page << "jq('.followup_post_body').val('');"
               page.replace_html "topic_details", topic_details(@topic)
             else  
               page.replace_html @post.dom_id, :partial => 'forum_posts/post', :object => @post
-              page << "$('TB_ajaxContent').innerHTML = ''" #otherwise we get double content on next show
-              page << "tb_remove()"
+              page << "jq('#TB_ajaxContent').html(''); tb_remove();"
             end
             page.visual_effect :highlight, @post.dom_id
             page << "tb_init('\##{@post.dom_id}_edit_link')"
           end
         end
       else
-        format.html do 
-          if action == :create
-            session[:new_forum_post] = @post
-            redirect_to(forum_topic_url(@forum, @topic)) 
-          else
-            render :action => "edit"
-          end
-        end
+        format.html { render :action => "edit" }
         format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
         format.js do
           render :update do |page|
@@ -83,6 +83,7 @@ private
   end
 
   def allow_to
+    super :all, :only => [:index, :show]
     super :admin, :all => true
     super :user, :only => [:new, :create]
   end

@@ -13,7 +13,7 @@
   </div>
   
   <div class="body">
-    <%= textilize(post.body)%>
+    <%= sanitize textilize(post.body)%>
   </div>
   
   <div id="<%= post.dom_id%>_edit" class="hidden">

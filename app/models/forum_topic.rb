@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 2
+#
+# Table name: forum_topics
+#
+#  id         :integer(11)   not null, primary key
+#  title      :string(255)   
+#  forum_id   :integer(11)   
+#  owner_id   :integer(11)   
+#  created_at :datetime      
+#  updated_at :datetime      
+#
+
 class ForumTopic < ActiveRecord::Base
   validates_presence_of :title, :owner_id, :forum_id
   
@@ -15,10 +28,5 @@ class ForumTopic < ActiveRecord::Base
     ([owner] + owner.friends + owner.followers).each{ |p| p.feed_items << feed_item }
   end
   
-  def build_post attributes
-    post = ForumPost.new(attributes)
-    self.posts << post unless post.body.empty?
-    post
-  end
   
 end

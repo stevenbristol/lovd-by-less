@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 2
+#
+# Table name: forum_posts
+#
+#  id         :integer(11)   not null, primary key
+#  body       :text          
+#  owner_id   :integer(11)   
+#  topic_id   :integer(11)   
+#  created_at :datetime      
+#  updated_at :datetime      
+#
+
 class ForumPost < ActiveRecord::Base
   validates_presence_of :body, :owner_id
   

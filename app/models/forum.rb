@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 2
+#
+# Table name: forums
+#
+#  id          :integer(11)   not null, primary key
+#  name        :string(255)   
+#  description :text          
+#  position    :integer(11)   
+#  created_at  :datetime      
+#  updated_at  :datetime      
+#
+
 class Forum < ActiveRecord::Base
   
   acts_as_list

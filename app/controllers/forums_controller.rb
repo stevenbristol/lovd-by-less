@@ -20,11 +20,11 @@ class ForumsController < ApplicationController
 
   def create
     @forum = Forum.new(params[:forum])
-    post_response @forum.save, :create
+    post_response @forum.save
   end
 
   def update
-    post_response @forum.update_attributes(params[:forum]), :update
+    post_response @forum.update_attributes(params[:forum])
   end
 
   def destroy
@@ -55,10 +55,9 @@ private
   
   def setup
     if params[:id]
-      @forum = Forum.find(params[:id], :include => :topics, :order => "forum_topics.updated_at DESC")
+      @forum = Forum.find(params[:id], :include => :topics, :order => "forum_topics.created_at DESC")
       @topics = @forum.topics.paginate(:all, :page => params[:page])
       @topic = @forum.topics.new
-      @post = ForumPost.new
     else
       @forum = Forum.new
     end
@@ -73,7 +72,7 @@ private
     end
   end
   
-  def post_response saved, action
+  def post_response saved
     respond_to do |format|
       if saved
         format.html do 
@@ -81,11 +80,11 @@ private
           redirect_to(forums_path) 
         end
         
-        format.xml  { render :xml => @forum, :status => (action == :create ? :created : :updated), :location => @forum }
+        format.xml  { render :xml => @forum, :location => @forum }
         
         format.js do
           render :update do |page|
-            if action == :create
+            if @controller.action_name == 'create'
               page.insert_html :bottom, :forums_list, :partial => 'forum', :object => @forum
               page.visual_effect :fade, "no_forums_message"
               page << "$$('#new_forum input[type=\"text\"]', '#new_forum textarea').each(function(input){input.value=''});"
@@ -100,7 +99,7 @@ private
         end
         
       else
-        format.html { render :action => action == :create ? "new" : "edit" }
+        format.html { render :action => action_name == 'create' ? "new" : "edit" }
         
         format.xml  { render :xml => @forum.errors, :status => :unprocessable_entity }
         

@@ -23,8 +23,8 @@
       <div id="top" >
         <%= link_to(image_tag('logo.png', :class=>'png left'), home_path) %>
         <div class="half right text_r">
-          <%= link_to 'Forums', forums_path %>
           <%= link_to 'Newest Stuff', home_path %>
+          <%= link_to 'Forums', forums_path %>
           <%= link_to('Dashboard', @p) if @p %>
           <%= link_to('Admin', admin_users_path) if @p && @p.user.is_admin %>
         </div>

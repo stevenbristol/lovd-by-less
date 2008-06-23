@@ -15,16 +15,20 @@ class ForumPostsControllerTest < ActionController::TestCase
   ##
   # :index
   
-  should "not respond to index" do
-    assert !ForumPostsController.new.respond_to?(:index)
+  should "redriect if index" do
+    get :index, {:forum_id => forum_topics(:one).forum.id, 
+                   :topic_id => forum_topics(:one).id}
+    assert_response 302
+    assert_redirected_to forum_path(forum_topics(:one).forum)
+  end
+  should "redriect if show" do
+    get :show, {:forum_id => forum_topics(:one).forum.id, 
+                       :topic_id => forum_topics(:one).id, 
+                       :id => forum_posts(:one).id}
+    assert_response 302
+    assert_redirected_to forum_path(forum_topics(:one).forum)
   end
   
-  ##
-  # :show
-  
-  should "not respond to show" do
-    assert !ForumPostsController.new.respond_to?(:show)
-  end
   
   ##
   # :new
@@ -70,6 +74,29 @@ class ForumPostsControllerTest < ActionController::TestCase
     end
   end
   
+  should "create a new forum post for :admin, js" do
+    assert_nothing_raised do
+      assert_difference "ForumPost.count" do
+        post :create, {:format=>'js', :forum_id => forum_topics(:one).forum.id, 
+                       :topic_id => forum_topics(:one).id,
+                       :forum_post => valid_forum_post_attributes}, {:user => profiles(:admin).id}
+         assert_response 200
+      end
+    end
+  end
+  
+  
+  should "create a new forum post for :admin, xml" do
+    assert_nothing_raised do
+      assert_difference "ForumPost.count" do
+        post :create, {:format=>'xml', :forum_id => forum_topics(:one).forum.id, 
+                       :topic_id => forum_topics(:one).id,
+                       :forum_post => valid_forum_post_attributes}, {:user => profiles(:admin).id}
+         assert_response 200
+      end
+    end
+  end
+  
   ##
   # :edit
 
@@ -111,7 +138,7 @@ class ForumPostsControllerTest < ActionController::TestCase
       put :update, {:forum_id => forum_posts(:one).topic.forum.id, 
                     :topic_id => forum_posts(:one).topic.id,
                     :id => forum_posts(:one).id,
-                    :post => valid_forum_post_attributes}
+                    :forum_post => valid_forum_post_attributes}
       assert_response 302
       assert_redirected_to :login_path
     end
@@ -122,7 +149,7 @@ class ForumPostsControllerTest < ActionController::TestCase
       put :update, {:forum_id => forum_posts(:one).topic.forum.id, 
                     :topic_id => forum_posts(:one).topic.id,
                     :id => forum_posts(:one).id,
-                    :post => valid_forum_post_attributes}, {:user => profiles(:user).id}
+                    :forum_post => valid_forum_post_attributes}, {:user => profiles(:user).id}
       assert_response 302
       assert flash[:error]
     end
@@ -133,8 +160,48 @@ class ForumPostsControllerTest < ActionController::TestCase
       put :update, {:forum_id => forum_posts(:one).topic.forum.id, 
                     :topic_id => forum_posts(:one).topic.id,
                     :id => forum_posts(:one).id,
-                    :post => valid_forum_post_attributes}, {:user => profiles(:admin).id}
+                    :forum_post => valid_forum_post_attributes}, {:user => profiles(:admin).id}
       assert_redirected_to :controller => 'forum_topics', :action => 'show', :id => forum_topics(:one).to_param+"\##{forum_posts(:one).dom_id}"
+    end
+  end
+  
+  should "update a forum post for :admin js" do
+    assert_nothing_raised do
+      put :update, {:format=>'js', :forum_id => forum_posts(:one).topic.forum.id, 
+                    :topic_id => forum_posts(:one).topic.id,
+                    :id => forum_posts(:one).id,
+                    :forum_post => valid_forum_post_attributes}, {:user => profiles(:admin).id}
+      assert_response 200
+    end
+  end
+  
+  should "not update a forum post for :admin" do
+    assert_nothing_raised do
+      put :update, {:forum_id => forum_posts(:one).topic.forum.id, 
+                    :topic_id => forum_posts(:one).topic.id,
+                    :id => forum_posts(:one).id,
+                    :forum_post => unvalid_forum_post_attributes}, {:user => profiles(:admin).id}
+      assert_response 200
+    end
+  end
+  
+  should "not update a forum post for :admin js" do
+    assert_nothing_raised do
+      put :update, {:format=>'js', :forum_id => forum_posts(:one).topic.forum.id, 
+                    :topic_id => forum_posts(:one).topic.id,
+                    :id => forum_posts(:one).id,
+                    :forum_post => unvalid_forum_post_attributes}, {:user => profiles(:admin).id}
+      assert_response 200
+    end
+  end
+    
+  should "not update a forum post for :admin xml" do
+    assert_nothing_raised do
+      put :update, {:format=>'xml', :forum_id => forum_posts(:one).topic.forum.id, 
+                    :topic_id => forum_posts(:one).topic.id,
+                    :id => forum_posts(:one).id,
+                    :forum_post => unvalid_forum_post_attributes}, {:user => profiles(:admin).id}
+      assert_response 422
     end
   end
   
@@ -176,4 +243,16 @@ class ForumPostsControllerTest < ActionController::TestCase
     end
   end
   
+  should "destroy a forum post for :admin js" do
+    assert_nothing_raised do
+      assert_difference "ForumPost.count", -1 do
+        delete :destroy, {:format=>'js', :forum_id => forum_posts(:one).topic.forum.id, 
+                          :topic_id => forum_posts(:one).topic.id,
+                          :id => forum_posts(:one).id}, {:user => profiles(:admin).id}
+          assert_response 200
+      end
+    end
+  end
+  
 end
+
