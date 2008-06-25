@@ -23,10 +23,6 @@ class ForumTopic < ActiveRecord::Base
     "#{self.id}-#{title.to_safe_uri}"
   end
   
-  def after_create
-    feed_item = FeedItem.create(:item => self)
-    ([owner] + owner.friends + owner.followers).each{ |p| p.feed_items << feed_item }
-  end
   
   
 end
