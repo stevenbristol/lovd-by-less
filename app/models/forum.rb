@@ -29,4 +29,9 @@ class Forum < ActiveRecord::Base
   def build_topic attributes
     topic = topics.build(attributes)
   end
+  
+  
+  
+  
+  
 end

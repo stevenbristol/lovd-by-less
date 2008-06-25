@@ -48,7 +48,7 @@ li				{list-style: none;}
 #demo_links	a:hover	{background: #999; color: #333;}
 #top a			{font-size: 20px;  font-weight: bold; color: #e185a7; margin: 0 8px;}
 #top img		{margin: 0 0 0 10px;}
-#top .right		{margin: 20px 0 0 0;}
+#top .right		{margin: 20px 0 0 0; width: 600px;}
 #top			{padding: 30px 0 20px 0;}
 
 #front_left_column		{width: 285px; margin: 25px 35px 15px 0;}
