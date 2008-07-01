@@ -30,21 +30,13 @@ Manual Setup:
 
 Install the Required Gems:
 
-- mislav-will_paginate
-- youtube-g
+1. Install these gems:
 - rflickr
-- uuidtools
-- colored
-- hpricot
-- tzinfo
-- mocha
-- redgreen
-- RedCloth
 - rmagick (will require ImageMagick, which is not a gem)
-- acts_as_ferret
-- ferret
 - win32console (windows only)
-- avatar (version 0.0.5 or greater)
+(The other gems are already provided in the vendor gems dir.)
+2. Run "rake gems:build" to build the gems that need builing
+
 
 TIPS:
 Installing ferret on Windows

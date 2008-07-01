@@ -1,0 +1,185 @@
+require 'rubygems'
+require 'rake'
+require 'rake/testtask'
+require 'rake/rdoctask'
+require 'rake/packagetask'
+require 'rake/gempackagetask'
+require 'rake/contrib/rubyforgepublisher'
+
+require File.join(File.dirname(__FILE__), 'lib/uuidtools', 'version')
+
+PKG_NAME      = 'uuidtools'
+PKG_VERSION   = UUID::UUID_TOOLS_VERSION::STRING
+PKG_FILE_NAME = "#{PKG_NAME}-#{PKG_VERSION}"
+
+RELEASE_NAME  = "REL #{PKG_VERSION}"
+
+RUBY_FORGE_PROJECT = PKG_NAME
+RUBY_FORGE_USER    = "sporkmonger"
+RUBY_FORGE_PATH    = "/var/www/gforge-projects/#{RUBY_FORGE_PROJECT}"
+
+PKG_FILES = FileList[
+    "lib/**/*", "test/**/*", "examples/**/*", "doc/**/*", "[A-Z]*", "rakefile"
+].exclude(/\bCVS\b|~$/).exclude(/database\.yml/)
+
+desc "Default Task"
+task :default => [ :test_all ]
+
+# Run the unit tests
+
+Rake::TestTask.new("test_all") { |t|
+  t.libs << "test"
+  t.pattern = 'test/*_test.rb'
+  t.verbose = true
+}
+
+# Generate the RDoc documentation
+
+Rake::RDocTask.new { |rdoc|
+  rdoc.rdoc_dir = 'doc'
+  rdoc.title    = "UUID Tools -- universally unique id generation tools"
+  rdoc.options << '--line-numbers' << '--inline-source' <<
+    '--accessor' << 'cattr_accessor=object'
+  rdoc.template = "#{ENV['template']}.rb" if ENV['template']
+  rdoc.rdoc_files.include('README', 'CHANGELOG')
+  rdoc.rdoc_files.include('lib/**/*.rb')
+}
+
+# Create compressed packages
+
+dist_dirs = [ "lib", "test" ]
+
+spec = Gem::Specification.new do |s|
+  s.name = PKG_NAME
+  s.version = PKG_VERSION
+  s.summary = "Generation of UUIDs."
+  s.description = "Implements a simple system for generating UUIDs."
+
+  s.files = [ "rakefile", "README", "CHANGELOG" ]
+  dist_dirs.each do |dir|
+    s.files = s.files + Dir.glob( "#{dir}/**/*" ).delete_if do |item|
+      item.include?( "\.svn" ) || item.include?( "database\.yml" )
+    end
+  end
+  s.test_files = Dir.glob('test/**/*_test.rb')
+  
+  s.require_path = 'lib'
+  s.autorequire = 'uuidtools'
+
+  s.has_rdoc = true
+  s.extra_rdoc_files = %w( README )
+  s.rdoc_options.concat ['--main',  'README']  
+  
+  s.author = "Bob Aman"
+  s.email = "bob@sporkmonger.com"
+  s.homepage = "http://sporkmonger.com/projects/uuidtools"
+  s.rubyforge_project = "uuidtools"
+end
+  
+Rake::GemPackageTask.new(spec) do |p|
+  p.gem_spec = spec
+  p.need_tar = true
+  p.need_zip = true
+end
+
+task :lines do
+  lines, codelines, total_lines, total_codelines = 0, 0, 0, 0
+
+  for file_name in FileList["lib/**/*.rb"]
+    f = File.open(file_name)
+
+    while line = f.gets
+      lines += 1
+      next if line =~ /^\s*$/
+      next if line =~ /^\s*#/
+      codelines += 1
+    end
+    puts "L: #{sprintf("%4d", lines)}, LOC #{sprintf("%4d", codelines)} | #{file_name}"
+    
+    total_lines     += lines
+    total_codelines += codelines
+    
+    lines, codelines = 0, 0
+  end
+
+  puts "Total: Lines #{total_lines}, LOC #{total_codelines}"
+end
+
+task :benchmark do
+  require 'lib/uuidtools'
+  require 'benchmark'
+  
+  # Version 1
+  result = Benchmark.measure do
+    10000.times do
+      UUID.timestamp_create.to_s
+    end
+  end
+  puts "#{(10000.0 / result.real)} version 1 per second."
+
+  # Version 3
+  result = Benchmark.measure do
+    10000.times do
+      UUID.md5_create(UUID_URL_NAMESPACE,
+        "http://www.ietf.org/rfc/rfc4122.txt").to_s
+    end
+  end
+  puts "#{(10000.0 / result.real)} version 3 per second."
+
+  # Version 4
+  result = Benchmark.measure do
+    10000.times do
+      UUID.random_create.to_s
+    end
+  end
+  puts "#{(10000.0 / result.real)} version 4 per second."
+
+  # Version 5
+  result = Benchmark.measure do
+    10000.times do
+      UUID.sha1_create(UUID_URL_NAMESPACE,
+        "http://www.ietf.org/rfc/rfc4122.txt").to_s
+    end
+  end
+  puts "#{(10000.0 / result.real)} version 5 per second."
+  
+end
+
+
+namespace :publish do
+  desc "Publish the API documentation"
+  task :api => [ "rdoc" ] do 
+    Rake::SshDirPublisher.new(
+      "#{RUBY_FORGE_USER}@rubyforge.org",
+      "#{RUBY_FORGE_PATH}/",
+      "doc"
+    ).upload
+  end
+
+  desc "Runs all of the publishing tasks"
+  task :all => ["publish:api"] do
+  end
+end
+
+task :lines do
+  lines, codelines, total_lines, total_codelines = 0, 0, 0, 0
+
+  for file_name in FileList["lib/**/*.rb"]
+    f = File.open(file_name)
+
+    while line = f.gets
+      lines += 1
+      next if line =~ /^\s*$/
+      next if line =~ /^\s*#/
+      codelines += 1
+    end
+    puts "L: #{sprintf("%4d", lines)}, LOC #{sprintf("%4d", codelines)} | #{file_name}"
+    
+    total_lines     += lines
+    total_codelines += codelines
+    
+    lines, codelines = 0, 0
+  end
+
+  puts "Total: Lines #{total_lines}, LOC #{total_codelines}"
+end

@@ -1,0 +1,105 @@
+--- !ruby/object:Gem::Specification 
+name: hpricot
+version: !ruby/object:Gem::Version 
+  version: "0.6"
+platform: ruby
+authors: 
+- why the lucky stiff
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2007-06-15 00:00:00 -04:00
+default_executable: 
+dependencies: []
+
+description: a swift, liberal HTML parser with a fantastic library
+email: why@ruby-lang.org
+executables: []
+
+extensions: 
+- ext/hpricot_scan/extconf.rb
+extra_rdoc_files: 
+- README
+- CHANGELOG
+- COPYING
+files: 
+- CHANGELOG
+- COPYING
+- README
+- Rakefile
+- test/files
+- test/test_preserved.rb
+- test/test_paths.rb
+- test/load_files.rb
+- test/test_xml.rb
+- test/test_parser.rb
+- test/test_alter.rb
+- test/test_builder.rb
+- test/files/why.xml
+- test/files/boingboing.html
+- test/files/uswebgen.html
+- test/files/immob.html
+- test/files/week9.html
+- test/files/utf8.html
+- test/files/basic.xhtml
+- test/files/cy0.html
+- test/files/tenderlove.html
+- test/files/pace_application.html
+- lib/hpricot
+- lib/hpricot.rb
+- lib/i686-linux
+- lib/hpricot/builder.rb
+- lib/hpricot/htmlinfo.rb
+- lib/hpricot/xchar.rb
+- lib/hpricot/inspect.rb
+- lib/hpricot/modules.rb
+- lib/hpricot/parse.rb
+- lib/hpricot/tag.rb
+- lib/hpricot/traverse.rb
+- lib/hpricot/elements.rb
+- lib/hpricot/tags.rb
+- lib/hpricot/blankslate.rb
+- extras/mingw-rbconfig.rb
+- ext/hpricot_scan/hpricot_scan.h
+- ext/hpricot_scan/HpricotScanService.java
+- ext/hpricot_scan/hpricot_scan.c
+- ext/hpricot_scan/extconf.rb
+- ext/hpricot_scan/hpricot_common.rl
+- ext/hpricot_scan/hpricot_scan.rl
+- ext/hpricot_scan/hpricot_scan.java.rl
+has_rdoc: true
+homepage: http://code.whytheluckystiff.net/hpricot/
+post_install_message: 
+rdoc_options: 
+- --quiet
+- --title
+- The Hpricot Reference
+- --main
+- README
+- --inline-source
+require_paths: 
+- bin
+- lib/i686-linux
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.1.0
+signing_key: 
+specification_version: 2
+summary: a swift, liberal HTML parser with a fantastic library
+test_files: []
+

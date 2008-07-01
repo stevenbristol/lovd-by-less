@@ -1,0 +1,17 @@
+== redgreen
+
+redgreen is an expanded version of Pat Eyler's RedGreen.  Use it as you would 
+the ruby interpreter when running your unit test.
+
+Like so:
+
+$ rg test/test_units.rb
+
+Relevant bloggings:
+- http://errtheblog.com/post/15
+- http://on-ruby.blogspot.com/2006/05/red-and-green-for-ruby.html
+
+Enjoy.
+
+>> Chris Wanstrath
+=> chris[at]ozmm[dot]org

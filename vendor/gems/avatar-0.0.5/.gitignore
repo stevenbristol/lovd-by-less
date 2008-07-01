@@ -1,0 +1,8 @@
+#ignore all .diff files
+/*.diff
+
+#ignore generated files:
+/coverage
+/doc
+/log/*.log
+/pkg

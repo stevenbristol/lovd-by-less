@@ -1,0 +1,61 @@
+--- !ruby/object:Gem::Specification 
+name: redgreen
+version: !ruby/object:Gem::Version 
+  version: 1.2.2
+platform: ruby
+authors: 
+- Chris Wanstrath and Pat Eyler
+autorequire: redgreen
+bindir: bin
+cert_chain: []
+
+date: 2007-04-17 00:00:00 -04:00
+default_executable: rg
+dependencies: []
+
+description: redgreen is an expanded version of Pat Eyler's RedGreen.  It will install a 'rg' file in your bin directory.  Use that as you would use 'ruby' when running a test.
+email: 
+- chris@ozmm.org
+- pat.eyler@gmail.com
+executables: 
+- rg
+extensions: []
+
+extra_rdoc_files: []
+
+files: 
+- README
+- bin/rg
+- lib/redgreen
+- lib/redgreen.rb
+- lib/redgreen/autotest.rb
+- test/test_fake.rb
+has_rdoc: false
+homepage: http://errtheblog.com/post/15, http://on-ruby.blogspot.com/
+post_install_message: 
+rdoc_options: []
+
+require_paths: 
+- bin
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.1.0
+signing_key: 
+specification_version: 2
+summary: redgreen is an expanded version of Pat Eyler's RedGreen
+test_files: []
+

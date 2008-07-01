@@ -1,0 +1,48 @@
+h1. Avatar
+
+h1. &#x2192; 'Avatar'
+
+
+h2. What
+support for avatars
+
+h2. Installing
+
+<pre syntax="bsd">sudo gem install avatar</pre>
+
+h2. The basics
+Set up Avatar::source (by default, a Gravatar)
+Use Avatar::source.avatar_url_for(person, options) or a view helper
+
+
+h2. Demonstration of usage
+
+app/helpers/people_helper.rb:
+<pre syntax='ruby'>class PeopleHelper
+	include Avatar::View::ActionViewSupport
+end
+</pre>
+
+app/views/people/show.html.erb:
+<pre syntax='ruby'><%= avatar_tag(@current_user, :size => 40) %>
+</pre>
+
+
+h2. Forum
+
+"http://groups.google.com/group/ruby-avatar":http://groups.google.com/group/ruby-avatar
+
+h2. How to submit patches
+
+Read the "8 steps for fixing other people's code":http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/ and for section "8b: Submit patch to Google Groups":http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/#8b-google-groups, use the Google Group above.
+
+The project is hosted on "GitHub":http://github.com/gcnovus/avatar/tree/master
+
+h2. License
+
+This code is free to use under the terms of the MIT license. 
+
+h2. Contact
+
+Comments are welcome. Put them on the "forum":http://groups.google.com/group/ruby-avatar
+

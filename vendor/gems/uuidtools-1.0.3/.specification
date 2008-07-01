@@ -1,0 +1,65 @@
+--- !ruby/object:Gem::Specification 
+name: uuidtools
+version: !ruby/object:Gem::Version 
+  version: 1.0.3
+platform: ruby
+authors: 
+- Bob Aman
+autorequire: uuidtools
+bindir: bin
+cert_chain: []
+
+date: 2008-01-04 00:00:00 -05:00
+default_executable: 
+dependencies: []
+
+description: Implements a simple system for generating UUIDs.
+email: bob@sporkmonger.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- README
+files: 
+- rakefile
+- README
+- CHANGELOG
+- lib/uuidtools
+- lib/uuidtools/version.rb
+- lib/uuidtools.rb
+- test/create_test.rb
+- test/mac_address_test.rb
+- test/parse_test.rb
+has_rdoc: true
+homepage: http://sporkmonger.com/projects/uuidtools
+post_install_message: 
+rdoc_options: 
+- --main
+- README
+require_paths: 
+- bin
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: uuidtools
+rubygems_version: 1.1.0
+signing_key: 
+specification_version: 2
+summary: Generation of UUIDs.
+test_files: 
+- test/create_test.rb
+- test/mac_address_test.rb
+- test/parse_test.rb

@@ -1,0 +1,56 @@
+--- !ruby/object:Gem::Specification 
+name: colored
+version: !ruby/object:Gem::Version 
+  version: "1.1"
+platform: ruby
+authors: 
+- Chris Wanstrath
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2007-07-25 00:00:00 -04:00
+default_executable: 
+dependencies: []
+
+description: Add some color to your life.
+email: chris[at]ozmm[dot]org
+executables: []
+
+extensions: []
+
+extra_rdoc_files: []
+
+files: 
+- README
+- lib/colored.rb
+- test/colored_test.rb
+has_rdoc: false
+homepage: http://errtheblog.com/
+post_install_message: 
+rdoc_options: []
+
+require_paths: 
+- bin
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.1.0
+signing_key: 
+specification_version: 2
+summary: Add some color to your life.
+test_files: []
+

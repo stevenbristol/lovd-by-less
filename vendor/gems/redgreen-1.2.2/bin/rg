@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'redgreen'
+require 'win32console' if PLATFORM =~ /win32/
+
+require $0 = ARGV.first

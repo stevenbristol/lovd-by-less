@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <link rel="stylesheet" href="stylesheets/screen.css" type="text/css" media="screen" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>
+      Avatar
+  </title>
+  <script src="javascripts/rounded_corners_lite.inc.js" type="text/javascript"></script>
+<style>
+
+</style>
+  <script type="text/javascript">
+    window.onload = function() {
+      settings = {
+          tl: { radius: 10 },
+          tr: { radius: 10 },
+          bl: { radius: 10 },
+          br: { radius: 10 },
+          antiAlias: true,
+          autoPad: true,
+          validTags: ["div"]
+      }
+      var versionBox = new curvyCorners(settings, document.getElementById("version"));
+      versionBox.applyCornersToAll();
+    }
+  </script>
+</head>
+<body>
+<div id="main">
+
+    <h1>Avatar</h1>
+    <div id="version" class="clickable" onclick='document.location = "http://rubyforge.org/projects/avatar"; return false'>
+      <p>Get Version</p>
+      <a href="http://rubyforge.org/projects/avatar" class="numbers">0.0.5</a>
+    </div>
+    <h1>&#x2192; &#8216;Avatar&#8217;</h1>
+
+
+	<h2>What
+support for avatars</h2>
+
+
+	<h2>Installing</h2>
+
+
+	<p><pre class='syntax'>sudo gem install avatar</pre></p>
+
+
+	<h2>The basics
+Set up Avatar::source (by default, a Gravatar)
+Use Avatar::source.avatar_url_for(person, options) or a view helper</h2>
+
+
+	<h2>Demonstration of usage</h2>
+
+
+	<p>app/helpers/people_helper.rb:
+<pre class='syntax'><span class="keyword">class </span><span class="class">PeopleHelper</span>
+	<span class="ident">include</span> <span class="constant">Avatar</span><span class="punct">::</span><span class="constant">View</span><span class="punct">::</span><span class="constant">ActionViewSupport</span>
+<span class="keyword">end</span>
+</pre></p>
+
+
+	<p>app/views/people/show.html.erb:
+<pre class='syntax'><span class="punct">&lt;%=</span><span class="string"> avatar_tag(@current_user, :size </span><span class="punct">=&gt;</span> <span class="number">40</span><span class="punct">)</span> <span class="punct">%&gt;</span><span class="string"><span class="normal">
+</span></span></pre></p>
+
+
+	<h2>Forum</h2>
+
+
+	<p><a href="http://groups.google.com/group/ruby-avatar">http://groups.google.com/group/ruby-avatar</a></p>
+
+
+	<h2>How to submit patches</h2>
+
+
+	<p>Read the <a href="http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/">8 steps for fixing other people&#8217;s code</a> and for section <a href="http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/#8b-google-groups">8b: Submit patch to Google Groups</a>, use the Google Group above.</p>
+
+
+	<p>The project is hosted on <a href="http://github.com/gcnovus/avatar/tree/master">GitHub</a></p>
+
+
+	<h2>License</h2>
+
+
+	<p>This code is free to use under the terms of the <span class="caps">MIT</span> license.</p>
+
+
+	<h2>Contact</h2>
+
+
+	<p>Comments are welcome. Put them on the <a href="http://groups.google.com/group/ruby-avatar">forum</a></p>
+    <p class="coda">
+      <a href="FIXME email">FIXME full name</a>, 28th March 2008<br>
+      Theme extended from <a href="http://rb2js.rubyforge.org/">Paul Battley</a>
+    </p>
+</div>
+
+<!-- insert site tracking codes here, like Google Urchin -->
+
+</body>
+</html>

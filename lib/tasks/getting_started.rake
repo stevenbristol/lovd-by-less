@@ -4,25 +4,15 @@ namespace :gems do
     task :install do
       windoz = /win32/ =~ RUBY_PLATFORM
       gems = %w[
-          youtube-g
           rflickr
-          uuidtools
-          colored
-          hpricot
-          tzinfo
-          mocha
-          redgreen
-          RedCloth
           rmagick
-          acts_as_ferret
-          ferret
-          avatar
         ]
       gems << 'win32console' if windoz
       sudo = windoz ? '' : 'sudo '
       gems.each do |gem|
         `#{sudo}gem install #{gem}`
       end
+      `rake gems:build`
     end
   end
 end

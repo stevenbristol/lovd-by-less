@@ -1,0 +1,91 @@
+--- !ruby/object:Gem::Specification 
+name: youtube-g
+version: !ruby/object:Gem::Version 
+  version: 0.4.1
+platform: ruby
+authors: 
+- Shane Vitarana
+- Walter Korman
+autorequire: 
+bindir: bin
+cert_chain: 
+date: 2008-02-11 00:00:00 -05:00
+default_executable: 
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: hoe
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: 1.5.0
+    version: 
+description: "youtube-g is a pure Ruby client for the YouTube GData API. It provides an easy way to access the latest YouTube video search results from your own programs. In comparison with the earlier Youtube search interfaces, this new API and library offers much-improved flexibility around executing complex search queries to obtain well-targeted video search results.  More detail on the underlying source Google-provided API is available at:  http://code.google.com/apis/youtube/overview.html  == FEATURES/PROBLEMS:  * Aims to be in parity with Google's YouTube GData API.  Core functionality is currently present -- work is in progress to fill in the rest.  == SYNOPSIS:  Create a client:  require 'rubygems' require 'youtube_g' client = YouTubeG::Client.new  Basic queries:  client.videos_by(:query => \"penguin\") client.videos_by(:tags => ['tiger', 'leopard']) client.videos_by(:categories => [:news, :sports]) client.videos_by(:categories => [:news, :sports], :tags => ['soccer', 'football']) client.videos_by(:user => 'liz')  Standard feeds:  client.videos_by(:most_viewed) client.videos_by(:top_rated, :time => :today)  Advanced queries (with boolean operators OR (either), AND (include), NOT (exclude)):  client.videos_by(:categories => { :either => [:news, :sports], :exclude => [:comedy] }, :tags => { :include => ['football'], :exclude => ['soccer'] })"
+email: shanev@gmail.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- History.txt
+- Manifest.txt
+- README.txt
+- TODO.txt
+files: 
+- History.txt
+- Manifest.txt
+- README.txt
+- Rakefile
+- TODO.txt
+- lib/youtube_g.rb
+- lib/youtube_g/client.rb
+- lib/youtube_g/logger.rb
+- lib/youtube_g/model/author.rb
+- lib/youtube_g/model/category.rb
+- lib/youtube_g/model/contact.rb
+- lib/youtube_g/model/content.rb
+- lib/youtube_g/model/playlist.rb
+- lib/youtube_g/model/rating.rb
+- lib/youtube_g/model/thumbnail.rb
+- lib/youtube_g/model/user.rb
+- lib/youtube_g/model/video.rb
+- lib/youtube_g/parser.rb
+- lib/youtube_g/record.rb
+- lib/youtube_g/request/video_search.rb
+- lib/youtube_g/response/video_search.rb
+- test/test_client.rb
+- test/test_video.rb
+- test/test_video_search.rb
+has_rdoc: true
+homepage: http://rubyforge.org/projects/youtube-g/
+post_install_message: 
+rdoc_options: 
+- --main
+- README.txt
+require_paths: 
+- bin
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">"
+    - !ruby/object:Gem::Version 
+      version: 0.0.0
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: youtube-g
+rubygems_version: 1.1.0
+signing_key: 
+specification_version: 1
+summary: Ruby client for the YouTube GData API
+test_files: 
+- test/test_client.rb
+- test/test_video.rb
+- test/test_video_search.rb

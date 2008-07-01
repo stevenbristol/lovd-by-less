@@ -1,0 +1,181 @@
+--- !ruby/object:Gem::Specification 
+name: avatar
+version: !ruby/object:Gem::Version 
+  version: 0.0.5
+platform: ruby
+authors: 
+- James Rosen
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2008-04-01 00:00:00 -04:00
+default_executable: 
+dependencies: []
+
+description: helpers for displaying avatars
+email: 
+- james@u-presence.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- History.txt
+- License.txt
+- Manifest.txt
+- README.txt
+- website/index.txt
+files: 
+- .gitignore
+- History.txt
+- License.txt
+- Manifest.txt
+- README.txt
+- Rakefile
+- config/hoe.rb
+- config/requirements.rb
+- lib/avatar.rb
+- lib/avatar/object_support.rb
+- lib/avatar/source.rb
+- lib/avatar/source/abstract_source.rb
+- lib/avatar/source/file_column_source.rb
+- lib/avatar/source/gravatar_source.rb
+- lib/avatar/source/nil_source.rb
+- lib/avatar/source/paperclip_source.rb
+- lib/avatar/source/source_chain.rb
+- lib/avatar/source/static_url_source.rb
+- lib/avatar/source/wrapper.rb
+- lib/avatar/source/wrapper/abstract_source_wrapper.rb
+- lib/avatar/source/wrapper/rails_asset_source_wrapper.rb
+- lib/avatar/source/wrapper/string_substitution_source_wrapper.rb
+- lib/avatar/version.rb
+- lib/avatar/view.rb
+- lib/avatar/view/abstract_view_support.rb
+- lib/avatar/view/action_view_support.rb
+- script/destroy
+- script/generate
+- script/txt2html
+- setup.rb
+- tasks/deployment.rake
+- tasks/environment.rake
+- tasks/testing.rake
+- tasks/website.rake
+- test/.gitignore
+- test/lib/database.rb
+- test/lib/database.yml
+- test/lib/file_column/CHANGELOG
+- test/lib/file_column/README
+- test/lib/file_column/Rakefile
+- test/lib/file_column/TODO
+- test/lib/file_column/init.rb
+- test/lib/file_column/lib/file_column.rb
+- test/lib/file_column/lib/file_column_helper.rb
+- test/lib/file_column/lib/file_compat.rb
+- test/lib/file_column/lib/magick_file_column.rb
+- test/lib/file_column/lib/rails_file_column.rb
+- test/lib/file_column/lib/test_case.rb
+- test/lib/file_column/lib/validations.rb
+- test/lib/file_column/test/abstract_unit.rb
+- test/lib/file_column/test/connection.rb
+- test/lib/file_column/test/file_column_helper_test.rb
+- test/lib/file_column/test/file_column_test.rb
+- test/lib/file_column/test/fixtures/entry.rb
+- test/lib/file_column/test/fixtures/invalid-image.jpg
+- test/lib/file_column/test/fixtures/kerb.jpg
+- test/lib/file_column/test/fixtures/mysql.sql
+- test/lib/file_column/test/fixtures/schema.rb
+- test/lib/file_column/test/fixtures/skanthak.png
+- test/lib/file_column/test/magick_test.rb
+- test/lib/file_column/test/magick_view_only_test.rb
+- test/lib/paperclip/README
+- test/lib/paperclip/Rakefile
+- test/lib/paperclip/generators/paperclip/USAGE
+- test/lib/paperclip/generators/paperclip/paperclip_generator.rb
+- test/lib/paperclip/generators/paperclip/templates/paperclip_migration.rb
+- test/lib/paperclip/init.rb
+- test/lib/paperclip/lib/paperclip.rb
+- test/lib/paperclip/lib/paperclip/attachment.rb
+- test/lib/paperclip/lib/paperclip/geometry.rb
+- test/lib/paperclip/lib/paperclip/iostream.rb
+- test/lib/paperclip/lib/paperclip/thumbnail.rb
+- test/lib/paperclip/lib/paperclip/upfile.rb
+- test/lib/paperclip/tasks/paperclip_tasks.rake
+- test/lib/paperclip/test/database.yml
+- test/lib/paperclip/test/fixtures/12k.png
+- test/lib/paperclip/test/fixtures/5k.png
+- test/lib/paperclip/test/fixtures/bad.png
+- test/lib/paperclip/test/helper.rb
+- test/lib/paperclip/test/test_attachment.rb
+- test/lib/paperclip/test/test_geometry.rb
+- test/lib/paperclip/test/test_integration.rb
+- test/lib/paperclip/test/test_iostream.rb
+- test/lib/paperclip/test/test_paperclip.rb
+- test/lib/paperclip/test/test_thumbnail.rb
+- test/lib/schema.rb
+- test/lib/user_suit.png
+- test/test_abstract_view_support.rb
+- test/test_action_view_support.rb
+- test/test_avatar.rb
+- test/test_file_column_source.rb
+- test/test_gravatar_source.rb
+- test/test_helper.rb
+- test/test_nil_source.rb
+- test/test_paperclip_source.rb
+- test/test_rails_asset_source_wrapper.rb
+- test/test_source_chain.rb
+- test/test_static_url_source.rb
+- test/test_string_substitution_source_wrapper.rb
+- website/index.html
+- website/index.txt
+- website/javascripts/rounded_corners_lite.inc.js
+- website/stylesheets/screen.css
+- website/template.rhtml
+has_rdoc: true
+homepage: http://avatar.rubyforge.org
+post_install_message: 
+rdoc_options: 
+- --main
+- README.txt
+require_paths: 
+- bin
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: avatar
+rubygems_version: 1.1.0
+signing_key: 
+specification_version: 2
+summary: helpers for displaying avatars
+test_files: 
+- test/lib/file_column/lib/test_case.rb
+- test/lib/paperclip/test/test_attachment.rb
+- test/lib/paperclip/test/test_geometry.rb
+- test/lib/paperclip/test/test_integration.rb
+- test/lib/paperclip/test/test_iostream.rb
+- test/lib/paperclip/test/test_paperclip.rb
+- test/lib/paperclip/test/test_thumbnail.rb
+- test/test_abstract_view_support.rb
+- test/test_action_view_support.rb
+- test/test_avatar.rb
+- test/test_file_column_source.rb
+- test/test_gravatar_source.rb
+- test/test_helper.rb
+- test/test_nil_source.rb
+- test/test_paperclip_source.rb
+- test/test_rails_asset_source_wrapper.rb
+- test/test_source_chain.rb
+- test/test_static_url_source.rb
+- test/test_string_substitution_source_wrapper.rb

@@ -1,0 +1,188 @@
+--- !ruby/object:Gem::Specification 
+name: mocha
+version: !ruby/object:Gem::Version 
+  version: 0.5.6
+platform: ruby
+authors: 
+- James Mead
+autorequire: mocha
+bindir: bin
+cert_chain: 
+date: 2007-12-22 00:00:00 -05:00
+default_executable: 
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: rake
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">"
+      - !ruby/object:Gem::Version 
+        version: 0.0.0
+    version: 
+description: Mocking and stubbing library with JMock/SchMock syntax, which allows mocking and stubbing of methods on real (non-mock) classes.
+email: mocha-developer@rubyforge.org
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- README
+- COPYING
+files: 
+- lib/mocha/any_instance_method.rb
+- lib/mocha/auto_verify.rb
+- lib/mocha/central.rb
+- lib/mocha/class_method.rb
+- lib/mocha/deprecation.rb
+- lib/mocha/exception_raiser.rb
+- lib/mocha/expectation.rb
+- lib/mocha/expectation_error.rb
+- lib/mocha/expectation_list.rb
+- lib/mocha/infinite_range.rb
+- lib/mocha/inspect.rb
+- lib/mocha/instance_method.rb
+- lib/mocha/is_a.rb
+- lib/mocha/metaclass.rb
+- lib/mocha/method_matcher.rb
+- lib/mocha/missing_expectation.rb
+- lib/mocha/mock.rb
+- lib/mocha/multiple_yields.rb
+- lib/mocha/no_yields.rb
+- lib/mocha/object.rb
+- lib/mocha/parameter_matchers/all_of.rb
+- lib/mocha/parameter_matchers/any_of.rb
+- lib/mocha/parameter_matchers/any_parameters.rb
+- lib/mocha/parameter_matchers/anything.rb
+- lib/mocha/parameter_matchers/base.rb
+- lib/mocha/parameter_matchers/equals.rb
+- lib/mocha/parameter_matchers/has_entries.rb
+- lib/mocha/parameter_matchers/has_entry.rb
+- lib/mocha/parameter_matchers/has_key.rb
+- lib/mocha/parameter_matchers/has_value.rb
+- lib/mocha/parameter_matchers/includes.rb
+- lib/mocha/parameter_matchers/instance_of.rb
+- lib/mocha/parameter_matchers/is_a.rb
+- lib/mocha/parameter_matchers/kind_of.rb
+- lib/mocha/parameter_matchers/not.rb
+- lib/mocha/parameter_matchers/object.rb
+- lib/mocha/parameter_matchers/optionally.rb
+- lib/mocha/parameter_matchers/regexp_matches.rb
+- lib/mocha/parameter_matchers.rb
+- lib/mocha/parameters_matcher.rb
+- lib/mocha/pretty_parameters.rb
+- lib/mocha/return_values.rb
+- lib/mocha/sequence.rb
+- lib/mocha/setup_and_teardown.rb
+- lib/mocha/single_return_value.rb
+- lib/mocha/single_yield.rb
+- lib/mocha/standalone.rb
+- lib/mocha/stub.rb
+- lib/mocha/test_case_adapter.rb
+- lib/mocha/yield_parameters.rb
+- lib/mocha.rb
+- lib/mocha_standalone.rb
+- lib/stubba.rb
+- test/acceptance/expected_invocation_count_acceptance_test.rb
+- test/acceptance/mocha_acceptance_test.rb
+- test/acceptance/mock_with_initializer_block_acceptance_test.rb
+- test/acceptance/mocked_methods_dispatch_acceptance_test.rb
+- test/acceptance/optional_parameters_acceptance_test.rb
+- test/acceptance/parameter_matcher_acceptance_test.rb
+- test/acceptance/partial_mocks_acceptance_test.rb
+- test/acceptance/sequence_acceptance_test.rb
+- test/acceptance/standalone_acceptance_test.rb
+- test/acceptance/stubba_acceptance_test.rb
+- test/active_record_test_case.rb
+- test/deprecation_disabler.rb
+- test/execution_point.rb
+- test/integration/mocha_test_result_integration_test.rb
+- test/integration/stubba_integration_test.rb
+- test/integration/stubba_test_result_integration_test.rb
+- test/method_definer.rb
+- test/test_helper.rb
+- test/test_runner.rb
+- test/unit/any_instance_method_test.rb
+- test/unit/array_inspect_test.rb
+- test/unit/auto_verify_test.rb
+- test/unit/central_test.rb
+- test/unit/class_method_test.rb
+- test/unit/date_time_inspect_test.rb
+- test/unit/expectation_error_test.rb
+- test/unit/expectation_list_test.rb
+- test/unit/expectation_raiser_test.rb
+- test/unit/expectation_test.rb
+- test/unit/hash_inspect_test.rb
+- test/unit/infinite_range_test.rb
+- test/unit/metaclass_test.rb
+- test/unit/method_matcher_test.rb
+- test/unit/missing_expectation_test.rb
+- test/unit/mock_test.rb
+- test/unit/multiple_yields_test.rb
+- test/unit/no_yield_test.rb
+- test/unit/object_inspect_test.rb
+- test/unit/object_test.rb
+- test/unit/parameter_matchers/all_of_test.rb
+- test/unit/parameter_matchers/any_of_test.rb
+- test/unit/parameter_matchers/anything_test.rb
+- test/unit/parameter_matchers/has_entries_test.rb
+- test/unit/parameter_matchers/has_entry_test.rb
+- test/unit/parameter_matchers/has_key_test.rb
+- test/unit/parameter_matchers/has_value_test.rb
+- test/unit/parameter_matchers/includes_test.rb
+- test/unit/parameter_matchers/instance_of_test.rb
+- test/unit/parameter_matchers/is_a_test.rb
+- test/unit/parameter_matchers/kind_of_test.rb
+- test/unit/parameter_matchers/not_test.rb
+- test/unit/parameter_matchers/regexp_matches_test.rb
+- test/unit/parameter_matchers/stub_matcher.rb
+- test/unit/parameters_matcher_test.rb
+- test/unit/return_values_test.rb
+- test/unit/sequence_test.rb
+- test/unit/setup_and_teardown_test.rb
+- test/unit/single_return_value_test.rb
+- test/unit/single_yield_test.rb
+- test/unit/string_inspect_test.rb
+- test/unit/stub_test.rb
+- test/unit/yield_parameters_test.rb
+- examples/misc.rb
+- examples/mocha.rb
+- examples/stubba.rb
+- COPYING
+- MIT-LICENSE
+- Rakefile
+- README
+- RELEASE
+has_rdoc: true
+homepage: http://mocha.rubyforge.org
+post_install_message: 
+rdoc_options: 
+- --title
+- Mocha
+- --main
+- README
+- --line-numbers
+require_paths: 
+- bin
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">"
+    - !ruby/object:Gem::Version 
+      version: 0.0.0
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: mocha
+rubygems_version: 1.1.0
+signing_key: 
+specification_version: 1
+summary: Mocking and stubbing library
+test_files: []
+

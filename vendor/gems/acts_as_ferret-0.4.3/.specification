@@ -1,0 +1,88 @@
+--- !ruby/object:Gem::Specification 
+name: acts_as_ferret
+version: !ruby/object:Gem::Version 
+  version: 0.4.3
+platform: ruby
+authors: 
+- Jens Kraemer
+autorequire: acts_as_ferret
+bindir: bin
+cert_chain: 
+date: 2007-11-17 00:00:00 -05:00
+default_executable: aaf_install
+dependencies: []
+
+description: 
+email: jk@jkraemer.net
+executables: 
+- aaf_install
+extensions: []
+
+extra_rdoc_files: []
+
+files: 
+- lib
+- lib/ferret_cap_tasks.rb
+- lib/acts_as_ferret.rb
+- lib/multi_index.rb
+- lib/ferret_extensions.rb
+- lib/more_like_this.rb
+- lib/instance_methods.rb
+- lib/class_methods.rb
+- lib/ferret_server.rb
+- lib/shared_index.rb
+- lib/local_index.rb
+- lib/remote_index.rb
+- lib/index.rb
+- lib/act_methods.rb
+- lib/shared_index_class_methods.rb
+- lib/ferret_result.rb
+- lib/search_results.rb
+- lib/bulk_indexer.rb
+- lib/server_manager.rb
+- lib/unix_daemon.rb
+- LICENSE
+- rakefile
+- init.rb
+- README
+- script
+- script/ferret_daemon
+- script/ferret_service
+- script/ferret_server
+- doc
+- doc/monit-example
+- doc/README.win32
+- config
+- config/ferret_server.yml
+- install.rb
+- bin
+- bin/aaf_install
+has_rdoc: true
+homepage: http://projects.jkraemer.net/acts_as_ferret
+post_install_message: 
+rdoc_options: []
+
+require_paths: 
+- bin
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">"
+    - !ruby/object:Gem::Version 
+      version: 0.0.0
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.1.0
+signing_key: 
+specification_version: 1
+summary: acts_as_ferret - Ferret based full text search for any ActiveRecord model
+test_files: []
+
