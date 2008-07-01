@@ -59,7 +59,7 @@ private
         format.js do
           render :update do |page|
             if @controller.action_name == 'create'
-              page.insert_html :bottom, "posts_list", :partial => 'forum_posts/post', :object => @post
+              page.insert_html :top, "posts_list", :partial => 'forum_posts/post', :object => @post
               page << "jq('.followup_post_body').val('');"
               page.replace_html "topic_details", topic_details(@topic)
             else  
