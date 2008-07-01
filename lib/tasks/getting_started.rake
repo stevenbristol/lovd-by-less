@@ -6,6 +6,7 @@ namespace :gems do
       gems = %w[
           rflickr
           rmagick
+          RedCloth
         ]
       gems << 'win32console' if windoz
       sudo = windoz ? '' : 'sudo '

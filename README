@@ -32,6 +32,7 @@ Install the Required Gems:
 
 1. Install these gems:
 - rflickr
+- RedCloth
 - rmagick (will require ImageMagick, which is not a gem)
 - win32console (windows only)
 (The other gems are already provided in the vendor gems dir.)
