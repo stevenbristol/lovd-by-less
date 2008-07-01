@@ -27,3 +27,8 @@ two:
   title: Topic Two
   forum: one
   owner: user
+
+three:
+  title: Topic Three
+  forum: two
+  owner: user

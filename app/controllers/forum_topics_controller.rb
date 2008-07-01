@@ -10,7 +10,7 @@ class ForumTopicsController < ApplicationController
   end
   
   def show
-    @posts = @topic.posts.paginate(:all, :page => params[:page], :order => 'created_at DESC')
+    @posts = @topic.posts.paginate(:all, :page => params[:page], :order => 'created_at DESC', :per_page => @per_page)
     get_response
   end
 

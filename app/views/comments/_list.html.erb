@@ -19,7 +19,7 @@ parent = @blog || @profile || nil
 		<%= render :partial => 'comments/comment', :collection => comments %>
 	</div>
 	
-	<%= william_paginate %>
+	<%= will_paginate comments%>
 </div>
 
 <%= render :partial => 'comments/form' if with_form && @p %>

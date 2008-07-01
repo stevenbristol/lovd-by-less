@@ -56,7 +56,7 @@ private
   def setup
     if params[:id]
       @forum = Forum.find(params[:id], :include => :topics, :order => "forum_topics.created_at DESC")
-      @topics = @forum.topics.paginate(:all, :page => params[:page])
+      @topics = @forum.topics.paginate(:all, :page => params[:page], :per_page => @per_page)
       @topic = @forum.topics.new
     else
       @forum = Forum.new

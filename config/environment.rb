@@ -1,5 +1,5 @@
 
-RAILS_GEM_VERSION = '2.0.2' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.1.0' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -24,7 +24,9 @@ Rails::Initializer.run do |config|
   # Make Active Record use UTC-base instead of local time
   config.active_record.default_timezone = :utc
   
-  
+  # Gem dependencies
+  config.gem 'mislav-will_paginate', :version => '~> 2.3.2', :lib => 'will_paginate',
+    :source => 'http://gems.github.com/'
   
 end
 

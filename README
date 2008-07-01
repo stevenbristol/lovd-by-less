@@ -30,6 +30,7 @@ Manual Setup:
 
 Install the Required Gems:
 
+- mislav-will_paginate
 - youtube-g
 - rflickr
 - uuidtools

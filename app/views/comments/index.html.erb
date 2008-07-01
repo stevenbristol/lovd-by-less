@@ -25,5 +25,5 @@ profile ||= @profile
 <div id="<%= "#{dom_id(parent)}_comments" %>">
 	<%= render :partial => 'comments/comment', :collection => comments %>
 	
-	<%= william_paginate %>
+	<%= will_paginate comments%>
 </div>
