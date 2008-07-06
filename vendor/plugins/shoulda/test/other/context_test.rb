@@ -63,53 +63,9 @@ class ContextTest < Test::Unit::TestCase # :nodoc:
       assert_nil @blah
     end
   end
-    
-  context "context with multiple setups and/or teardowns" do
-    
-    cleanup_count = 0
-        
-    2.times do |i|
-      setup { cleanup_count += 1 }
-      teardown { cleanup_count -= 1 }
-    end
-    
-    2.times do |i|
-      should "call all setups and all teardowns (check ##{i + 1})" do
-        assert_equal 2, cleanup_count
-      end
-    end
-    
-    context "subcontexts" do
-      
-      2.times do |i|
-        setup { cleanup_count += 1 }
-        teardown { cleanup_count -= 1 }
-      end
-                  
-      2.times do |i|
-        should "also call all setups and all teardowns in parent and subcontext (check ##{i + 1})" do
-          assert_equal 4, cleanup_count
-        end
-      end
-      
-    end
-    
-  end
   
-  should_eventually "pass, since it's unimplemented" do
+  should_eventually "should pass, since it's unimplemented" do
     flunk "what?"
   end
 
-  should_eventually "not require a block when using should_eventually"
-  should "pass without a block, as that causes it to piggyback to should_eventually"
-  
-  context "context for testing should piggybacking" do
-    should "call should_eventually as we are not passing a block"
-  end
-
-  context "context" do
-    context "with nested subcontexts" do
-      should_eventually "only print this statement once for a should_eventually"
-    end
-  end
 end

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Fri Jun 13 20:43:05 -0400 2008</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Shoulda - Making tests easy on the fingers and eyes</h1>
+<p>
+Shoulda makes it easy to write elegant, understandable, and maintainable
+tests. Shoulda consists of test macros, assertions, and helpers added on to
+the Test::Unit framework. It&#8216;s fully compatible with your existing
+tests, and requires no retooling to use.
+</p>
+<table>
+<tr><td valign="top">Helpers:</td><td>context and should give you rSpec like test blocks. In addition, you get
+nested contexts and a much more readable syntax.
+
+</td></tr>
+<tr><td valign="top">Macros:</td><td>Generate hundreds of lines of Controller and ActiveRecord tests with these
+powerful macros. They get you started quickly, and can help you ensure that
+your application is conforming to best practices.
+
+</td></tr>
+<tr><td valign="top">Assertions:</td><td>Many common rails testing idioms have been distilled into a set of useful
+assertions.
+
+</td></tr>
+</table>
+<h1>Usage</h1>
+<h3>Context Helpers (ThoughtBot::Shoulda::Context)</h3>
+<p>
+Stop killing your fingers with all of those underscores&#8230; Name your
+tests with plain sentences!
+</p>
+<pre>
+  class UserTest &lt;&lt; Test::Unit::TestCase
+    context &quot;A User instance&quot; do
+      setup do
+        @user = User.find(:first)
+      end
+
+      should &quot;return its full name&quot;
+        assert_equal 'John Doe', @user.full_name
+      end
+
+      context &quot;with a profile&quot; do
+        setup do
+          @user.profile = Profile.find(:first)
+        end
+
+        should &quot;return true when sent #has_profile?&quot;
+          assert @user.has_profile?
+        end
+      end
+    end
+  end
+</pre>
+<p>
+Produces the following test methods:
+</p>
+<pre>
+  &quot;test: A User instance should return its full name.&quot;
+  &quot;test: A User instance with a profile should return true when sent #has_profile?.&quot;
+</pre>
+<p>
+So readable!
+</p>
+<h3>ActiveRecord Tests (ThoughtBot::Shoulda::ActiveRecord)</h3>
+<p>
+Quick macro tests for your ActiveRecord associations and validations:
+</p>
+<pre>
+  class PostTest &lt; Test::Unit::TestCase
+    load_all_fixtures
+
+    should_belong_to :user
+    should_have_many :tags, :through =&gt; :taggings
+
+    should_require_unique_attributes :title
+    should_require_attributes :body, :message =&gt; /wtf/
+    should_require_attributes :title
+    should_only_allow_numeric_values_for :user_id
+  end
+
+  class UserTest &lt; Test::Unit::TestCase
+    load_all_fixtures
+
+    should_have_many :posts
+
+    should_not_allow_values_for :email, &quot;blah&quot;, &quot;b lah&quot;
+    should_allow_values_for :email, &quot;a@b.com&quot;, &quot;asdf@asdf.com&quot;
+    should_ensure_length_in_range :email, 1..100
+    should_ensure_value_in_range :age, 1..100
+    should_protect_attributes :password
+  end
+</pre>
+<p>
+Makes TDD so much easier.
+</p>
+<h3>Controller Tests (ThoughtBot::Shoulda::Controller::ClassMethods)</h3>
+<p>
+Macros to test the most common controller patterns&#8230;
+</p>
+<pre>
+  context &quot;on GET to :show for first record&quot; do
+    setup do
+      get :show, :id =&gt; 1
+    end
+
+    should_assign_to :user
+    should_respond_with :success
+    should_render_template :show
+    should_not_set_the_flash
+
+    should &quot;do something else really cool&quot; do
+      assert_equal 1, assigns(:user).id
+    end
+  end
+</pre>
+<p>
+Test entire controllers in a few lines&#8230;
+</p>
+<pre>
+  class PostsControllerTest &lt; Test::Unit::TestCase
+    should_be_restful do |resource|
+      resource.parent = :user
+
+      resource.create.params = { :title =&gt; &quot;first post&quot;, :body =&gt; 'blah blah blah'}
+      resource.update.params = { :title =&gt; &quot;changed&quot; }
+    end
+  end
+</pre>
+<p>
+should_be_restful generates 40 tests on the fly, for both html and xml
+requests.
+</p>
+<h3>Helpful Assertions (ThoughtBot::Shoulda::General)</h3>
+<p>
+More to come here, but have fun with what&#8216;s there.
+</p>
+<pre>
+  load_all_fixtures
+  assert_same_elements([:a, :b, :c], [:c, :a, :b])
+  assert_contains(['a', '1'], /\d/)
+  assert_contains(['a', '1'], 'a')
+</pre>
+<h1>Credits</h1>
+<p>
+Shoulda is maintained by <a href="mailto:tsaleh@thoughtbot.com">Tammer
+Saleh</a>, and is funded by <a
+href="http://www.thoughtbot.com">Thoughtbot</a>, inc.
+</p>
+<h1>License</h1>
+<p>
+Shoulda is Copyright © 2006-2007 Tammer Saleh, Thoughtbot. It is free
+software, and may be redistributed under the terms specified in the
+MIT-LICENSE file.
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

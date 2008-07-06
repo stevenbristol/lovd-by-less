@@ -145,16 +145,14 @@ module ThoughtBot # :nodoc:
           attr_accessor :identifier
           
           # Name of the ActiveRecord class this resource is responsible for.  Automatically determined from
-          # test class if not explicitly set.  UserTest => "User"
+          # test class if not explicitly set.  UserTest => :user
           attr_accessor :klass
 
           # Name of the instantiated ActiveRecord object that should be used by some of the tests.  
           # Defaults to the underscored name of the AR class.  CompanyManager => :company_manager
           attr_accessor :object
 
-          # Name of the parent AR objects.  Can be set as parent= or parents=, and can take either
-          # the name of the parent resource (if there's only one), or an array of names (if there's
-          # more than one).
+          # Name of the parent AR objects.
           #
           # Example:
           #   # in the routes...
@@ -373,7 +371,7 @@ module ThoughtBot # :nodoc:
         #
         #   should_render_template :new
         def should_render_template(template)
-          should "render template #{template.inspect}" do            
+          should "render '#{template}' template" do            
             assert_template template.to_s
           end
         end
@@ -386,7 +384,7 @@ module ThoughtBot # :nodoc:
         #   should_redirect_to '"/"'
         #   should_redirect_to "users_url(@user)"
         def should_redirect_to(url)
-          should "redirect to #{url.inspect}" do
+          should "redirect to \"#{url}\"" do
             instantiate_variables_from_assigns do
               assert_redirected_to eval(url, self.send(:binding), __FILE__, __LINE__)
             end
@@ -457,7 +455,7 @@ module ThoughtBot # :nodoc:
           parent_name = parent_names.shift
           parent = record ? record.send(parent_name) : parent_name.to_s.classify.constantize.find(:first)
 
-          { :"#{parent_name}_id" => parent.to_param }.merge(make_parent_params(resource, parent, parent_names))
+          { :"#{parent_name}_id" => parent.id }.merge(make_parent_params(resource, parent, parent_names))
         end
 
       end

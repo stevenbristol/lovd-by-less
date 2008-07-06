@@ -14,10 +14,27 @@ namespace :shoulda do
       load file
       klass = File.basename(file, '.rb').classify.constantize
       
-      puts klass.name.gsub('Test', '')
-
+      puts
+      puts "#{klass.name.gsub(/Test$/, '')}"
       test_methods = klass.instance_methods.grep(/^test/).map {|s| s.gsub(/^test: /, '')}.sort
-      test_methods.each {|m| puts "  " + m }
+      test_methods.each {|m| puts "  - #{m}" }
+      # puts "#{klass.name.gsub(/Test$/, '')}"
+      # test_methods = klass.instance_methods.grep(/^test/).sort
+      # 
+      # method_hash = test_methods.inject({}) do |h, name|
+      #   header = name.gsub(/^test: (.*)should.*$/, '\1')
+      #   test   = name.gsub(/^test:.*should (.*)$/, '\1')
+      #   h[header] ||= []
+      #   h[header] << test
+      #   h
+      # end
+      # 
+      # method_hash.keys.sort.each do |header|
+      #   puts "  #{header.chomp} should"
+      #   method_hash[header].each do |test|
+      #     puts "    - #{test}"
+      #   end
+      # end
     end
   end
 end

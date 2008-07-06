@@ -1,9 +1,9 @@
-require 'shoulda/gem/shoulda'
+require 'yaml'
 require 'shoulda/private_helpers'
 require 'shoulda/general'
+require 'shoulda/gem/shoulda'
 require 'shoulda/active_record_helpers'
 require 'shoulda/controller_tests/controller_tests.rb'
-require 'yaml'
 
 shoulda_options = {}
 
@@ -26,10 +26,12 @@ module Test # :nodoc: all
   module Unit 
     class TestCase
 
-      include ThoughtBot::Shoulda::General
       include ThoughtBot::Shoulda::Controller
+      include ThoughtBot::Shoulda::General
 
-      extend ThoughtBot::Shoulda::ActiveRecord
+      class << self
+        include ThoughtBot::Shoulda::ActiveRecord
+      end
     end
   end
 end

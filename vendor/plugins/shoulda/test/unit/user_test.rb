@@ -6,11 +6,6 @@ class UserTest < Test::Unit::TestCase
   should_have_many :posts
   should_have_many :dogs
 
-  should_have_one :address
-
-  should_have_indices :email, :name, [:email, :name]
-  should_have_index :age
-
   should_not_allow_values_for :email, "blah", "b lah"
   should_allow_values_for :email, "a@b.com", "asdf@asdf.com"
   should_ensure_length_in_range :email, 1..100
@@ -23,10 +18,4 @@ class UserTest < Test::Unit::TestCase
   should_have_db_column :email, :type => "string", :default => nil,   :precision => nil, :limit    => 255, 
                                 :null => true,     :primary => false, :scale     => nil, :sql_type => 'varchar(255)'
   should_require_acceptance_of :eula
-  should_require_unique_attributes :email, :scoped_to => :name
-  
-  should_ensure_length_is :ssn, 9, :message => "Social Security Number is not the right length"
-  should_only_allow_numeric_values_for :ssn
-
-  should_have_readonly_attributes :name
 end
