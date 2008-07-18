@@ -34,7 +34,7 @@ Rails::Initializer.run do |config|
   config.gem 'hpricot', :version=>"0.6"
   config.gem 'mocha', :version=>"0.5.6"
   config.gem 'redgreen', :version=>"1.2.2"
-  config.gem 'avatar', :version=>"0.0.5"
+  config.gem 'gcnovus-avatar', :version=>"0.0.7", :lib => 'avatar'
   
   
   

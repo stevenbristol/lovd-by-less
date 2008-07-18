@@ -1,4 +1,3 @@
-gem 'avatar', '>= 0.0.5'
 require 'avatar'
 require 'avatar/source/file_column_source'
 require 'avatar/source/source_chain'
