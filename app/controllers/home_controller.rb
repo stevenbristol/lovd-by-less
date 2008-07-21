@@ -12,6 +12,7 @@ class HomeController < ApplicationController
 
  
   def index
+    check_featured
     respond_to do |wants|
       wants.html {render}
       wants.rss {render :partial =>  'profiles/newest_member', :collection => new_members}
