@@ -134,6 +134,7 @@ h2 a			{text-transform: capitalize; font-weight: normal; font-size: 11px;}
 #messages th	{padding: 3px;}
 #messages th	{background: #971d4a; font-size: 10px;}
 #messages		{width: 100%;}
+#messages .unread {font-weight: bold;}
 
 .blurp			{padding: 0 0 15px 0;}
 .blurp strong	{display: block; color: white;}

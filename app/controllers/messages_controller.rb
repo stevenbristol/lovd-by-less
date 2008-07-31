@@ -50,6 +50,10 @@ class MessagesController < ApplicationController
   def show
     @message = @p.sent_messages.find params[:id] rescue nil
     @message ||= @p.received_messages.find params[:id] rescue nil
+		if not @message.nil?
+			@message.read = true
+			@message.save
+		end
     @to_list = [@message.sender]
   end
   

@@ -4,10 +4,10 @@ class ForumPostsController < ApplicationController
   skip_filter :login_required, :only => [:show, :index]  
   
   def index
-    redirect_to forum_path @forum
+    redirect_to forum_path(@forum)
   end
   def show
-    redirect_to forum_path @forum
+    redirect_to forum_path(@forum)
   end
 
   def edit

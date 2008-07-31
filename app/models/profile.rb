@@ -46,7 +46,7 @@ class Profile < ActiveRecord::Base
   # Messages
   has_many :sent_messages,     :class_name => 'Message', :order => 'created_at desc', :foreign_key => 'sender_id'
   has_many :received_messages, :class_name => 'Message', :order => 'created_at desc', :foreign_key => 'receiver_id'
-  has_many :unread_messages,   :class_name => 'Message', :conditions => ["read=?",false] 
+  has_many :unread_messages,   :class_name => 'Message', :conditions => {:read => false}, :foreign_key => 'receiver_id'
 
   # Friends
   has_many :friendships, :class_name  => "Friend", :foreign_key => 'inviter_id', :conditions => "status = #{Friend::ACCEPTED}"
