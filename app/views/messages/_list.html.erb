@@ -30,9 +30,9 @@ sent = params[:action]=='sent'
 	<% list.each do |m|
 		mail_user = (@p == m.sender ? m.receiver : m.sender)%>
 	<tr>
-		<td <%= "class=\"unread\"" if !m.read %>><%= link_to mail_user.f,  mail_user %></td>
-		<td <%= "class=\"unread\"" if !m.read %>><%= time_ago_in_words m.created_at %></td>
-		<td <%= "class=\"unread;\"" if !m.read %>><%= link_to h( m.subject), message_path(m) %></td>
+		<td<%= ' class="unread"' if m.unread? %>><%= link_to mail_user.f,  mail_user %></td>
+		<td<%= ' class="unread"' if m.unread? %>><%= time_ago_in_words m.created_at %></td>
+		<td<%= ' class="unread"' if m.unread? %>><%= link_to h( m.subject), message_path(m) %></td>
 	</tr>
 	<% end %>
 </table>

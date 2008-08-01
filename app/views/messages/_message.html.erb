@@ -27,5 +27,5 @@ to_list ||= @to_list
 
 
 <div id="new_reply" class="hidden">
-	<%= render :partial => "messages/form" %>
+	<%= render :partial => "messages/form", :locals => {:hide_header => true} %>
 </div>
