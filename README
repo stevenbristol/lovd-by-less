@@ -1,5 +1,14 @@
 How to get LovdByLess up and running
 
+
+WINDOWS USERS READ THIS: http://www.gamutworks.net/blog/?p=17
+
+START BY MAKING SURE your ruby gems are version 1.2.0 or greater:
+* (sudo) gem update --system
+Then add the github repo to your gems:
+* gem sources -a http://gems.github.com
+
+
     * Lovd runs on Ruby on Rails, so first you need to get rails running. Go download rails (http://rubyonrails.org/down) and follow it's instructions to get rails running.
     * The directions in this README file assume some knowledge of rails, but I'll go through it a bit here first.
     * The first thing to do is install the ruby gems that are required. For each gem listed in the README, at the command line, do something like "gem install [gem name]" or "sudo gem install [gem name]".
