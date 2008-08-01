@@ -27,4 +27,8 @@ class ForumTopic < ActiveRecord::Base
     feed_item = FeedItem.create(:item => self)
   end
   
+  def users
+    posts.collect{|p| p.owner.user}.uniq
+  end
+  
 end

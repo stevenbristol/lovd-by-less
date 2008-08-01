@@ -9,7 +9,7 @@ class AccountMailer < ActionMailer::Base
     @headers        = {}
   end
   
-  
+
   def forgot_password(email, name, login, password)
     @subject        = "Password reset from #{SITE_NAME}"
     @body['user']   = [email, name, login, password]
