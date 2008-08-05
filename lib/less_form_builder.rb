@@ -24,7 +24,7 @@ class LessFormBuilder < ActionView::Helpers::FormBuilder
   # that value is used for the text of the label.  Otherwise,
   # "#{method titleized}: " is used.
   def label method, options = {}
-    text = options[:label] ||  "#{method.to_s.titleize}: "
+    text = options.delete(:label) ||  "#{method.to_s.titleize}: "
     if options[:for]
       "<label for='#{options.delete(:for)}'>#{text}</label>"
     else
