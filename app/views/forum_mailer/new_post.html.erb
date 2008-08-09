@@ -1,4 +1,4 @@
-A new post was written.
+A new post was added to the <%= h @post.topic.title %> topic on the <%= h @post.topic.forum.name %> form at <%= link_to SITE_NAME, "http://#{SITE}" %>
 
 <%= sanitize textilize(@post.body) %>
  

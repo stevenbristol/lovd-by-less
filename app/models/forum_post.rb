@@ -19,10 +19,12 @@ class ForumPost < ActiveRecord::Base
   
   after_create :update_topic
   after_create :notify_new_post
+  
 private
   def update_topic
     topic.update_attributes({:updated_at => Time.now})
   end
+  
   def notify_new_post
     other_users = (topic.users - [owner.user])
     other_users.each do |user|
