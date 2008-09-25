@@ -14,6 +14,7 @@
 class Forum < ActiveRecord::Base
   
   acts_as_list
+  attr_immutable :id
   
   validates_presence_of :name
   

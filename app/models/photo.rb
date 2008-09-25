@@ -19,6 +19,7 @@ class Photo < ActiveRecord::Base
   belongs_to :profile
   
   validates_presence_of :image, :profile_id
+  attr_immutable :id, :profile_id
   
   def after_create
     feed_item = FeedItem.create(:item => self)

@@ -29,7 +29,10 @@ module ForumsTestHelper
   end
 
   def valid_forum_post_attributes
-    forum_posts(:one).attributes
+    d = forum_posts(:one).attributes.clone
+    d.delete 'owner_id'
+    d.delete 'topic_id'
+    d
   end
 
 end

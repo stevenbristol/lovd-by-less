@@ -1,0 +1,17 @@
+
+
+ImmutableAttributes
+===================
+
+When you want to prevent certain attributes from being changed once set you can declare them as immutable:
+
+class MyModel < ActiveRecord::Base
+  attr_immutable :permalink, :param_identifier
+end
+
+When MyModel.find(:first).permalink = 'anything' is called it will raise an ImmutableAttributeError
+MyModel.new.permalink = 'works!' will properly set the value because the record is unsaved.
+
+Created by Jack Danger Canty @ http://6brand.com
+Released under the same licence as Rails (MIT)
+

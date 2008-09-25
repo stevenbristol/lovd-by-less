@@ -15,6 +15,7 @@ class Blog < ActiveRecord::Base
   has_many :comments, :as => :commentable, :order => "created_at asc"
   belongs_to :profile
   validates_presence_of :title, :body
+  attr_immutable :id, :profile_id
   
   def after_create
     feed_item = FeedItem.create(:item => self)

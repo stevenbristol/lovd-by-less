@@ -13,6 +13,7 @@
 
 class ForumTopic < ActiveRecord::Base
   validates_presence_of :title, :owner_id, :forum_id
+  attr_immutable :id, :forum_id, :owner_id
   
   belongs_to :owner, :class_name => "Profile"
   belongs_to :forum

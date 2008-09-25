@@ -13,6 +13,7 @@
 
 class ForumPost < ActiveRecord::Base
   validates_presence_of :body, :owner_id
+  attr_immutable :id, :owner_id, :topic_id
   
   belongs_to :owner, :class_name => "Profile"
   belongs_to :topic, :class_name => "ForumTopic"

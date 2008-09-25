@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   # Virtual attribute for the unencrypted password
   attr_accessor :password, :email, :terms_of_service
   attr_protected :is_admin, :can_send_messages
+  attr_immutable :id
   
   validates_acceptance_of :terms_of_service, :on => :create
   validates_confirmation_of :password, :if => :password_required?

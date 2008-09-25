@@ -33,7 +33,7 @@ Rails::Initializer.run do |config|
   config.gem 'ferret', :version=> '0.11.4'
   config.gem 'hpricot', :version=>"0.6"
   config.gem 'mocha', :version=>"0.5.6"
-  config.gem 'redgreen', :version=>"1.2.2"
+  config.gem 'redgreen', :version=>"1.2.2" unless ENV['TM_MODE']
   config.gem 'gcnovus-avatar', :version=>"0.0.7", :lib => 'avatar'
   
   
