@@ -41,3 +41,4 @@ Rails::Initializer.run do |config|
   
 end
 
+Less::JsRoutes.generate!
