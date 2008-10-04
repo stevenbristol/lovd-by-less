@@ -4,7 +4,8 @@ profile ||= @profile
 <div class="activity_box learn">
   <div class="left avatar"><%= icon profile, :big %></div>
   <div class="right bio_stuff">
-    <h1><%= h profile.f %></h1> 
+    <h1><%= h profile.f %></h1>
+ 	<% unless profile.last_activity_at.blank? %><small>Last seen <%= time_ago_in_words profile.last_activity_at %> ago</small><% end %>
 	  <h3><%= location_link profile %></h3>
 		<% unless profile.about_me.blank? %><div><strong>About:</strong> <%= sanitize(textilize(profile.about_me)) %></div><% end %>
 		<% unless profile.website.blank? %><div><strong>Website:</strong> <%= link_to h(profile.website), h(profile.website) %></div><% end %>
