@@ -1,0 +1,42 @@
+LessReverseCaptcha
+===========
+
+The Less Reverse Capchta creates a captcha that is invisible to the user. Rather than force the user to prove they are a human, we are allowing bots to prove they are bots. The captcha field is hidden and so humans will leave it blank. Bots do not realize it is hidden so they will fill out the field. The validator checks to see if the field is blank, if it is it allows the save, if not, it does not allow it.
+To use less reverse captcha simply put 'validates_captcha' in the model and use the 'captcha_field' helper in your view.
+
+
+
+new.html.erb
+
+
+<%= flash[:notice] %>
+<%= error_messages_for :comment %>
+
+<% form_for @comment do |form| %>
+  
+  <%= form.text_area :comment %>
+  <%= less_reverse_captcha_field :comment %>
+  
+  <%= submit_tag %>
+<% end %>
+
+
+
+comments_controller.rb
+def create
+  @comment = Comment.create params[:comment]
+  if @comment.new_record?
+    render :action=>'index'
+  else
+    redirect_to comments_path
+  end
+end
+
+
+
+
+comment.rb
+
+class Comment < ActiveRecord::Base
+  
+  validates_less_reverse_captcha
