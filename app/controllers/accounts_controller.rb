@@ -62,8 +62,7 @@ class AccountsController < ApplicationController
     u.password = params[:user][:password]
     u.password_confirmation = params[:user][:password_confirmation]
     u.email = params[:user][:email]
-    u.captcha = params[:user][:captcha] unless ENV['RAILS_ENV'] == 'test'
-    u.captcha_answer = params[:user][:captcha_answer] unless ENV['RAILS_ENV'] == 'test'
+    u.less_value_for_text_input = params[:user][:less_value_for_text_input]
     
     @u = u
     if u.save

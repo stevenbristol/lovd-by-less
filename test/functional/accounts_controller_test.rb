@@ -120,6 +120,27 @@ class AccountsControllerTest < ActionController::TestCase
     assert assigns(:u).new_record?
   end
   
+  
+  def test_should_fail_signup_cuz_captcha
+    flashback
+    assert_no_difference "User.count" do
+      post :signup, {
+        :user => { 
+          :login => 'lquire',
+          :email => 'lquire@example.com',
+          :password => 'lquire',
+          :password_confirmation => 'lquire',
+          :terms_of_service => '1',
+          :less_value_for_text_input=>'1'
+          }
+        }
+    end
+    assert assigns(:user).errors.on(:you)
+    assert_response :success
+    assert assigns(:u)
+    assert assigns(:u).new_record?
+  end
+  
   def test_should_require_email_on_signup
     assert_no_difference "User.count" do
       create_user(:email => nil)

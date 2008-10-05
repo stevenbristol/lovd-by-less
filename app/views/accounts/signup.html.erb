@@ -15,9 +15,7 @@ terms_of_service_label = "Accept #{link_to 'Terms of Service', tos_path, :target
     <%= f.password_field :password %>
     <%= f.password_field :password_confirmation, :label => 'Confirm Password' %>
     <% f.wrap nil, :label=>"" do  %> 
-    <div class="row">    
-      <%= captcha_field(:user)  unless RAILS_ENV == 'test'%>
-      </div>
+      <%= less_reverse_captcha_field(:user)%>
     <% end %>  
     
 	<%= f.front :terms_of_service, :label => terms_of_service_label %>

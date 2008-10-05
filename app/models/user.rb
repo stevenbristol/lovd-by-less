@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   validates_format_of :email, :with => /^([^@\s]{1}+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :on => :create, :message=>"Invalid email address."
 
   before_save :encrypt_password
-  validates_captcha unless ENV['RAILS_ENV'] == 'test'
+  validates_less_reverse_captcha
   
   composed_of :tz, :class_name => 'TZInfo::Timezone', :mapping => %w( time_zone time_zone )
 
