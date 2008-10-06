@@ -51,7 +51,7 @@ class ProfilesController < ApplicationController
   def update
     case params[:switch]
     when 'name','image'
-      if @profile.update_attributes params[:profile]
+      if @profile.update_attributes(params[:profile]) && @user.update_attributes(params[:user])
         flash[:notice] = "Settings have been saved."
         redirect_to edit_profile_url(@profile)
       else

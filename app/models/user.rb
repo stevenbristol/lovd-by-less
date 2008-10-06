@@ -44,7 +44,6 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   validates_less_reverse_captcha
   
-  composed_of :tz, :class_name => 'TZInfo::Timezone', :mapping => %w( time_zone time_zone )
 
 
 
