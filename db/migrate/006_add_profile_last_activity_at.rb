@@ -4,6 +4,6 @@ class AddProfileLastActivityAt < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column :last_activity_at
+    remove_column :profiles, :last_activity_at
   end
 end
