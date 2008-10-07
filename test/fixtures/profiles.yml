@@ -1,10 +1,10 @@
 # == Schema Information
-# Schema version: 2
+# Schema version: 2008100601002
 #
 # Table name: profiles
 #
-#  id               :integer(11)   not null, primary key
-#  user_id          :integer(11)   
+#  id               :integer(4)    not null, primary key
+#  user_id          :integer(4)    
 #  first_name       :string(255)   
 #  last_name        :string(255)   
 #  website          :string(255)   
@@ -22,6 +22,8 @@
 #  is_active        :boolean(1)    
 #  youtube_username :string(255)   
 #  flickr_username  :string(255)   default(""), not null
+#  last_activity_at :datetime      
+#  time_zone        :string(255)   default("UTC")
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

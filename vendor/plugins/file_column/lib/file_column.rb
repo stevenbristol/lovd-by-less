@@ -616,7 +616,7 @@ module FileColumn # :nodoc:
       options = DEFAULT_OPTIONS.merge(options) if options
       
       my_options = FileColumn::init_options(options, 
-                                            Inflector.underscore(self.name).to_s,
+                                            ActiveSupport::Inflector.underscore(self.name).to_s,
                                             attr.to_s)
       
       state_attr = "@#{attr}_state".to_sym

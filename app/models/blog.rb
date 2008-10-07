@@ -1,12 +1,12 @@
 # == Schema Information
-# Schema version: 2
+# Schema version: 2008100601002
 #
 # Table name: blogs
 #
-#  id         :integer(11)   not null, primary key
+#  id         :integer(4)    not null, primary key
 #  title      :string(255)   
 #  body       :text          
-#  profile_id :integer(11)   
+#  profile_id :integer(4)    
 #  created_at :datetime      
 #  updated_at :datetime      
 #

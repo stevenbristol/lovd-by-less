@@ -1,12 +1,12 @@
 # == Schema Information
-# Schema version: 2
+# Schema version: 2008100601002
 #
 # Table name: friends
 #
-#  id         :integer(11)   not null, primary key
-#  inviter_id :integer(11)   
-#  invited_id :integer(11)   
-#  status     :integer(11)   default(0)
+#  id         :integer(4)    not null, primary key
+#  inviter_id :integer(4)    
+#  invited_id :integer(4)    
+#  status     :integer(4)    default(0)
 #  created_at :datetime      
 #  updated_at :datetime      
 #

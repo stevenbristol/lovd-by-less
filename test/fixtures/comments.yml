@@ -1,16 +1,16 @@
 # == Schema Information
-# Schema version: 2
+# Schema version: 2008100601002
 #
 # Table name: comments
 #
-#  id               :integer(11)   not null, primary key
+#  id               :integer(4)    not null, primary key
 #  comment          :text          
 #  created_at       :datetime      not null
 #  updated_at       :datetime      not null
-#  profile_id       :integer(11)   
+#  profile_id       :integer(4)    
 #  commentable_type :string(255)   default(""), not null
-#  commentable_id   :integer(11)   not null
-#  is_denied        :integer(11)   default(0), not null
+#  commentable_id   :integer(4)    not null
+#  is_denied        :integer(4)    default(0), not null
 #  is_reviewed      :boolean(1)    
 #
 
