@@ -1,0 +1,87 @@
+--- !ruby/object:Gem::Specification 
+name: youtube-g
+version: !ruby/object:Gem::Version 
+  version: 0.4.9.9
+platform: ruby
+authors: 
+- Shane Vitarana
+- Walter Korman
+- Aman Gupta
+- Filip H.F. Slagter
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2008-09-01 00:00:00 -04:00
+default_executable: 
+dependencies: []
+
+description: An object-oriented Ruby wrapper for the YouTube GData API
+email: ruby-youtube-library@googlegroups.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- History.txt
+- README.txt
+files: 
+- History.txt
+- lib/youtube_g/client.rb
+- lib/youtube_g/logger.rb
+- lib/youtube_g/model/author.rb
+- lib/youtube_g/model/category.rb
+- lib/youtube_g/model/contact.rb
+- lib/youtube_g/model/content.rb
+- lib/youtube_g/model/playlist.rb
+- lib/youtube_g/model/rating.rb
+- lib/youtube_g/model/thumbnail.rb
+- lib/youtube_g/model/user.rb
+- lib/youtube_g/model/video.rb
+- lib/youtube_g/parser.rb
+- lib/youtube_g/record.rb
+- lib/youtube_g/request/base_search.rb
+- lib/youtube_g/request/standard_search.rb
+- lib/youtube_g/request/user_search.rb
+- lib/youtube_g/request/video_search.rb
+- lib/youtube_g/request/video_upload.rb
+- lib/youtube_g/response/video_search.rb
+- lib/youtube_g.rb
+- Manifest.txt
+- README.txt
+- test/test_client.rb
+- test/test_video.rb
+- test/test_video_search.rb
+- TODO.txt
+- youtube-g.gemspec
+has_rdoc: true
+homepage: http://youtube-g.rubyforge.org/
+post_install_message: 
+rdoc_options: 
+- --main
+- README.txt
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.1
+signing_key: 
+specification_version: 2
+summary: An object-oriented Ruby wrapper for the YouTube GData API
+test_files: 
+- test/test_client.rb
+- test/test_video.rb
+- test/test_video_search.rb

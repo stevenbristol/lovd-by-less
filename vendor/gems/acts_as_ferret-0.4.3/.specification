@@ -63,7 +63,6 @@ post_install_message:
 rdoc_options: []
 
 require_paths: 
-- bin
 - lib
 required_ruby_version: !ruby/object:Gem::Requirement 
   requirements: 
@@ -80,7 +79,7 @@ required_rubygems_version: !ruby/object:Gem::Requirement
 requirements: []
 
 rubyforge_project: 
-rubygems_version: 1.1.0
+rubygems_version: 1.3.1
 signing_key: 
 specification_version: 1
 summary: acts_as_ferret - Ferret based full text search for any ActiveRecord model

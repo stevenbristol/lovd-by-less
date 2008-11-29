@@ -1,0 +1,94 @@
+--- !ruby/object:Gem::Specification 
+name: uuidtools
+version: !ruby/object:Gem::Version 
+  version: 1.0.4
+platform: ruby
+authors: 
+- Bob Aman
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2008-09-29 00:00:00 -04:00
+default_executable: 
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: rake
+  type: :runtime
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: 0.7.3
+    version: 
+- !ruby/object:Gem::Dependency 
+  name: rspec
+  type: :runtime
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: 1.0.8
+    version: 
+description: A simple universally unique ID generation library.
+email: bob@sporkmonger.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- README
+files: 
+- lib/uuidtools
+- lib/uuidtools/version.rb
+- lib/uuidtools.rb
+- spec/spec.opts
+- spec/spec_helper.rb
+- spec/uuidtools
+- spec/uuidtools/mac_address_spec.rb
+- spec/uuidtools/uuid_creation_spec.rb
+- spec/uuidtools/uuid_parsing_spec.rb
+- tasks/benchmark.rake
+- tasks/clobber.rake
+- tasks/gem.rake
+- tasks/git.rake
+- tasks/metrics.rake
+- tasks/rdoc.rake
+- tasks/rubyforge.rake
+- tasks/spec.rake
+- website/index.html
+- CHANGELOG
+- LICENSE
+- Rakefile
+- README
+has_rdoc: true
+homepage: http://uuidtools.rubyforge.org/
+post_install_message: 
+rdoc_options: 
+- --main
+- README
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: uuidtools
+rubygems_version: 1.3.1
+signing_key: 
+specification_version: 2
+summary: UUID generator
+test_files: []
+

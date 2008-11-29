@@ -1,0 +1,63 @@
+== 0.0.6 2008-06-09
+* 1 major fix:
+  * removed all task files (./task/*.rake) for Rails plugin compatability
+
+* 1 minor enhancement
+  * removed redundant Hoe dependencies, since the gem is only hosted on GitHub
+
+== 0.0.5 2008-04-01
+* 4 major enhancements:
+  * added PaperclipSource for use with the Paperclip plugin
+  * added AbstractSourceWrapper
+  * changed StringSubstitutionSource to a SourceWrapper
+  * changed RailsAssetSource to a SourceWrapper
+
+* 1 minor change:
+  * moved StringSubstitution out of separate module and into new StringSubstitutionSourceWrapper
+
+== 0.0.4 2008-03-28
+* 2 major fixes:
+  * GravatarSource downcases email to comply with Gravatar standards
+  * GravatarSource raises exception if passed a path instead of a URL for default
+
+* 1 major enhancement:
+  * added RailsAssetSource
+
+* 3 minor enhancements:
+  * added default_options to StringSubstitutionSource
+  * broke StringSubstitution out into a separate module
+  * added :any to GravatarSource::allowed_ratings
+
+== 0.0.3 2008-03-27
+* 2 minor fixes:
+  * GravatarSource now takes parameter :gravatar_field instead of :field for compatibility with other sources
+  * FileColumnSource now takes parameter :file_column_field instead of :field for compatibility with other sources
+
+* 2 minor enhancements:
+  * broke out options parsing in FileColumnSource to allow overriding
+  * added :gravatar_xxx versions to allowed options for GravatarSource
+
+== 0.0.2 2008-03-24
+* 1 major fix:
+  * SourceChain duplicates options before passing to elements
+
+* 1 minor fix:
+  * forced GravatarSource to coerce rating and size to proper values
+
+* 1 minor enhancement:
+  * broke out URL generation in GravatarSource to allow overriding
+
+== 0.0.1 2008-03-24
+
+* 1 major enhancement:
+  * Initial release
+  * AbstractSource
+  * FileColumnSource
+  * GravatarSource
+  * NilSource
+  * SourceChain
+  * StaticUrlSource
+  * StringSubstitutionSource
+  * AbstractViewSupport
+  * ActionViewSupport
+  * tests
