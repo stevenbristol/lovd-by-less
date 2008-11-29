@@ -1,7 +1,7 @@
 #locals
-comments ||= @comments
-parent ||= @parent
-profile ||= @profile
+comments = @comments
+parent = @parent
+profile = @profile
 
 
 

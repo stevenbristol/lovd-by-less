@@ -1,6 +1,6 @@
 <%
 #locals
-post ||= @post || @topic.posts.build
+post = @post || @topic.posts.build
 css_class ||= ''
 
 url = post.new_record? ? forum_topic_posts_url(post.topic.forum, post.topic) : forum_topic_post_url(post.topic.forum, post.topic, post)

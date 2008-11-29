@@ -1,12 +1,12 @@
 <%-
-profile ||= @profile
+profile = @profile
 with_form ||= false
 with_wall_to_wall ||= false
 
-comments ||= @comments
+comments = @comments
 @count = comments.total_entries
 
-parent ||= @parent
+parent = @parent
 parent = @blog || @profile || nil
 -%>
   

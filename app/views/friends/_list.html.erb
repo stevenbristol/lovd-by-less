@@ -1,5 +1,5 @@
 <% 
-profile ||= @profile
+profile = @profile
 type ||= 'friends'
 size ||= 20
 list = profile.send(type).find(:all, :limit => size, :order => 'RANDOM()') rescue []
