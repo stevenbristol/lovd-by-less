@@ -135,3 +135,11 @@ In AccountController.rb, look for lines that contain: redirect_back_or_default h
 Why is public/javascripts/less_routes.js always modified and needing to be checked in? I swear I didn't touch it.
 
 less_routes.js is automatically generate when your app starts. Any changes to this app will be lost the next time it's generated.
+
+
+
+
+Hey, I get some mysql errors when installing the mysql gem. What the funk?
+
+If you get errors that look something like "dlsym(0x10ef660, Init_mysql): symbol not found" when installing your mysql gem, it may be due to an inconsistency in the build architecture of mysql, ruby, the mysql gem or all three. Reinstall the aforementioned components as necessary using the i386 build.
+

@@ -1,5 +1,5 @@
 
-RAILS_GEM_VERSION = '2.1.1' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -25,16 +25,17 @@ Rails::Initializer.run do |config|
   config.time_zone = 'UTC'
   
   # Gem dependencies
+  config.gem 'mysql', :version => '2.7'
   config.gem 'will_paginate', :version => '~> 2.2.2'
   config.gem 'colored', :version=> '1.1'
   config.gem 'youtube-g', :version=> '0.4.1', :lib=>'youtube_g'
   config.gem 'uuidtools', :version=> '1.0.3'
   config.gem 'acts_as_ferret', :version=> '0.4.3'
   config.gem 'ferret', :version=> '0.11.4'
-  config.gem 'hpricot', :version=>"0.6"
-  config.gem 'mocha', :version=>"0.5.6"
-  config.gem 'redgreen', :version=>"1.2.2" unless ENV['TM_MODE']
-  config.gem 'gcnovus-avatar', :version=>"0.0.7", :lib => 'avatar'
+  config.gem 'hpricot', :version=> '0.6'
+  config.gem 'mocha', :version=> '0.5.6'
+  config.gem 'redgreen', :version=> '1.2.2' unless ENV['TM_MODE']
+  config.gem 'gcnovus-avatar', :version=> '0.0.7', :lib => 'avatar'
   
   
   

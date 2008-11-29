@@ -4,62 +4,70 @@ SHELL = /bin/sh
 #### Start of system configuration section. ####
 
 srcdir = .
-topdir = /usr/local/lib/ruby/1.8/i686-darwin8.10.3
+topdir = /opt/local/lib/ruby/1.8/i686-darwin9
 hdrdir = $(topdir)
 VPATH = $(srcdir):$(topdir):$(hdrdir)
-prefix = $(DESTDIR)/usr/local
 exec_prefix = $(prefix)
-sitedir = $(prefix)/lib/ruby/site_ruby
+prefix = $(DESTDIR)/opt/local
+sharedstatedir = $(prefix)/com
+mandir = $(DESTDIR)/opt/local/share/man
+psdir = $(docdir)
+oldincludedir = $(DESTDIR)/usr/include
+localedir = $(datarootdir)/locale
+bindir = $(exec_prefix)/bin
+libexecdir = $(exec_prefix)/libexec
+sitedir = $(libdir)/ruby/site_ruby
+htmldir = $(docdir)
+vendorarchdir = $(vendorlibdir)/$(sitearch)
+includedir = $(prefix)/include
+infodir = $(datarootdir)/info
+vendorlibdir = $(vendordir)/$(ruby_version)
+sysconfdir = $(prefix)/etc
+libdir = $(exec_prefix)/lib
+sbindir = $(exec_prefix)/sbin
 rubylibdir = $(libdir)/ruby/$(ruby_version)
 docdir = $(datarootdir)/doc/$(PACKAGE)
 dvidir = $(docdir)
+vendordir = $(DESTDIR)/opt/local/lib/ruby/vendor_ruby
 datarootdir = $(prefix)/share
-archdir = $(rubylibdir)/$(arch)
-sbindir = $(exec_prefix)/sbin
-psdir = $(docdir)
-localedir = $(datarootdir)/locale
-htmldir = $(docdir)
-datadir = $(datarootdir)
-includedir = $(prefix)/include
-infodir = $(datarootdir)/info
-sysconfdir = $(prefix)/etc
-mandir = $(datarootdir)/man
-libdir = $(exec_prefix)/lib
-sharedstatedir = $(prefix)/com
-oldincludedir = $(DESTDIR)/usr/include
 pdfdir = $(docdir)
+archdir = $(rubylibdir)/$(arch)
 sitearchdir = $(sitelibdir)/$(sitearch)
-bindir = $(exec_prefix)/bin
+datadir = $(datarootdir)
 localstatedir = $(prefix)/var
 sitelibdir = $(sitedir)/$(ruby_version)
-libexecdir = $(exec_prefix)/libexec
 
-CC = gcc
+CC = /usr/bin/gcc-4.0
 LIBRUBY = $(LIBRUBY_SO)
 LIBRUBY_A = lib$(RUBY_SO_NAME)-static.a
 LIBRUBYARG_SHARED = -l$(RUBY_SO_NAME)
 LIBRUBYARG_STATIC = -l$(RUBY_SO_NAME)-static
 
 RUBY_EXTCONF_H = 
-CFLAGS   =  -fno-common -g -O2  -fno-common -pipe -fno-common -D_FILE_OFFSET_BITS=64 
+CFLAGS   =  -fno-common -O2  -fno-common -pipe -fno-common $(cflags) -D_FILE_OFFSET_BITS=64 
 INCFLAGS = -I. -I$(topdir) -I$(hdrdir) -I$(srcdir)
-CPPFLAGS =  
+DEFS     = 
+CPPFLAGS =  -I/opt/local/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE $(DEFS) $(cppflags)
 CXXFLAGS = $(CFLAGS) 
-DLDFLAGS =   
+ldflags  = -L. -L/opt/local/lib
+dldflags = 
+archflag = 
+DLDFLAGS = $(ldflags) $(dldflags) $(archflag)
 LDSHARED = cc -dynamic -bundle -undefined suppress -flat_namespace
 AR = ar
 EXEEXT = 
 
 RUBY_INSTALL_NAME = ruby
 RUBY_SO_NAME = ruby
-arch = i686-darwin8.10.3
-sitearch = i686-darwin8.10.3
+arch = i686-darwin9
+sitearch = i686-darwin9
+vendorarch = i686-darwin9
 ruby_version = 1.8
-ruby = /usr/local/bin/ruby
+ruby = /opt/local/bin/ruby
 RUBY = $(ruby)
 RM = rm -f
 MAKEDIRS = mkdir -p
-INSTALL = /usr/bin/install -c
+INSTALL = /usr/bin/install
 INSTALL_PROG = $(INSTALL) -m 0755
 INSTALL_DATA = $(INSTALL) -m 644
 COPY = cp
@@ -68,11 +76,11 @@ COPY = cp
 
 preload = 
 
-libpath = $(libdir)
-LIBPATH =  -L"$(libdir)"
+libpath = . $(libdir)
+LIBPATH =  -L. -L$(libdir)
 DEFFILE = 
 
-CLEANFILES = 
+CLEANFILES = mkmf.log
 DISTCLEANFILES = 
 
 extout = 
@@ -87,9 +95,10 @@ DLLIB = $(TARGET).bundle
 EXTSTATIC = 
 STATIC_LIB = 
 
+BINDIR        = $(bindir)
 RUBYCOMMONDIR = $(sitedir)$(target_prefix)
-RUBYLIBDIR = /Users/steve/rails/lovd-by-less/vendor/gems/ferret-0.11.4/bin$(target_prefix)
-RUBYARCHDIR = /Users/steve/rails/lovd-by-less/vendor/gems/ferret-0.11.4/bin$(target_prefix)
+RUBYLIBDIR = /Users/jon/Code/lovd-by-less/vendor/gems/ferret-0.11.4/bin$(target_prefix)
+RUBYARCHDIR = /Users/jon/Code/lovd-by-less/vendor/gems/ferret-0.11.4/bin$(target_prefix)
 
 TARGET_SO     = $(DLLIB)
 CLEANLIBS     = $(TARGET).bundle $(TARGET).il? $(TARGET).tds $(TARGET).map
@@ -142,7 +151,7 @@ site-install-rb: install-rb
 
 $(DLLIB): $(OBJS)
 	@-$(RM) $@
-	$(LDSHARED) $(DLDFLAGS) $(LIBPATH) -o $@ $(OBJS) $(LOCAL_LIBS) $(LIBS)
+	$(LDSHARED) -o $@ $(OBJS) $(LIBPATH) $(DLDFLAGS) $(LOCAL_LIBS) $(LIBS)
 
 
 
