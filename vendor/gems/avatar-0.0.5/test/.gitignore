@@ -1,3 +1,0 @@
-# ignore the tmp and public directories used for file_column images storage:
-/public
-/tmp
