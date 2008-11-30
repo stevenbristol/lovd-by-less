@@ -1,8 +1,8 @@
 <%
 #locals
-comments = @comments
-parent = @parent
-profile = @profile
+comments ||= @comments
+parent ||= @parent
+profile ||= @profile
 
 @count = comments.total_entries
 %>

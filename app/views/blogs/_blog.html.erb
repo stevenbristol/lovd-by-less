@@ -1,11 +1,10 @@
 <% 
 #locals
-blog = @blog 
+blog ||= @blog 
 
 %>
 
 <div id="blog_<%= blog.id %>" class="border_top">
-
     Posted <%= time_ago_in_words blog.created_at  %>
 		<%- if @p == @profile -%>
 			<%= link_to '(edit)', edit_profile_blog_path(@profile, blog) %>

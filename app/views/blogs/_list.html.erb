@@ -1,6 +1,6 @@
 <%-
 #locals
-profile = @profile
+profile ||= @profile
 size ||= 10
 blogs ||= profile.blogs.find :all, :limit => size
 

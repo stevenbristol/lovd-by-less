@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
       if @comment.save
         wants.js do
           render :update do |page|
-            page.insert_html :top, "#{dom_id(@parent)}_comments", :partial => 'comments/comment'
+            page.insert_html :top, "#{dom_id(@parent)}_comments", :partial => 'comments/comment', :object => @comment
             page.visual_effect :highlight, "comment_#{@comment.id}".to_sym
             page << 'tb_remove();'
             page << "jq('#comment_comment').val('');"

@@ -1,6 +1,6 @@
 <%-
 #locals
-list = @list
+list ||= @list
 sub ||= 'inbox'
 label ||= 'Inbox Messages'
 sent = params[:action]=='sent'

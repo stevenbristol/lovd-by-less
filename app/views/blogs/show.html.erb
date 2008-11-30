@@ -19,7 +19,7 @@
     <%= link_to "&larr; Back to #{h @profile.f}'s Profile", profile_path(@profile) unless me %>
   </div>
 
-  <%= render :partial => 'blogs/blog' %>
+  <%= render :partial => 'blogs/blog', :object => @blog %>
 </div>
 
 <%= render :partial => 'history' %>

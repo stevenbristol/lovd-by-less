@@ -1,6 +1,6 @@
 <%
 #locals
-topic = @topic || @forum.topic.build
+topic ||= @topic || @forum.topic.build
 
 url = topic.new_record? ? forum_topics_path(@forum) : forum_topic_path(topic.forum, topic)  
 %>

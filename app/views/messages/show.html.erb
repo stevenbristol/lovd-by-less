@@ -7,4 +7,4 @@ label ||= 'Reading a Message'
 <h1><%= sanitize label %></h1>
 
 
-<%= render :partial => "messages/message" %>
+<%= render :partial => "messages/message", :object => @message %>
