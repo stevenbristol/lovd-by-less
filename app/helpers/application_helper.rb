@@ -6,17 +6,13 @@ module ApplicationHelper
   
 
   def less_form_for name, *args, &block
-    options = args.last.is_a?(Hash) ? args.pop : {}
-    options = options.merge(:builder=>LessFormBuilder)
-    args = (args << options)
-    form_for name, *args, &block
+    options = args.extract_options!
+    form_for name, *(args << options.merge(:builder=>LessFormBuilder)), &block
   end
   
   def less_remote_form_for name, *args, &block
-    options = args.last.is_a?(Hash) ? args.pop : {}
-    options = options.merge(:builder=>LessFormBuilder)
-    args = (args << options)
-    remote_form_for name, *args, &block
+    options = args.extract_options!
+    form_for name, *(args << options.merge(:builder=>LessFormBuilder)), &block
   end
   
   

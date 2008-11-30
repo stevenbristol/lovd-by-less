@@ -29,7 +29,7 @@ class LessFormBuilder < ActionView::Helpers::FormBuilder
       "<label for='#{options.delete(:for)}'>#{text}</label>"
     else
       #need to use InstanceTag to build the correct ID for :for
-      ActionView::Helpers::InstanceTag.new(@object_name, method, self, nil, @object).to_label_tag(text, options)
+      ActionView::Helpers::InstanceTag.new(@object_name, method, self, @object).to_label_tag(text, options)
     end
   end
   
