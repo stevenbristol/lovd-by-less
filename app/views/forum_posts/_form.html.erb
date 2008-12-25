@@ -7,7 +7,7 @@ url = post.new_record? ? forum_topic_posts_url(post.topic.forum, post.topic) : f
 %>
 
   <%= error_messages_for :post %>
-<% less_remote_form_for(post, :url => forum_topic_post_url(post.topic.forum, post.topic, post)) do |f| %>
+<% less_remote_form_for(post, :url => url) do |f| %>
 
     <%= f.text_area :body, :class=>css_class, :for=>:followup_post_body %>
     <div class="row button">
