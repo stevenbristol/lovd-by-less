@@ -122,7 +122,7 @@ class ForumsControllerTest < ActionController::TestCase
     assert_nothing_raised do
       get :new, {}
       assert_response 302
-      assert_redirected_to :login_path
+      assert_redirected_to :login
     end
   end
 
@@ -150,7 +150,7 @@ class ForumsControllerTest < ActionController::TestCase
       assert_no_difference "Forum.count" do
         post :create, {:forum => valid_forum_attributes}
         assert_response 302
-        assert_redirected_to :login_path
+        assert_redirected_to :login
       end
     end
   end
@@ -217,7 +217,7 @@ class ForumsControllerTest < ActionController::TestCase
     assert_nothing_raised do
       get :edit, {:id => forums(:one).id}
       assert_response 302
-      assert_redirected_to :login_path
+      assert_redirected_to :login
     end
   end
 
@@ -244,7 +244,7 @@ class ForumsControllerTest < ActionController::TestCase
     assert_nothing_raised do
       put :update, {:id => forums(:one).id, :forum => valid_forum_attributes}
       assert_response 302
-      assert_redirected_to :login_path
+      assert_redirected_to :login
     end
   end
 
@@ -321,7 +321,7 @@ class ForumsControllerTest < ActionController::TestCase
       assert_no_difference "Forum.count" do
         delete :destroy, {:id => forums(:one).id}
         assert_response 302
-        assert_redirected_to :login_path
+        assert_redirected_to :login
       end
     end
   end

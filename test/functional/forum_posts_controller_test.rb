@@ -15,13 +15,13 @@ class ForumPostsControllerTest < ActionController::TestCase
   ##
   # :index
   
-  should "redriect if index" do
+  should "redirect if index" do
     get :index, {:forum_id => forum_topics(:one).forum.id, 
                    :topic_id => forum_topics(:one).id}
     assert_response 302
     assert_redirected_to forum_path(forum_topics(:one).forum)
   end
-  should "redriect if show" do
+  should "redirect if show" do
     get :show, {:forum_id => forum_topics(:one).forum.id, 
                        :topic_id => forum_topics(:one).id, 
                        :id => forum_posts(:one).id}
@@ -47,7 +47,7 @@ class ForumPostsControllerTest < ActionController::TestCase
                        :topic_id => forum_topics(:one).id,
                        :forum_post => valid_forum_post_attributes}
         assert_response 302
-        assert_redirected_to :login_path
+        assert_redirected_to :login
       end
     end
   end
@@ -58,7 +58,7 @@ class ForumPostsControllerTest < ActionController::TestCase
         post :create, {:forum_id => forum_topics(:one).forum.id, 
                        :topic_id => forum_topics(:one).id,
                        :forum_post => valid_forum_post_attributes}, {:user => profiles(:user).id}
-        assert_redirected_to :controller => 'forum_topics', :action => 'show'
+        assert_redirected_to forum_topic_url(forum_topics(:one).forum, forum_topics(:one))+"\##{assigns(:post).dom_id}"
       end
     end
   end
@@ -69,7 +69,8 @@ class ForumPostsControllerTest < ActionController::TestCase
         post :create, {:forum_id => forum_topics(:one).forum.id, 
                        :topic_id => forum_topics(:one).id,
                        :forum_post => valid_forum_post_attributes}, {:user => profiles(:admin).id}
-        assert_redirected_to :controller => 'forum_topics', :action => 'show'
+        
+        assert_redirected_to forum_topic_url(forum_topics(:one).forum, forum_topics(:one))+"\##{assigns(:post).dom_id}"
       end
     end
   end
@@ -106,7 +107,7 @@ class ForumPostsControllerTest < ActionController::TestCase
                   :topic_id => forum_topics(:one).id,
                   :id => forum_topics(:one).id}
       assert_response 302
-      assert_redirected_to :login_path
+      assert_redirected_to :login
     end
   end
 
@@ -140,7 +141,7 @@ class ForumPostsControllerTest < ActionController::TestCase
                     :id => forum_posts(:one).id,
                     :forum_post => valid_forum_post_attributes}
       assert_response 302
-      assert_redirected_to :login_path
+      assert_redirected_to :login
     end
   end
 
@@ -161,7 +162,7 @@ class ForumPostsControllerTest < ActionController::TestCase
                     :topic_id => forum_posts(:one).topic.id,
                     :id => forum_posts(:one).id,
                     :forum_post => valid_forum_post_attributes}, {:user => profiles(:admin).id}
-      assert_redirected_to :controller => 'forum_topics', :action => 'show', :id => forum_topics(:one).to_param+"\##{forum_posts(:one).dom_id}"
+      assert_redirected_to forum_topic_url(forum_topics(:one).forum, forum_topics(:one))+"\##{assigns(:post).dom_id}"
     end
   end
   
@@ -215,7 +216,7 @@ class ForumPostsControllerTest < ActionController::TestCase
                           :topic_id => forum_posts(:one).topic.id,
                           :id => forum_posts(:one).id}
         assert_response 302
-        assert_redirected_to :login_path
+        assert_redirected_to :login
       end
     end
   end
@@ -238,7 +239,7 @@ class ForumPostsControllerTest < ActionController::TestCase
         delete :destroy, {:forum_id => forum_posts(:one).topic.forum.id, 
                           :topic_id => forum_posts(:one).topic.id,
                           :id => forum_posts(:one).id}, {:user => profiles(:admin).id}
-        assert_redirected_to :controller => 'forum_topics', :action => 'show', :id => forum_posts(:one).topic.to_param
+        assert_redirected_to forum_topic_url(forum_topics(:one).forum, forum_topics(:one))
       end
     end
   end

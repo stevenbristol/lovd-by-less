@@ -75,7 +75,7 @@ class ForumTopicsControllerTest < ActionController::TestCase
     assert_nothing_raised do
       get :new, {:forum_id => forum_topics(:one).forum.id}
       assert_response 302
-      assert_redirected_to :login_path
+      assert_redirected_to :login
     end
   end
 
@@ -103,7 +103,7 @@ class ForumTopicsControllerTest < ActionController::TestCase
       assert_no_difference "ForumTopic.count" do
         post :create, {:forum_id => forums(:one).id, :topic => valid_forum_topic_attributes}
         assert_response 302
-        assert_redirected_to :login_path
+        assert_redirected_to :login
       end
     end
   end
@@ -113,7 +113,7 @@ class ForumTopicsControllerTest < ActionController::TestCase
       assert_difference "ForumTopic.count" do
         post :create, {:forum_id => forums(:one).id, 
                        :forum_topic => valid_forum_topic_attributes}, {:user => profiles(:user).id}
-        assert_redirected_to :controller => 'forum_topics', :action => 'show'
+        assert_redirected_to forum_topic_url(forums(:one), assigns(:topic))
       end
     end
   end
@@ -123,7 +123,7 @@ class ForumTopicsControllerTest < ActionController::TestCase
       assert_difference "ForumTopic.count" do
         post :create, {:forum_id => forums(:one).id,
                        :forum_topic => valid_forum_topic_attributes}, {:user => profiles(:admin).id}
-        assert_redirected_to :controller => 'forum_topics', :action => 'show'
+        assert_redirected_to forum_topic_url(forums(:one), assigns(:topic))
       end
     end
   end
@@ -159,7 +159,7 @@ class ForumTopicsControllerTest < ActionController::TestCase
     assert_nothing_raised do
       get :edit, {:forum_id => forum_topics(:one).forum.id, :id => forum_topics(:one).id}
       assert_response 302
-      assert_redirected_to :login_path
+      assert_redirected_to :login
     end
   end
 
@@ -187,7 +187,7 @@ class ForumTopicsControllerTest < ActionController::TestCase
       put :update, {:forum_id => forum_topics(:one).forum.id, 
                     :id => forum_topics(:one).id, :forum => valid_forum_attributes}
       assert_response 302
-      assert_redirected_to :login_path
+      assert_redirected_to :login
     end
   end
 
