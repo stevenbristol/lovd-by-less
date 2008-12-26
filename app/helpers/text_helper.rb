@@ -11,8 +11,8 @@ module TextHelper
     return if text.nil?
 
     doc = Hpricot(text.to_s)
-    ellipsis_length = Hpricot(ellipsis).inner_text.chars.length
-    content_length = doc.inner_text.chars.length
+    ellipsis_length = Hpricot(ellipsis).inner_text.length
+    content_length = doc.inner_text.length
     actual_length = max_length - ellipsis_length
 
     content_length > max_length ? doc.truncate(actual_length).inner_html + ellipsis : text.to_s
