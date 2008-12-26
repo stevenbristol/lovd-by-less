@@ -10,7 +10,7 @@ class SpiderTest < ActionController::IntegrationTest
     get "/"
     assert_response 200
   
-    spider(@response.body, '/', false)
+    spider(@response.body, '/')
   end
   
   
@@ -26,7 +26,7 @@ class SpiderTest < ActionController::IntegrationTest
     follow_redirect!
   
     #   puts @response.body
-    spider(@response.body, "/", false)
+    spider(@response.body, "/")
   end
 
   
@@ -43,7 +43,7 @@ class SpiderTest < ActionController::IntegrationTest
     follow_redirect!
   
     #   puts @response.body
-    spider(@response.body, "/", false)
+    spider(@response.body, "/")
   end
 
 
