@@ -1,1 +1,2 @@
-class Caboose; end
+module Caboose #:nodoc:
+end

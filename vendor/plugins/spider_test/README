@@ -33,7 +33,7 @@ fixtures.
   
   class SpiderTest < ActionController::IntegrationTest
     fixtures :users, :roles, :images, :categories
-    include SpiderIntegrator
+    include Caboose::SpiderIntegrator
   
     def test_spider
       get '/'
@@ -50,7 +50,7 @@ If you require a login for your app, you'll need to specifically log in. I do it
   
   class SpiderTest < ActionController::IntegrationTest
     fixtures :users, :roles, :images, :categories
-    include SpiderIntegrator
+    include Caboose::SpiderIntegrator
   
     def test_spider
       get '/sessions/new'
@@ -60,9 +60,12 @@ If you require a login for your app, you'll need to specifically log in. I do it
       assert_response :redirect
       assert_redirected_to '/'
       follow_redirect!
-  
-      spider(@response.body, '/')
-    end
+
+      spider(@response.body, '/', 
+               :verbose => true,
+               :ignore_urls => ['/login', %r{^.+logout}, %r{^.+delete.?}, %r{^.+/destroy.?}], 
+               :ignore_forms => [])
+     end
   
   end
 
@@ -77,19 +80,11 @@ Todo:
     you can modify this by editing the plugin and setting @visited_urls and @visited_forms
     but this should be more easily settable.
 
-  - use hpricot instead of html::document
-    no clue, really, but I hear hpricot is faster.
+  x use hpricot instead of html::document
     
   x better capturing of errors
     instead of dying each time there's an error, store them all up so the user can fix
     'em all at once.
 
 
-Changelog:
-
-
-SVN
-      Better capturing of errors (waits until the end to display the errors or missing pages)
-      More fun status dots (! for error, ? for missing file)
-
-0.1 : Initial release
+Please see CHANGELOG for more details.
