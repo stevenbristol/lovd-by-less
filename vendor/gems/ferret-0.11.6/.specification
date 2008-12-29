@@ -246,6 +246,7 @@ rdoc_options:
 - TUTORIAL
 - TODO
 require_paths: 
+- bin
 - lib
 required_ruby_version: !ruby/object:Gem::Requirement 
   requirements: 

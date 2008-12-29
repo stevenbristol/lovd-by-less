@@ -81,6 +81,8 @@ require 'caboose'
 require 'hpricot'
 module Caboose::SpiderIntegrator
 
+
+
   # Begin spidering your application.
   # +body+:: the HTML request.body from a page in your app
   # +uri+::  the URL which generated the request.body. This is used in stack traces (followed link <...> from <uri>)
@@ -140,7 +142,7 @@ module Caboose::SpiderIntegrator
   
   def setup_spider(options = {})
     options.reverse_merge!({ :ignore_urls => ['/logout'], :ignore_forms => ['/login'] })
-
+    
     @ignore = {}
     @ignore[:urls] = Hash.new(false)
     @ignore[:url_patterns] = Hash.new(false)
@@ -179,6 +181,9 @@ module Caboose::SpiderIntegrator
        return true
      end
     
+    return true if uri.starts_with?("javascript:")
+    return true if uri.ends_with? ".jpg"
+    
     @ignore[:url_patterns].keys.each do |pattern|
       if pattern.match(uri)
         console  "- #{uri} ( Ignored by pattern #{pattern.inspect})"
@@ -210,7 +215,6 @@ module Caboose::SpiderIntegrator
     until @links_to_visit.empty?
       next_link = @links_to_visit.shift
       next if spider_should_ignore_url?(next_link.uri)
-      
       get next_link.uri
       if %w( 200 201 302 401 ).include?( @response.code )
         console "GET '#{next_link.uri}'"
@@ -249,7 +253,7 @@ module Caboose::SpiderIntegrator
         send(next_form.method, next_form.action, next_form.query)
       rescue => err
         printf "*"
-        (@errors[next_form.action]||=[]) << "Could not spider page :#{next_form.method} '#{next_form.action}' with #{next_form.query.inspect} because of error #{err.message}"
+        (@errors[next_form.action]||=[]) << "Could not spider page :#{next_form.method} '#{next_form.action}' with #{next_form.query.inspect} because of error #{err.message}, from: #{next_form.source}"
         @stacktraces[next_form.action] = err.inspect
       end
       unless %w( 200 201 302 401 ).include?( @response.code )

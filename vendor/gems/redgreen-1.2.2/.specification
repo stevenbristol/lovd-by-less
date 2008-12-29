@@ -7,7 +7,8 @@ authors:
 - Chris Wanstrath and Pat Eyler
 autorequire: redgreen
 bindir: bin
-cert_chain: 
+cert_chain: []
+
 date: 2007-04-17 00:00:00 -04:00
 default_executable: rg
 dependencies: []
@@ -38,9 +39,9 @@ require_paths:
 - lib
 required_ruby_version: !ruby/object:Gem::Requirement 
   requirements: 
-  - - ">"
+  - - ">="
     - !ruby/object:Gem::Version 
-      version: 0.0.0
+      version: "0"
   version: 
 required_rubygems_version: !ruby/object:Gem::Requirement 
   requirements: 
@@ -53,7 +54,7 @@ requirements: []
 rubyforge_project: 
 rubygems_version: 1.3.1
 signing_key: 
-specification_version: 1
+specification_version: 2
 summary: redgreen is an expanded version of Pat Eyler's RedGreen
 test_files: []
 

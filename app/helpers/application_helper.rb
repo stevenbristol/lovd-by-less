@@ -12,7 +12,7 @@ module ApplicationHelper
   
   def less_remote_form_for name, *args, &block
     options = args.extract_options!
-    form_for name, *(args << options.merge(:builder=>LessFormBuilder)), &block
+    remote_form_for name, *(args << options.merge(:builder=>LessFormBuilder)), &block
   end
   
   
