@@ -72,7 +72,11 @@ class Profile < ActiveRecord::Base
   #Forums
   has_many :forum_posts, :foreign_key => 'owner_id', :dependent => :destroy
   
-  acts_as_ferret :fields => [ :location, :f, :about_me ], :remote=>true
+  define_index do
+    indexes location, about_me, first_name, last_name
+    indexes user.login, :as => :login
+    set_property :min_prefix_len => 3, :morphology => false
+  end
   
   file_column :icon, :magick => {
     :versions => { 
@@ -184,11 +188,8 @@ class Profile < ActiveRecord::Base
   
   
   
-  def self.search query = '', options = {}
-    query ||= ''
-    q = '*' + query.gsub(/[^\w\s-]/, '').gsub(' ', '* *') + '*'
-    options.each {|key, value| q += " #{key}:#{value}"}
-    arr = find_by_contents q, :limit=>:all
+  def self.search_results query = '', options = {}
+    arr = self.search(query)
     logger.debug arr.inspect
     arr
   end
