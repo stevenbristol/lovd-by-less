@@ -84,13 +84,14 @@ Configure Thinking Sphinx:
 14. rake ts:start
 15. rake ts:in
 16. Rake ts:start again in sphinx is not running.
+17. Create a cron job that will rake ts:in every hour. This will make any changes made in the last hour searchable.
 
 Start Lovd By Less:
 
-17. ./script/server
-18. Go to the home page http://localhost:3000
-19. Go to the signup page and create an account.
-20. Go into the database and turn the is_admin flag to true on your new account.
+18. ./script/server
+19. Go to the home page http://localhost:3000
+20. Go to the signup page and create an account.
+21. Go into the database and turn the is_admin flag to true on your new account.
 
 
 
