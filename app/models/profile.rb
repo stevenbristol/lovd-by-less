@@ -188,13 +188,6 @@ class Profile < ActiveRecord::Base
   
   
   
-  def self.search_results query = '', options = {}
-    arr = self.search(query)
-    logger.debug arr.inspect
-    arr
-  end
-  
-  
   
   protected
   def fix_http str

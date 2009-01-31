@@ -28,7 +28,7 @@ Quick Setup (currently for non-Windows users only - due to ferret gem issues):
   1. Edit config/database.yml.tmp to reflect the database names you would like to use.
   2. Edit config/environments/production.rb so asset_host reflects the name of the production asset server
   3. cp config/database.yml.tmp config/database.yml
-  4. MAKE SURE YOU UPGRADE TO GEMS 1.2.
+  4. MAKE SURE YOU UPGRADE TO GEMS 1.3.
   5. RUN gem sources -a http://gems.github.com
   6. rake lovdbyless:getting_started
   7. rake test
@@ -51,11 +51,6 @@ Install the Required Gems:
 
 
 TIPS:
-Installing ferret on Windows
-1. Running gem install ferret does not work. Instead, download the gem directly from http://rubyforge.org/frs/?group_id=1028
-2. Download file: ferret-0.11.6-mswin32.gem
-3. From the directory you downloaded the gem to: gem install ferret-0.11.6-mswin32.gem
-
 Installing ImageMagick and RMagick
 See these posts for tips:
 http://b.lesseverything.com/2007/9/26/installing-imagemagick-and-rmagick-on-mac-os-x
@@ -84,11 +79,11 @@ Setup default values:
 12. Edit application.css to suite your tastes.
 13. Edit app/views/home/terms.
 
-Configure Ferret:
+Configure Thinking Sphinx:
 
-14. Feel free to replace ferret with the search engine of your choice.
-15. Acts_s_ferret home page: http://projects.jkraemer.net/acts_as_ferret/wiki.
-16. We recommend using the drb server as described here: http://projects.jkraemer.net/acts_as_ferret/wiki/DrbServer.
+14. rake ts:start
+15. rake ts:in
+16. Rake ts:start again in sphinx is not running.
 
 Start Lovd By Less:
 

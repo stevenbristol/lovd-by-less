@@ -32,7 +32,7 @@ class SpiderTest < ActionController::IntegrationTest
   
   
   def test_spider_admin
-    Profile.stubs(:search_results).returns(ThinkingSphinx::Collection.new(1, 1, 1, 1))
+    Profile.stubs(:search).returns(ThinkingSphinx::Collection.new(1, 1, 1, 1))
     puts ''
     puts 'test_spider_admin'
     get "/login"

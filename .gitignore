@@ -8,7 +8,6 @@ log/*.pid
 tmp
 config/database.yml
 config/*.sphinx.conf
-index
 public/system
 public/javascripts/less_routes.js
 test/public/system
