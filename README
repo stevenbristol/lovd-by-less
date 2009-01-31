@@ -79,19 +79,31 @@ Setup default values:
 12. Edit application.css to suite your tastes.
 13. Edit app/views/home/terms.
 
+Install Sphinx:
+
+14. Go here and get the latest sphinx: http://sphinxsearch.com/downloads.html
+15. You can follow these commands:
+  wget http://sphinxsearch.com/downloads/sphinx-0.9.8.1.tar.gz
+  tar zxvf sphinx-0.9.8.1.tar.gz
+  cd sphinx-0.9.8.1
+  ./configure
+  make
+  sudo make install
+
 Configure Thinking Sphinx:
 
-14. rake ts:start
-15. rake ts:in
-16. Rake ts:start again in sphinx is not running.
-17. Create a cron job that will rake ts:in every hour. This will make any changes made in the last hour searchable.
+16. rake ts:start
+17. rake ts:in
+18. Rake ts:start again in sphinx is not running.
+19. Create a cron job that will rake ts:in every hour. This will make any changes made in the last hour searchable. It should look something like this: 0 * * * * cd /var/rails/lovdbyless/current/ && rake ts:in RAILS_ENV=production
+Note: remember that to call rails vi cron you have to make sure your crontab has a PATH variable set up. Include something like this at the top of your crontab: PATH=/usr/bin:/bin:/sbin:/usr/sbin:/sbin:/usr/local/bin
 
 Start Lovd By Less:
 
-18. ./script/server
-19. Go to the home page http://localhost:3000
-20. Go to the signup page and create an account.
-21. Go into the database and turn the is_admin flag to true on your new account.
+20. ./script/server
+21. Go to the home page http://localhost:3000
+22. Go to the signup page and create an account.
+23. Go into the database and turn the is_admin flag to true on your new account.
 
 
 
