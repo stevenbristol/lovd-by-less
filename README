@@ -47,7 +47,7 @@ Install the Required Gems:
 - rmagick (will require ImageMagick, which is not a gem)
 - win32console (windows only)
 (The other gems are already provided in the vendor gems dir.)
-2. Run "rake gems:build" to build the gems that need builing
+2. Run "rake gems:build" to build the gems that need building
 
 
 TIPS:
@@ -133,7 +133,7 @@ Yes. It can be found here: http://groups.google.com/group/lovdbyless
 
 
 
-How to change the page a user is redirected to after login or singup:
+How to change the page a user is redirected to after login or signup:
 
 In AccountController.rb, look for lines that contain: redirect_back_or_default home_path and change either home_path to the path you want to send them to, or change redirect_back_or_default to redirect_to, or both.
 
