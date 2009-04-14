@@ -2,7 +2,7 @@
 profile ||= @profile
 type ||= 'friends'
 size ||= 20
-list = profile.send(type).find(:all, :limit => size, :order => 'RANDOM()') rescue []
+list = profile.send(type).find(:all, :limit => size, :order => ActiveRecord::Base.connection.rand) rescue []
 total = profile.send(type).count
 with_friending ||= false
 
