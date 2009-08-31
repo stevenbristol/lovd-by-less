@@ -14,6 +14,12 @@ class <<ActiveRecord::Base
   end
   alias_method_chain :find, :defaults
   
+  def concerned_with
+    Dir.entries("#{RAILS_ROOT}/app/models/#{name.underscore}").each do |file_name|
+      next unless file_name.ends_with? '.rb'
+      require_dependency "#{name.underscore}/#{file_name}"
+    end
+  end
 end
 
 

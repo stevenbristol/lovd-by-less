@@ -6,8 +6,8 @@ SITE_NAME = 'Lovd By Less'
 SITE = RAILS_ENV == 'production' ? 'lovdbyless.com' : 'localhost:3000'
 
 
-MAILER_TO_ADDRESS = 'info@#{SITE}'
-MAILER_FROM_ADDRESS = 'The Lovd by Less Team <info@lovdbyless.com>'
+MAILER_TO_ADDRESS = "info@#{SITE}"
+MAILER_FROM_ADDRESS = "The Lovd by Less Team <info@#{SITE}>"
 REGISTRATION_RECIPIENTS = %W() #send an email to this list everytime someone signs up
 
 
