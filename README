@@ -4,7 +4,7 @@ How to get LovdByLess up and running
 WINDOWS USERS READ THIS: http://www.gamutworks.net/blog/?p=17
 UBUNTO USERS READ THIS: http://groups.google.com/group/lovdbyless/browse_thread/thread/d29043342c47f06?hl=en
 
-START BY MAKING SURE your ruby gems are version 1.2.0 or greater:
+START BY MAKING SURE your rubygems install is version 1.3.5 or greater:
 * (sudo) gem update --system
 Then add the github repo to your gems:
 * gem sources -a http://gems.github.com
