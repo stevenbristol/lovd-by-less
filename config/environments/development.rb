@@ -10,9 +10,8 @@ config.whiny_nils = true
 
 # Show full error reports and disable caching
 config.action_controller.consider_all_requests_local = true
-config.action_controller.perform_caching             = false
 config.action_view.debug_rjs                         = true
-config.action_controller.asset_host                  = "http://localhost:3000"
+config.action_controller.perform_caching             = false
 
 # needed for Avatar::Source::RailsAssetSource
 config.action_controller.asset_host                  = "http://localhost:3000"
