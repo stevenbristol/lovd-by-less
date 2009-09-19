@@ -10,7 +10,7 @@ module ImmutableAttributes
     args.each do |meth|
       class_eval do
         define_method("#{meth}=") do |value|
-          new_record? || send(meth).nil? ? write_attribute(meth, value) : raise(ActiveRecord::ImmutableAttributeError, "#{meth} is immutable!")
+          new_record? ? write_attribute(meth, value) : raise(ActiveRecord::ImmutableAttributeError, "#{meth} is immutable!")
         end
       end
     end

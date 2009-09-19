@@ -64,10 +64,17 @@ class FootnotesTest < Test::Unit::TestCase
 
   def test_not_included_when_body_is_not_a_string
     @controller.response.body = Proc.new{ Time.now }
-    @footnotes = Footnotes::Filter.new(@controller)
     assert_nothing_raised do
       footnotes_perform!
     end
+  end
+
+  def test_footnotes_prefix
+    assert_equal 'txmt://open?url=file://%s&amp;line=%d&amp;column=%d', Footnotes::Filter.prefix
+    assert_equal 'txmt://open?url=file://file&amp;line=0&amp;column=0', Footnotes::Filter.prefix('file', 0, 0)
+    assert_equal 'txmt://open?url=file://file&amp;line=10&amp;column=10', Footnotes::Filter.prefix('file', 10, 10)
+    assert_equal 'txmt://open?url=file://file&amp;line=10&amp;column=10', Footnotes::Filter.prefix('file', 10, 10, 10)
+    assert_equal 'txmt://open?url=file://file&amp;line=10&amp;column=10', Footnotes::Filter.prefix('file', '10', '10')
   end
 
   def test_notes_are_initialized
@@ -78,54 +85,55 @@ class FootnotesTest < Test::Unit::TestCase
   end
 
   def test_notes_links
-    footnotes_perform!
-    @footnotes.instance_variable_get('@notes').first.expects(:row).times(2)
+    note = Footnotes::Notes::TestNote.new
+    note.expects(:row).times(2)
+    @footnotes.instance_variable_set(:@notes, [note])
     footnotes_perform!
   end
 
   def test_notes_fieldset
-    footnotes_perform!
-    @footnotes.instance_variable_get('@notes').first.expects(:fieldset?).times(3)
+    note = Footnotes::Notes::TestNote.new
+    note.expects(:has_fieldset?).times(3)
+    @footnotes.instance_variable_set(:@notes, [note])
     footnotes_perform!
   end
 
   def test_multiple_notes
     Footnotes::Filter.multiple_notes = true
-    footnotes_perform!
-    @footnotes.instance_variable_get('@notes').first.expects(:fieldset?).times(2)
+    note = Footnotes::Notes::TestNote.new
+    note.expects(:has_fieldset?).times(2)
+    @footnotes.instance_variable_set(:@notes, [note])
     footnotes_perform!
   end
 
   def test_notes_are_reset
-    footnotes_perform!
-    @footnotes.instance_variable_get('@notes').first.class.expects(:close!)
+    note = Footnotes::Notes::TestNote.new
+    note.class.expects(:close!)
+    @footnotes.instance_variable_set(:@notes, [note])
     @footnotes.send(:close!, @controller)
   end
 
   def test_links_helper
     note = Footnotes::Notes::TestNote.new
-    note.expects(:title).times(2).returns(:title)
-    assert_equal '<a href="#" onclick="">title</a>', @footnotes.send(:link_helper, note)
+    assert_equal '<a href="#" onclick="">Test</a>', @footnotes.send(:link_helper, note)
 
     note.expects(:link).times(1).returns(:link)
-    assert_equal '<a href="link" onclick="">title</a>', @footnotes.send(:link_helper, note)
+    assert_equal '<a href="link" onclick="">Test</a>', @footnotes.send(:link_helper, note)
   end
 
-  def test_links_helper_fieldset?
+  def test_links_helper_has_fieldset?
     note = Footnotes::Notes::TestNote.new
-    note.expects(:title).times(1).returns(:title)
-    note.expects(:fieldset?).times(1).returns(true)
-    assert_equal '<a href="#" onclick="footnotes_toogle(\'test_debug_info\');return false;">title</a>', @footnotes.send(:link_helper, note)
+    note.expects(:has_fieldset?).times(1).returns(true)
+    assert_equal '<a href="#" onclick="Footnotes.hideAllAndToggle(\'test_debug_info\');return false;">Test</a>', @footnotes.send(:link_helper, note)
   end
 
   def test_links_helper_onclick
     note = Footnotes::Notes::TestNote.new
-    note.expects(:title).times(2).returns(:title)
     note.expects(:onclick).times(2).returns(:onclick)
-    assert_equal '<a href="#" onclick="onclick">title</a>', @footnotes.send(:link_helper, note)
+    assert_equal '<a href="#" onclick="onclick">Test</a>', @footnotes.send(:link_helper, note)
 
-    note.expects(:fieldset?).times(1).returns(true)
-    assert_equal '<a href="#" onclick="onclick">title</a>', @footnotes.send(:link_helper, note)
+    note.expects(:has_fieldset?).times(1).returns(true)
+    assert_equal '<a href="#" onclick="onclick">Test</a>', @footnotes.send(:link_helper, note)
   end
 
   def test_insert_style
@@ -168,6 +176,7 @@ class FootnotesTest < Test::Unit::TestCase
       @controller.template.expects(:template_format).returns('html')
       @controller.performed_render = true
 
+      Footnotes::Filter.start!(@controller)
       @footnotes.add_footnotes!
     end
 end

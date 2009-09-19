@@ -1,6 +1,7 @@
+require 'thinking_sphinx/active_record/attribute_updates'
 require 'thinking_sphinx/active_record/delta'
-require 'thinking_sphinx/active_record/search'
 require 'thinking_sphinx/active_record/has_many_association'
+require 'thinking_sphinx/active_record/scopes'
 
 module ThinkingSphinx
   # Core additions to ActiveRecord models - define_index for creating indexes
@@ -12,6 +13,15 @@ module ThinkingSphinx
       base.class_eval do
         class_inheritable_array :sphinx_indexes, :sphinx_facets
         class << self
+          
+          def set_sphinx_primary_key(attribute)
+            @sphinx_primary_key_attribute = attribute
+          end
+          
+          def primary_key_for_sphinx
+            @sphinx_primary_key_attribute || primary_key
+          end
+          
           # Allows creation of indexes for Sphinx. If you don't do this, there
           # isn't much point trying to search (or using this plugin at all,
           # really).
@@ -65,7 +75,8 @@ module ThinkingSphinx
             return unless ThinkingSphinx.define_indexes?
             
             self.sphinx_indexes ||= []
-            index = Index.new(self, &block)
+            self.sphinx_facets  ||= []
+            index = ThinkingSphinx::Index::Builder.generate(self, &block)
             
             self.sphinx_indexes << index
             unless ThinkingSphinx.indexed_models.include?(self.name)
@@ -79,7 +90,22 @@ module ThinkingSphinx
             
             after_destroy :toggle_deleted
             
+            include ThinkingSphinx::SearchMethods
+            include ThinkingSphinx::ActiveRecord::AttributeUpdates
+            include ThinkingSphinx::ActiveRecord::Scopes
+            
             index
+            
+            # We want to make sure that if the database doesn't exist, then Thinking
+            # Sphinx doesn't mind when running non-TS tasks (like db:create, db:drop
+            # and db:migrate). It's a bit hacky, but I can't think of a better way.
+          rescue StandardError => err
+            case err.class.name
+            when "Mysql::Error", "Java::JavaSql::SQLException", "ActiveRecord::StatementInvalid"
+              return
+            else
+              raise err
+            end
           end
           alias_method :sphinx_index, :define_index
           
@@ -126,11 +152,19 @@ module ThinkingSphinx
               ThinkingSphinx::AbstractAdapter.detect(self)
           end
           
-          private
-          
           def sphinx_name
             self.name.underscore.tr(':/\\', '_')
           end
+          
+          def sphinx_index_names
+            klass = source_of_sphinx_index
+            names = ["#{klass.sphinx_name}_core"]
+            names << "#{klass.sphinx_name}_delta" if sphinx_delta?
+            
+            names
+          end
+          
+          private
           
           def sphinx_delta?
             self.sphinx_indexes.any? { |index| index.delta? }
@@ -148,7 +182,9 @@ module ThinkingSphinx
             self.sphinx_indexes.select { |ts_index|
               ts_index.model == self
             }.each_with_index do |ts_index, i|
-              index.sources << ts_index.to_riddle_for_core(offset, i)
+              index.sources += ts_index.sources.collect { |source|
+                source.to_riddle_for_core(offset, i)
+              }
             end
             
             index
@@ -160,7 +196,9 @@ module ThinkingSphinx
             index.path = File.join(ThinkingSphinx::Configuration.instance.searchd_file_path, index.name)
             
             self.sphinx_indexes.each_with_index do |ts_index, i|
-              index.sources << ts_index.to_riddle_for_delta(offset, i) if ts_index.delta?
+              index.sources += ts_index.sources.collect { |source|
+                source.to_riddle_for_delta(offset, i)
+              } if ts_index.delta?
             end
             
             index
@@ -197,7 +235,6 @@ module ThinkingSphinx
       end
       
       base.send(:include, ThinkingSphinx::ActiveRecord::Delta)
-      base.send(:include, ThinkingSphinx::ActiveRecord::Search)
       
       ::ActiveRecord::Associations::HasManyAssociation.send(
         :include, ThinkingSphinx::ActiveRecord::HasManyAssociation
@@ -207,11 +244,20 @@ module ThinkingSphinx
       )
     end
     
+    def in_index?(suffix)
+      self.class.search_for_id self.sphinx_document_id, sphinx_index_name(suffix)
+    end
+    
     def in_core_index?
-      self.class.search_for_id(
-        self.sphinx_document_id,
-        "#{self.class.source_of_sphinx_index.name.underscore.tr(':/\\', '_')}_core"
-      )
+      in_index? "core"
+    end
+    
+    def in_delta_index?
+      in_index? "delta"
+    end
+    
+    def in_both_indexes?
+      in_core_index? && in_delta_index?
     end
     
     def toggle_deleted
@@ -232,14 +278,30 @@ module ThinkingSphinx
         {self.sphinx_document_id => 1}
       ) if ThinkingSphinx.deltas_enabled? &&
         self.class.sphinx_indexes.any? { |index| index.delta? } &&
-        self.delta
+        self.toggled_delta?
     rescue ::ThinkingSphinx::ConnectionError
       # nothing
     end
     
+    # Returns the unique integer id for the object. This method uses the
+    # attribute hash to get around ActiveRecord always mapping the #id method
+    # to whatever the real primary key is (which may be a unique string hash).
+    # 
+    # @return [Integer] Unique record id for the purposes of Sphinx.
+    # 
+    def primary_key_for_sphinx
+      @primary_key_for_sphinx ||= read_attribute(self.class.primary_key_for_sphinx)
+    end
+    
     def sphinx_document_id
-      (self.id * ThinkingSphinx.indexed_models.size) +
+      primary_key_for_sphinx * ThinkingSphinx.indexed_models.size +
         ThinkingSphinx.indexed_models.index(self.class.source_of_sphinx_index.name)
+    end
+
+    private
+
+    def sphinx_index_name(suffix)
+      "#{self.class.source_of_sphinx_index.name.underscore.tr(':/\\', '_')}_#{suffix}"
     end
   end
 end

@@ -8,11 +8,17 @@ Before do
   @conditions = {}
   @with       = {}
   @without    = {}
+  @with_all   = {}
   @options    = {}
+  @results    = nil
 end
 
 Given /^I am searching on (.+)$/ do |model|
   @model = model.gsub(/\s/, '_').singularize.camelize.constantize
+end
+
+Given /^updates are (\w+)$/ do |action|
+  ThinkingSphinx.updates_enabled = (action == "enabled")
 end
 
 When /^I am searching for ids$/ do
@@ -30,7 +36,7 @@ When /^I search for (\w+)$/ do |query|
   @query = query
 end
 
-When /^I search for "([^\"]+)"$/ do |query|
+When /^I search for "([^\"]*)"$/ do |query|
   @results = nil
   @query = query
 end
@@ -40,9 +46,25 @@ When /^I search for (\w+) on (\w+)$/ do |query, field|
   @conditions[field.to_sym] = query
 end
 
+When /^I clear existing filters$/ do
+  @with     = {}
+  @without  = {}
+  @with_all = {}
+end
+
 When /^I filter by (\w+) on (\w+)$/ do |filter, attribute|
   @results = nil
   @with[attribute.to_sym] = filter.to_i
+end
+
+When /^I filter by (\d+) and (\d+) on (\w+)$/ do |value_one, value_two, attribute|
+  @results = nil
+  @with[attribute.to_sym] = [value_one.to_i, value_two.to_i]
+end
+
+When /^I filter by both (\d+) and (\d+) on (\w+)$/ do |value_one, value_two, attribute|
+  @results = nil
+  @with_all[attribute.to_sym] = [value_one.to_i, value_two.to_i]
 end
 
 When /^I filter between ([\d\.]+) and ([\d\.]+) on (\w+)$/ do |first, last, attribute|
@@ -57,6 +79,11 @@ end
 When /^I filter between (\d+) and (\d+) days ago on (\w+)$/ do |last, first, attribute|
   @results = nil
   @with[attribute.to_sym] = first.to_i.days.ago..last.to_i.days.ago
+end
+
+When /^I filter by (\w+) between (\d+) and (\d+)$/ do |attribute, first, last|
+  @results = nil
+  @with[attribute.to_sym] = Time.utc(first.to_i)..Time.utc(last.to_i)
 end
 
 When /^I order by (\w+)$/ do |attribute|
@@ -94,6 +121,11 @@ When /^I set retry stale to (\w+)$/ do |retry_stale|
   end
 end
 
+When /^I destroy (\w+) (\w+)$/ do |model, name|
+  model.gsub(/\s/, '_').camelize.
+    constantize.find_by_name(name).destroy
+end
+
 Then /^the (\w+) of each result should indicate order$/ do |attribute|
   results.inject(nil) do |prev, current|
     unless prev.nil?
@@ -123,14 +155,20 @@ Then /^I should not get (\d+) results?$/ do |count|
   results.length.should_not == count.to_i
 end
 
+Then /^I should get as many results as there are (.+)$/ do |model|
+  results.length.should == model.gsub(/\s/, '_').singularize.camelize.
+    constantize.count
+end
+
 def results
-  @results ||= (@model || ThinkingSphinx::Search).send(
+  @results ||= (@model || ThinkingSphinx).send(
     @method,
     @query,
     @options.merge(
       :conditions => @conditions,
       :with       => @with,
-      :without    => @without
+      :without    => @without,
+      :with_all   => @with_all
     )
   )
 end

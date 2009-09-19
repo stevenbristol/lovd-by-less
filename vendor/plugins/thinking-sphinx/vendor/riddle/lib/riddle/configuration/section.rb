@@ -21,7 +21,7 @@ module Riddle
             conf = "  #{setting} = "
           else
             conf = setting_to_array(setting).collect { |set|
-              "  #{setting} = #{set}"  
+              "  #{setting} = #{set}"
             }
           end
           conf.length == 0 ? nil : conf
@@ -30,7 +30,13 @@ module Riddle
       
       def setting_to_array(setting)
         value = send(setting)
-        value.is_a?(Array) ? value : [value]
+        case value
+        when Array      then value
+        when TrueClass  then [1]
+        when FalseClass then [0]
+        else
+          [value]
+        end
       end
     end
   end

@@ -1,3 +1,16 @@
+2008-08-24  Dave Thomas  <dave@pragprog.com>
+   * annotate_models.rb (AnnotateModels::self.annotate): Patch from
+	Robert Evans (and almost identical patch from Akhil
+	Bansai) to add support for annotating rspec files and
+	fixtures
+
+   * annotate_models.rb (AnnotateModels::self.get_schema_info): Patch
+	from Denis Barushev to removing trailing whitespace from
+	the output.
+
+   * annotate_models.rb (AnnotateModels::self.annotate): Patch from
+        Zach Moazeni to support fixtures in subdirectories
+
 2007-03-05: Dave Thomas <dave@pragprog.com>
    * Forgot to call the quote method
    

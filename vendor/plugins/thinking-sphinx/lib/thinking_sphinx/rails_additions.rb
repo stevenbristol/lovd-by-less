@@ -49,10 +49,13 @@ module ThinkingSphinx
   end
 end
 
-if ActiveRecord::ConnectionAdapters.constants.include?("MysqlAdapter")
-  ActiveRecord::ConnectionAdapters::MysqlAdapter.send(
-    :include, ThinkingSphinx::MysqlQuotedTableName
-  ) unless ActiveRecord::ConnectionAdapters::MysqlAdapter.instance_methods.include?("quote_table_name")
+if ActiveRecord::ConnectionAdapters.constants.include?("MysqlAdapter") or ActiveRecord::Base.respond_to?(:jdbcmysql_connection)
+  adapter = ActiveRecord::ConnectionAdapters.const_get(
+    defined?(JRUBY_VERSION) ? :JdbcAdapter : :MysqlAdapter
+  )
+  unless adapter.instance_methods.include?("quote_table_name")
+    adapter.send(:include, ThinkingSphinx::MysqlQuotedTableName)
+  end
 end
 
 module ThinkingSphinx
@@ -131,3 +134,17 @@ end
 Class.extend(
   ThinkingSphinx::ClassAttributeMethods
 ) unless Class.respond_to?(:cattr_reader)
+
+module ThinkingSphinx
+  module MetaClass
+    def metaclass
+      class << self
+        self
+      end
+    end
+  end
+end
+
+unless Object.new.respond_to?(:metaclass)
+  Object.send(:include, ThinkingSphinx::MetaClass)
+end

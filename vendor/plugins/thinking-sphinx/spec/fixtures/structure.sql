@@ -27,6 +27,7 @@ CREATE TABLE `friendships` (
   `person_id` int(11) NOT NULL,
   `friend_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
+  `created_on` date NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -63,6 +64,8 @@ DROP TABLE IF EXISTS `alphas`;
 CREATE TABLE `alphas` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(50) NOT NULL,
+  `value` int(11),
+  `cost` decimal(10,6),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -71,7 +74,18 @@ DROP TABLE IF EXISTS `betas`;
 CREATE TABLE `betas` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(50) NOT NULL,
+  `alpha_id` int(11),
   `delta` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `gammas`;
+
+CREATE TABLE `gammas` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(50) NOT NULL,
+  `value` int(11),
+  `beta_id` int(11),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -81,4 +95,31 @@ CREATE TABLE `searches` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `tags`;
+
+CREATE TABLE `tags` (
+  `id` int(11) NOT NULL auto_increment,
+  `person_id` int(11) NOT NULL,
+  `football_team_id` int(11) NOT NULL,
+  `cricket_team_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `links`;
+
+CREATE TABLE `links` (
+  `id` int(11) NOT NULL auto_increment,
+  `url` varchar(50) NOT NULL,
+  `description` varchar(200),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `links_people`;
+
+CREATE TABLE `links_people` (
+  `link_id` int(11) NOT NULL,
+  `person_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

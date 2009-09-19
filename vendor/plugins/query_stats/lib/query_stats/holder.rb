@@ -3,13 +3,9 @@
 module QueryStats
   # QueryStatsHolder holds data on queries executed.
   # QueryStatsHolder#stats will return an array of hashes containing the following keys:
-  # * type: The type of SQL query based on methods in ActiveRecord::ConnectionAdapters::AbstractAdapter
-  #   * begin_db_transaction
-  #   * columns
-  #   * commit_db_transaction
+  # * type: The type of SQL query
   #   * delete
   #   * insert
-  #   * rollback_db_transaction
   #   * select
   #   * update
   # * sql: The SQL executed.
@@ -17,34 +13,27 @@ module QueryStats
   # * seconds: The execution time in seconds.
   # * label: A custom label which can be set to track queries.
   class Holder
-    LIMIT = 100
+    LIMIT = 1_000
     # Gets or sets the current label to be applied to queries for custom tracking.
     # Including QueryStats in ApplicationController will label queries :controller or :view
     attr_accessor :label
-    # Gets the current query type
-    attr_reader   :query_type
   
     # Creates a new instance of QueryStats::Holder with an empty array of stats.
     def initialize
-      @ignore_types = [
-        :begin_db_transaction,
-        :columns,
-        :commit_db_transaction,
-        :rollback_db_transaction
-      ]
       @stats = []
     end
 
     # Add data to the array of stats - should only be called by the active record connection adapter.
-    def add(seconds, query, name = nil, *args) #:nodoc:
+    def add(sql, seconds, name = nil, *args) #:nodoc:
       @stats.shift if @stats.size >= LIMIT
+      query_type = query_type_from_sql(sql)
       @stats << {
-        :sql     => query,
+        :sql     => sql,
         :name    => name,
         :label   => @label,
         :seconds => seconds,
-        :type    => @query_type
-      }
+        :type    => query_type
+      } if query_type
     end
 
     # Remove the current label and clear the array of stats.
@@ -68,12 +57,6 @@ module QueryStats
       with_type(type).length
     end
   
-    # Set the query type - this should only be called automatically from the connection adapter.
-    def query_type=(sym) #:nodoc:
-      @query_type = sym
-      @query_type = :select if @query_type.to_s =~ /select/
-    end
-  
     # Return an array of query statistics collected.
     def stats
       @stats
@@ -81,20 +64,34 @@ module QueryStats
   
     # Return the total execution time for all queries in #stats.
     def runtime
-      @stats.inject(0) { |sum,query| sum + query[:seconds] }
+      @stats.map { |query| query[:seconds] }.sum
     end
     alias :total_time :runtime
   
-    # Returns an array of statistics for queries with a given label.
-    # Set ignore to false to include transaction and column queries.
-    def with_label(label, ignore = true)
+    def with_label(label)
       stats = @stats.select { |q| q[:label] == label }
-      ignore ? stats.reject { |q| @ignore_types.include?(q[:type]) } : stats
     end
   
     # Returns an array of statistics for queries with a given type.
     def with_type(type)
       @stats.select { |q| q[:type] == type }
+    end
+    
+    protected
+    
+    def query_type_from_sql(sql)
+      case sql.upcase
+      when /^SELECT/
+        :select
+      when /^INSERT/
+        :insert
+      when /^DELETE/
+        :delete
+      when /^UPDATE/
+        :update
+      else
+        nil
+      end
     end
 
   end

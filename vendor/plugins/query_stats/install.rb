@@ -1,1 +1,0 @@
-puts "Query Stats plugin successfully installed."

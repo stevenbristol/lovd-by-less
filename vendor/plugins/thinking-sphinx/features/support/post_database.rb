@@ -11,21 +11,27 @@ Kernel.const_set :RAILS_ROOT, "#{Dir.pwd}/tmp" unless defined?(RAILS_ROOT)
 at_exit do
   ThinkingSphinx::Configuration.instance.controller.stop
   sleep(1) # Ensure Sphinx has shut down completely
+  ActiveRecord::Base.logger.close
   FileUtils.rm_r "#{Dir.pwd}/tmp"
 end
 
 # Add log file
 ActiveRecord::Base.logger = Logger.new open("tmp/active_record.log", "a")
 
-ThinkingSphinx.deltas_enabled = false
+# Set up database tables
+Dir["features/support/db/migrations/*.rb"].each do |file|
+  require file.gsub(/\.rb$/, '')
+end
 
 # Load Models
 Dir["features/support/models/*.rb"].sort.each do |file|
   require file.gsub(/\.rb$/, '')
 end
 
-# Set up database tables and records
-Dir["features/support/db/migrations/*.rb"].each do |file|
+ThinkingSphinx.deltas_enabled = false
+
+# Load Fixtures
+Dir["features/support/db/fixtures/*.rb"].each do |file|
   require file.gsub(/\.rb$/, '')
 end
 

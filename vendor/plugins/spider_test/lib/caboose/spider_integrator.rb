@@ -78,10 +78,7 @@ require 'caboose'
 #   locations, and up until now this has been impossible to test in an automated fashion
 #   or without being strongly coupled to your code.
 # 
-require 'hpricot'
 module Caboose::SpiderIntegrator
-
-
 
   # Begin spidering your application.
   # +body+:: the HTML request.body from a page in your app
@@ -98,7 +95,7 @@ module Caboose::SpiderIntegrator
   #    @forms_to_visit : array containing Caboose::SpiderIntegrator::Form.new( method, action, query, source ) objects
   #   
   # You may find it useful to have two spider tests, one logged in and one logged out.
-  def spider( body, uri, options = {} )
+  def spider( body, uri, options )
     @errors, @stacktraces = {}, {}
     setup_spider(options)
     begin
@@ -118,18 +115,18 @@ module Caboose::SpiderIntegrator
   # todo: use hpricot or something else more fun (we will need to validate 
   # the html in this case since HTML::Document does it by default)
   def consume_page( html, url )
-    body = Hpricot html
-    body.search('a').each do |tag|
+    body = HTML::Document.new html
+    body.find_all(:tag=>'a').each do |tag|
       queue_link( tag, url )
     end
-    body.search('link').each do |tag|
+    body.find_all(:tag=>'link').each do |tag|
       # Strip appended browser-caching numbers from asset paths like ?12341234
       queue_link( tag, url )
     end
-    body.search('input[name=""]') do |input|
+    body.find_all(:tag => 'input', :attributes => { :name => nil }) do |input|
       queue_link( tag, url ) if tag['onclick']
     end
-    body.search('form').each do |form|
+    body.find_all(:tag =>'form').each do |form|
       form = SpiderableForm.new form
       queue_form( form, url )
     end
@@ -142,7 +139,7 @@ module Caboose::SpiderIntegrator
   
   def setup_spider(options = {})
     options.reverse_merge!({ :ignore_urls => ['/logout'], :ignore_forms => ['/login'] })
-    
+
     @ignore = {}
     @ignore[:urls] = Hash.new(false)
     @ignore[:url_patterns] = Hash.new(false)
@@ -181,9 +178,6 @@ module Caboose::SpiderIntegrator
        return true
      end
     
-    return true if uri.starts_with?("javascript:")
-    return true if uri.ends_with? ".jpg"
-    
     @ignore[:url_patterns].keys.each do |pattern|
       if pattern.match(uri)
         console  "- #{uri} ( Ignored by pattern #{pattern.inspect})"
@@ -215,6 +209,7 @@ module Caboose::SpiderIntegrator
     until @links_to_visit.empty?
       next_link = @links_to_visit.shift
       next if spider_should_ignore_url?(next_link.uri)
+      
       get next_link.uri
       if %w( 200 201 302 401 ).include?( @response.code )
         console "GET '#{next_link.uri}'"
@@ -253,7 +248,7 @@ module Caboose::SpiderIntegrator
         send(next_form.method, next_form.action, next_form.query)
       rescue => err
         printf "*"
-        (@errors[next_form.action]||=[]) << "Could not spider page :#{next_form.method} '#{next_form.action}' with #{next_form.query.inspect} because of error #{err.message}, from: #{next_form.source}"
+        (@errors[next_form.action]||=[]) << "Could not spider page :#{next_form.method} '#{next_form.action}' with #{next_form.query.inspect} because of error #{err.message}"
         @stacktraces[next_form.action] = err.inspect
       end
       unless %w( 200 201 302 401 ).include?( @response.code )

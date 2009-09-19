@@ -2,6 +2,8 @@ require "config/environment"
 
 MODEL_DIR   = File.join(RAILS_ROOT, "app/models")
 FIXTURE_DIR = File.join(RAILS_ROOT, "test/fixtures")
+RSPEC_DIR   = File.join(RAILS_ROOT, "spec/models")
+RSPEC_FIXTURES = File.join(RAILS_ROOT, "spec/fixtures")
 
 module AnnotateModels
 
@@ -42,7 +44,8 @@ module AnnotateModels
       else
         col_type << "(#{col.limit})" if col.limit
       end 
-      info << sprintf("#  %-#{max_size}.#{max_size}s:%-13.13s %s\n", col.name, col_type, attrs.join(", "))
+      info << sprintf("#  %-#{max_size}.#{max_size}s:%-15.15s %s", col.name, col_type, attrs.join(", ")).rstrip
+      info << "\n"
     end
 
     info << "#\n\n"
@@ -74,9 +77,18 @@ module AnnotateModels
     
     model_file_name = File.join(MODEL_DIR, klass.name.underscore + ".rb")
     annotate_one_file(model_file_name, info)
+    
+    if File.join(RAILS_ROOT, "spec")
+      rspec_file_name = File.join(RSPEC_DIR, klass.name.underscore + "_spec.rb")
+      annotate_one_file(rspec_file_name, info)
+      
+      rspec_fixture = File.join(RSPEC_FIXTURES, klass.table_name + ".yml")
+      annotate_one_file(rspec_fixture, info)
+    end
 
-    fixture_file_name = File.join(FIXTURE_DIR, klass.table_name + ".yml")
-    annotate_one_file(fixture_file_name, info)
+    Dir.glob(File.join(FIXTURE_DIR, "**", klass.table_name + ".yml")) do | fixture_file_name |
+      annotate_one_file(fixture_file_name, info)
+    end
   end
 
   # Return a list of the model files to annotate. If we have 

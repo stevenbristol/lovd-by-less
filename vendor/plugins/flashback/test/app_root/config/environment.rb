@@ -9,4 +9,4 @@ Rails::Initializer.run do |config|
   config.plugins = [File.basename(File.expand_path('.'))]
 end
 
-Dependencies.log_activity = true
+Dependencies.log_activity = false

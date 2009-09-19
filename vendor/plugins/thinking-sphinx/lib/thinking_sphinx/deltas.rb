@@ -4,18 +4,26 @@ require 'thinking_sphinx/deltas/datetime_delta'
 
 module ThinkingSphinx
   module Deltas
-    def self.parse(index, options)
-      case options.delete(:delta)
+    def self.parse(index)
+      delta_option = index.local_options.delete(:delta)
+      case delta_option
       when TrueClass, :default
-        DefaultDelta.new index, options
+        DefaultDelta.new index, index.local_options
       when :delayed
-        DelayedDelta.new index, options
+        DelayedDelta.new index, index.local_options
       when :datetime
-        DatetimeDelta.new index, options
+        DatetimeDelta.new index, index.local_options
       when FalseClass, nil
         nil
       else
-        raise "Unknown delta type"
+        if delta_option.is_a?(String)
+          delta_option = Kernel.const_get(delta_option)
+        end
+        if delta_option.ancestors.include?(ThinkingSphinx::Deltas::DefaultDelta)
+          delta_option.new index, index.local_options
+        else
+          raise "Unknown delta type"
+        end
       end
     end
   end

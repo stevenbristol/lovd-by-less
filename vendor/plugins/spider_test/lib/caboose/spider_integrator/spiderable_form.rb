@@ -1,4 +1,3 @@
-require 'hpricot'
 module Caboose::SpiderIntegrator
   
   # This is an abstract representation of a form that we can spider.
@@ -16,14 +15,14 @@ module Caboose::SpiderIntegrator
       @method = m.downcase if m
     end
     
-    def search(*args)
-      @form.search(*args)
+    def find_all(*args)
+      @form.find_all(*args)
     end
     
     def mutate_inputs!(mutate_existing_values = false)
       input_hash = mutate_existing_values ? { '_mutated' => true } : { '_modified' => true }
     
-      @form.search('input').each do |input|
+      @form.find_all(:tag => 'input').each do |input|
         if input['name'] == '_method' # and value.in?['put','post',..] # rails is faking the post/put etc
           self.method = input['value']
         else
@@ -53,11 +52,11 @@ module Caboose::SpiderIntegrator
           end
         end
       end
-      @form.search('textarea').each do |input|
+      @form.find_all(:tag => 'textarea').each do |input|
         input_hash[ input['name'] ] = create_data(input, mutate_existing_values)
       end
-      @form.search('select').each do |select|
-        options = select.search('option')
+      @form.find_all(:tag => 'select').each do |select|
+        options = select.find_all(:tag => 'option')
         option = options[ rand(options.length) ]
         input_hash[ select['name'] ] = option['value'] 
       end

@@ -99,6 +99,26 @@ module ThinkingSphinx
       @reflection.klass.column_names.include?(column.to_s)
     end
     
+    def primary_key_from_reflection
+      if @reflection.options[:through]
+        @reflection.source_reflection.options[:foreign_key] ||
+        @reflection.source_reflection.primary_key_name
+      elsif @reflection.macro == :has_and_belongs_to_many
+        @reflection.association_foreign_key
+      else
+        nil
+      end
+    end
+    
+    def table
+      if @reflection.options[:through] ||
+        @reflection.macro == :has_and_belongs_to_many
+        @join.aliased_join_table_name
+      else
+        @join.aliased_table_name
+      end
+    end
+    
     private
     
     # Returns all the objects that could be currently instantiated from a

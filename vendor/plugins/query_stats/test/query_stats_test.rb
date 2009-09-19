@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + "/test_helper")
+require File.dirname(__FILE__) + "/test_helper"
 
 class QueryStatsTest < Test::Unit::TestCase
   include QueryStats::Helper

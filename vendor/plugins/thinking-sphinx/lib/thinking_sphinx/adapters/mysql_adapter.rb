@@ -13,7 +13,7 @@ module ThinkingSphinx
     end
     
     def group_concatenate(clause, separator = ' ')
-      "GROUP_CONCAT(#{clause} SEPARATOR '#{separator}')"
+      "GROUP_CONCAT(DISTINCT #{clause} SEPARATOR '#{separator}')"
     end
     
     def cast_to_string(clause)
@@ -38,7 +38,8 @@ module ThinkingSphinx
       value ? 1 : 0
     end
     
-    def crc(clause)
+    def crc(clause, blank_to_null = false)
+      clause = "NULLIF(#{clause},'')" if blank_to_null
       "CRC32(#{clause})"
     end
     

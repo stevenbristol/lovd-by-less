@@ -1,5 +1,9 @@
 = Query Stats Change Log
 
+* July 12, 2008
+  * Rails 2.0 support
+  * Give statistics in response header
+
 * February 14, 2007
   * Fixed test_helper.rb so tests run without having the plugin in a Rails project.
   * No longer need to include QueryStats in ApplicationController

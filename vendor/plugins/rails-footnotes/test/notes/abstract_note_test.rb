@@ -18,10 +18,8 @@ class AbstractNoteTest < Test::Unit::TestCase
 
   def test_respond_to_included?
     assert Footnotes::Notes::AbstractNote.included?
-    assert @note.included?
     Footnotes::Filter.notes = []
     assert !Footnotes::Notes::AbstractNote.included?
-    assert !@note.included?
   end
 
   def test_respond_to_row
@@ -29,7 +27,7 @@ class AbstractNoteTest < Test::Unit::TestCase
   end
   
   def test_respond_to_title
-    assert_respond_to @note, :title
+    assert_respond_to @note.class, :title
   end
   
   def test_respond_to_legend
@@ -57,23 +55,24 @@ class AbstractNoteTest < Test::Unit::TestCase
     assert @note.valid?
   end
 
-  def test_respond_to_fieldset?
-    assert_respond_to @note, :fieldset?
-    assert !@note.fieldset?
+  def test_respond_to_has_fieldset?
+    assert_respond_to @note, :has_fieldset?
+    assert !@note.has_fieldset?
   end
-  
+
   def test_footnotes_prefix
+    Footnotes::Filter.prefix = ''
     assert !@note.send(:prefix?)
-    Footnotes::Filter.prefix = 'texteditor://open?url=file://'
+    Footnotes::Filter.prefix = 'txmt://open?url=file://%s&amp;line=%d&amp;column=%d'
     assert @note.send(:prefix?)
   end
-  
+
   def test_footnotes_escape
     assert_equal '&lt;', @note.send(:escape,'<')
     assert_equal '&amp;', @note.send(:escape,'&')
     assert_equal '&gt;', @note.send(:escape,'>')
   end
-  
+
   def test_footnotes_mount_table
     assert_equal '', @note.send(:mount_table,[])
     assert_equal '', @note.send(:mount_table,[['h1','h2','h3']], :class => 'table')

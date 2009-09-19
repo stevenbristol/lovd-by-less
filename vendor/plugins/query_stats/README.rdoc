@@ -1,0 +1,41 @@
+= Query Stats Plugin
+
+The Query Stats plugin tracks database queries.
+
+== Usage
+
+Use the "queries" helper or controller method to access data on the queries.
+See the documentation on QueryStats::Holder for functionality.
+
+You can easily display statistics in your page footer, such as:
+  Queries in Controller: <%= queries.count_with_label :controller %>
+  Queries in View:       <%= queries.count_with_label :view %>
+  Query Time:            <%= queries.runtime %>
+
+== Logging
+
+QueryStats adds the number of queries to the log in the DB section:
+  Completed in 0.00642 (155 reqs/sec) | Rendering: 0.00228 (35%) | DB: 0.00247 (38%) 6 queries | 200 OK [http://test.host/]
+
+== Response Headers
+
+* X-QueryCount will be set to the number of queries
+* X-QueryRuntime will be set to the db runtime
+
+== Requirements
+
+Tests pass with:
+* Rails: 1.2.6, 2.0.2, 2.1.0
+* Adapters: sqlite3, mysql
+
+== Maintainer
+
+* Dan Manges
+
+== Contributors
+
+* Guillaume Dufloux
+
+== License
+
+Released under the MIT license.

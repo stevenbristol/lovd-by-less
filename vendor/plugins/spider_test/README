@@ -80,11 +80,19 @@ Todo:
     you can modify this by editing the plugin and setting @visited_urls and @visited_forms
     but this should be more easily settable.
 
-  x use hpricot instead of html::document
+  - use hpricot instead of html::document
+    no clue, really, but I hear hpricot is faster.
     
   x better capturing of errors
     instead of dying each time there's an error, store them all up so the user can fix
     'em all at once.
 
 
-Please see CHANGELOG for more details.
+Changelog:
+
+
+SVN
+      Better capturing of errors (waits until the end to display the errors or missing pages)
+      More fun status dots (! for error, ? for missing file)
+
+0.1 : Initial release

@@ -10,6 +10,8 @@ h2. Contributing
 
 Fork on GitHub and after you've committed tested patches, send a pull request.
 
+To quickly see if your system is ready to run the thinking sphinx specs, run the contribute.rb script found in the project root directory. Use the following instructions to install any missing requirements.
+
 To get the spec suite running, you will need to install the not-a-mock gem if you don't already have it:
 
   git clone git://github.com/freelancing-god/not-a-mock.git
@@ -23,11 +25,22 @@ Then install the ginger gem. The steps are the same, except that you might need 
   cd ginger
   rake gem
   sudo gem install pkg/ginger-1.1.0.gem
+  
+Alternatively, install the ginger gem directly from the freelancing-god github repository
+
+  sudo gem sources -a http://gems.github.com
+  sudo gem install freelancing-god-ginger
+  
+Then install the cucumber, yard, jeweler and rspec gems. Make sure you have a git install version 1.6.0.0 or higher, otherwise the jeweler gem won't install.
+
+  sudo gem install cucumber yard jeweler rspec
 
 Then set up your database:
 
   cp spec/fixtures/database.yml.default spec/fixtures/database.yml
   mysqladmin -u root create thinking_sphinx
+  
+This last step can be done automatically by the contribute.rb script if all dependencies are met.
 
 Make sure you don't have another Sphinx daemon (searchd) running. If you do, quit it with "rake ts:stop"
 in the app root.
@@ -105,3 +118,40 @@ Since I first released this library, there's been quite a few people who have su
 * Tom Davies
 * Dan Pickett
 * Alex Caudill
+* Jim Benton
+* John Aughey
+* Keith Pitty
+* Jeff Talbot
+* Dana Contreras
+* Menno van der Sman
+* Bill Harding
+* Isaac Feliu
+* Andrei Bocan
+* László Bácsi
+* Peter Wagenet
+* Max Lapshin
+* Martin Emde
+* David Wennergren
+* Mark Lane
+* Eric Lindvall
+* Lawrence Pit
+* Mike Bailey
+* Bill Leeper
+* Michael Reinsch
+* Anderson Dias
+* Jerome Riga
+* Tien Dung
+* Johannes Kaefer
+* Paul Campbell
+* Matthew Beale
+* Tom Simnett
+* Erik Ostrom
+* Ole Riesenberg
+* Josh Kalderimis
+* J.D. Hollis
+* Jeffrey Chupp
+* Rob Anderton
+* Zach Inglis
+* Ward Bekker
+* Brian Terlson
+* Christian Aust

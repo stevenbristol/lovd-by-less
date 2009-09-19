@@ -1,6 +1,9 @@
 dan:
+  id: 1
   name: Dan Manges
 john:
+  id: 2
   name: John Andrews
 josh:
+  id: 3
   name: Josh Schairbaum
