@@ -117,7 +117,7 @@ If you WANT to have flickr integration in your Lovd By Less project, follow thes
   This stores the flickr auth stuff into config/flickr.cache. If you add this cache file to your source control, then you shouldn't have to repeat this in production. Alternatively, you can get a different key for production, if you'd like.
 
 If you DO NOT WANT to have flickr integration in your Lovd By Less project, follow these setup instructions:
-1. Delete line 15 from app/controllers/profiles_controller.rb [@flickr = @profile.flickr_username.blank? ? [] : flickr_images(flickr.people.findByUsername(@profile.flickr_username))]
+1. Delete line 18 from app/controllers/profiles_controller.rb [@flickr = @profile.flickr_username.blank? ? [] : flickr_images(flickr.people.findByUsername(@profile.flickr_username))]
 2. Delete lines 22-35 in app/views/profiles/_public.html.erb
 
 

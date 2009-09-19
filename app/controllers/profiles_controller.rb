@@ -14,11 +14,11 @@ class ProfilesController < ApplicationController
       end
     end
     
-    begin
-      @flickr = @profile.flickr_username.blank? ? [] : flickr_images(flickr.people.findByUsername(@profile.flickr_username))
-    rescue Exception, OpenURI::HTTPError
-      @flickr = []
-    end
+    # begin
+    #   @flickr = @profile.flickr_username.blank? ? [] : flickr_images(flickr.people.findByUsername(@profile.flickr_username))
+    # rescue Exception, OpenURI::HTTPError
+    #   @flickr = []
+    # end
       
       
 
