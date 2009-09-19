@@ -4,7 +4,7 @@ class ProfilesControllerTest < ActionController::TestCase
 
   context 'on POST to :search' do
     setup do
-      Profile.stubs(:search).returns(ThinkingSphinx::Collection.new(1, 1, 1, 1))
+      Profile.stubs(:search).returns(WillPaginate::Collection.new(1, 1, 1))
       post :search, {:q => 'user'}
     end
 
@@ -15,7 +15,7 @@ class ProfilesControllerTest < ActionController::TestCase
 
   context 'on GET to :index' do
     setup do
-      Profile.stubs(:search).returns(ThinkingSphinx::Collection.new(1, 1, 1, 1))
+      Profile.stubs(:search).returns(WillPaginate::Collection.new(1, 1, 1))
       get :index
     end
 
