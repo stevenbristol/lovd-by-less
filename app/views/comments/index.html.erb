@@ -9,7 +9,7 @@ profile ||= @profile
 
 
 <% content_for :head do  -%>  
-  <%= auto_discovery_link_tag(:rss, formatted_profile_comments_url(@profile, :rss), :title=>"Wall to wall with #{profile.f}") %>
+  <%= auto_discovery_link_tag(:rss, profile_comments_url(@profile, :rss), :title=>"Wall to wall with #{profile.f}") %>
 <% end -%>
 
 
