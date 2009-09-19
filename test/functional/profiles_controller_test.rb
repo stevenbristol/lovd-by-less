@@ -57,7 +57,7 @@ class ProfilesControllerTest < ActionController::TestCase
 
     should_not_assign_to :user
     should_respond_with :redirect
-    should_redirect_to 'login_path'
+    should_redirect_to('login_path') { login_path }
     should_not_set_the_flash
   end
 
@@ -212,7 +212,7 @@ class ProfilesControllerTest < ActionController::TestCase
   should "delete" do
     assert_difference 'User.count', -1 do
       assert users(:user)
-      delete :destroy, {:id=>users(:user).id, :user => users(:user).id}
+      post :destroy, {:id=>users(:user).id}, {:user => users(:user).id}
       assert_response 200
       assert_nil User.find_by_id(users(:user).id)
     end

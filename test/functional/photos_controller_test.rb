@@ -58,7 +58,7 @@ class PhotosControllerTest < ActionController::TestCase
     end
 
     should_respond_with :redirect
-    should_redirect_to 'profile_photos_path(profiles(:user))'
+    should_redirect_to('profile_photos_path(profiles(:user))') { profile_photos_path(profiles(:user)) }
     should_not_set_the_flash
   end
 
@@ -71,7 +71,7 @@ class PhotosControllerTest < ActionController::TestCase
     end
 
     should_respond_with :redirect
-    should_redirect_to 'profile_photos_path(profiles(:user))'
+    should_redirect_to('profile_photos_path(profiles(:user))') { profile_photos_path(profiles(:user)) }
     should_set_the_flash_to 'Photo was deleted.'
   end
 
@@ -83,7 +83,7 @@ class PhotosControllerTest < ActionController::TestCase
     end
 
     should_respond_with :redirect
-    should_redirect_to 'home_path'
+    should_redirect_to('home_path') { home_path }
     should_set_the_flash_to 'It looks like you don\'t have permission to view that page.'
   end
 
@@ -95,7 +95,7 @@ class PhotosControllerTest < ActionController::TestCase
     end
 
     should_respond_with :redirect
-    should_redirect_to 'home_path'
+    should_redirect_to('home_path') { home_path }
     should_set_the_flash_to 'It looks like you don\'t have permission to view that page.'
   end
 
@@ -109,7 +109,7 @@ class PhotosControllerTest < ActionController::TestCase
     end
 
     should_respond_with :redirect
-    should_redirect_to 'profile_photos_path(profiles(:user))'
+    should_redirect_to('profile_photos_path(profiles(:user))') { profile_photos_path(profiles(:user)) }
     should_set_the_flash_to 'Photo successfully uploaded.'
   end
 
@@ -132,7 +132,7 @@ class PhotosControllerTest < ActionController::TestCase
     end
 
     should_respond_with :redirect
-    should_redirect_to 'home_path'
+    should_redirect_to('home_path') { home_path }
   end
 
   context 'on POST to :create while logged not in' do
@@ -143,7 +143,7 @@ class PhotosControllerTest < ActionController::TestCase
     end
 
     should_respond_with :redirect
-    should_redirect_to 'home_path'
+    should_redirect_to('home_path') { home_path }
   end
 
 
