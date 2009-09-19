@@ -8,7 +8,7 @@ require 'mocha'
 # place any "already uploaded" files in a subdirectory within /test/ instead of overwriting production files.
 FileColumn::ClassMethods::DEFAULT_OPTIONS[:root_path] = File.join(RAILS_ROOT, 'test', "public", 'system')
 
-class Test::Unit::TestCase
+class ActiveSupport::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
   # in a transaction that's rolled back on completion.  This ensures that the
   # test database remains unchanged so your fixtures don't have to be reloaded

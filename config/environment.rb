@@ -22,10 +22,11 @@ Rails::Initializer.run do |config|
   config.gem 'will_paginate', :version => '~> 2.2.2'
   config.gem 'youtube-g', :version=> '0.4.9.9', :lib=>'youtube_g'
   config.gem 'uuidtools', :version=> '1.0.4'
-  config.gem 'hpricot', :version=> '0.6.164'
+  config.gem 'hpricot', :version=> '0.8.1'
   config.gem 'mocha', :version=> '0.9.3'
   config.gem 'gcnovus-avatar', :version=> '0.0.7', :lib => 'avatar'
   config.gem "thoughtbot-shoulda", :lib => "shoulda", :source => "http://gems.github.com"
+  config.gem 'flickr', :version => '1.0.2'
   
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
