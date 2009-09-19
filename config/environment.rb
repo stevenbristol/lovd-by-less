@@ -26,6 +26,7 @@ Rails::Initializer.run do |config|
   config.gem 'mocha', :version=> '0.9.8'
   config.gem 'gcnovus-avatar', :version=> '0.0.7', :lib => 'avatar'
   config.gem "thoughtbot-shoulda", :lib => "shoulda", :source => "http://gems.github.com"
+  config.gem "RedCloth"
   
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

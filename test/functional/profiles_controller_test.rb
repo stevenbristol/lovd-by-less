@@ -212,7 +212,7 @@ class ProfilesControllerTest < ActionController::TestCase
   should "delete" do
     assert_difference 'User.count', -1 do
       assert users(:user)
-      delete :destroy, {:id=>users(:user).id}, {:user, users(:user).id}
+      delete :destroy, {:id=>users(:user).id, :user => users(:user).id}
       assert_response 200
       assert_nil User.find_by_id(users(:user).id)
     end
