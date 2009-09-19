@@ -1,5 +1,14 @@
 require 'less'
 
+# Backwards compatibility for a deprecated function fix. Remove when we don't care about 1.8 breakage.
+unless RUBY_VERSION =~ /^1.9/
+  class Hash
+    def key(k)
+      self.index(k)
+    end
+  end
+end
+
 module Less
   class JsRoutes
     class << self
@@ -45,9 +54,11 @@ module Less
         <<-JS
 function less_json_eval(json){return eval('(' +  json + ')')}  
 
+function jq_defined(){return typeof(jQuery) != "undefined"}
+
 function less_get_params(obj){
   #{'console.log("less_get_params(" + obj + ")");' if @@debug} 
-  if (jQuery) { return obj }
+  if (jq_defined()) { return obj }
   if (obj == null) {return '';}
   var s = [];
   for (prop in obj){
@@ -69,7 +80,7 @@ function less_ajax(url, verb, params, options){
   #{'console.log("less_ajax(" + url + ", " + verb + ", " + params +", " + options + ")");' if @@debug} 
   if (verb == undefined) {verb = 'get';}
   var res;
-  if (jQuery){
+  if (jq_defined()){
     v = verb.toLowerCase() == 'get' ? 'GET' : 'POST'
     if (verb.toLowerCase() == 'get' || verb.toLowerCase() == 'post'){p = less_get_params(params);}
     else{p = less_get_params(less_merge_objects({'_method': verb.toLowerCase()}, params))} 
@@ -85,7 +96,7 @@ function less_ajax(url, verb, params, options){
 function less_ajaxx(url, verb, params, options){
   #{'console.log("less_ajax(" + url + ", " + verb + ", " + params +", " + options + ")");' if @@debug} 
   if (verb == undefined) {verb = 'get';}
-  if (jQuery){
+  if (jq_defined()){
     v = verb.toLowerCase() == 'get' ? 'GET' : 'POST'
     if (verb.toLowerCase() == 'get' || verb.toLowerCase() == 'post'){p = less_get_params(params);}
     else{p = less_get_params(less_merge_objects({'_method': verb.toLowerCase()}, params))} 
@@ -105,7 +116,7 @@ JS
       def generate!
         s = get_js_helpers
         ActionController::Routing::Routes.routes.each do |route|
-          name = ActionController::Routing::Routes.named_routes.routes.index(route).to_s
+          name = ActionController::Routing::Routes.named_routes.routes.key(route).to_s
           next if name.blank?
 # s << build_path( route.segments)
 # s << "\n"
@@ -117,7 +128,7 @@ function #{name}_ajax(#{build_params route.segments, 'params'}, options){ return
 function #{name}_ajaxx(#{build_params route.segments, 'params'}, options){ return less_ajaxx('#{build_path route.segments}', verb, params, options);}
 JS
         end
-        File.open(RAILS_ROOT + '/public/javascripts/less_routes.js', 'w') do |f|
+        File.open("#{Rails.public_path}/javascripts/less_routes.js", 'w') do |f|
           f.write s
         end
       end

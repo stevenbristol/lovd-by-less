@@ -12,7 +12,7 @@ and functions that will call these routes using ajax (uses jQuery or Prototype).
 
 Installation
 ============
-1. ./script/plugin install http://lessjsroutes.googlecode.com/svn/trunk/less_js_routes
+1. ./script/plugin install git://github.com/stevenbristol/less-js-routes.git
 2. Add 'less_routes' to your javascript_include tag
 3. Either:
 
