@@ -11,10 +11,10 @@ class ProfileTest < ActiveSupport::TestCase
     should_have_many :followers, :through => :follower_friends
     should_have_many :followings, :through => :following_friends
     should_have_many :comments, :blogs
-    should_protect_attributes :is_active
+    should_not_allow_mass_assignment_of :is_active
 
     should_ensure_length_in_range :email, 3..100, :short_message => 'does not look like an email address.', :long_message => 'does not look like an email address.'
-    should_allow_values_for :email, 'a@x.com', 'de.veloper@example.com', :message => 'does not look like an email address.'
+    should_allow_values_for :email, 'a@x.com', 'de.veloper@example.com'
     should_not_allow_values_for :email, 'example.com', '@example.com', 'developer@example', 'developer', :message => 'does not look like an email address.'
   end
 

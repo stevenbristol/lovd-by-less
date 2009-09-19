@@ -7,12 +7,12 @@ class UserTest < ActiveSupport::TestCase
 
 
   context 'A User instance' do
-    should_require_attributes :login, :password, :password_confirmation
-    should_require_unique_attributes :login
+    should_validate_presence_of :login, :password, :password_confirmation
+    should_validate_uniqueness_of :login
 
     should_ensure_length_in_range :login, 3..40
     should_ensure_length_in_range :password, 4..40
-    should_protect_attributes :is_admin, :can_send_messages
+    should_not_allow_mass_assignment_of :is_admin, :can_send_messages
 
     should 'be able to change their password' do
       assert p = users(:user).crypted_password

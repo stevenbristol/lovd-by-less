@@ -13,7 +13,7 @@ class ForumTest < ActiveSupport::TestCase
   
   context "A Forum instance" do
     
-    should_require_attributes :name
+    should_validate_presence_of :name
     should_have_many :topics, :posts
   
     context ".build_topic" do

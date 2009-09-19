@@ -11,7 +11,7 @@ class ForumTopicTest < ActiveSupport::TestCase
   
   include ForumsTestHelper
   
-  should_require_attributes :title, :forum_id, :owner_id
+  should_validate_presence_of :title, :forum_id, :owner_id
   
   should_belong_to :forum, :owner
   should_have_many :posts
