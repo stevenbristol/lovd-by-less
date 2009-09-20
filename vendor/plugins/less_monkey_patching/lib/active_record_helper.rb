@@ -37,9 +37,8 @@ module ActionView::Helpers::ActiveRecordHelper
     end
     name = options['method_name'] ||= method.to_s.humanize.capitalize
     if (obj = instance_variable_get("@#{object}")) && (errors = obj.errors.on(method))
-      [errors].flatten!
     content_tag(:div,
-      content_tag(:ul, [errors].map {|msg| content_tag(:li, "#{name} #{msg}") }),
+      content_tag(:ul, [errors].flatten.map {|msg| content_tag(:li, "#{name} #{msg}") }),
       html
     )
     else 
