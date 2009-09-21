@@ -1,3 +1,4 @@
+require 'hpricot'
 module Caboose::SpiderIntegrator
   
   # This is an abstract representation of a form that we can spider.
@@ -15,14 +16,14 @@ module Caboose::SpiderIntegrator
       @method = m.downcase if m
     end
     
-    def find_all(*args)
-      @form.find_all(*args)
+    def search(*args)
+      @form.search(*args)
     end
     
     def mutate_inputs!(mutate_existing_values = false)
       input_hash = mutate_existing_values ? { '_mutated' => true } : { '_modified' => true }
     
-      @form.find_all(:tag => 'input').each do |input|
+      @form.search('input').each do |input|
         if input['name'] == '_method' # and value.in?['put','post',..] # rails is faking the post/put etc
           self.method = input['value']
         else
@@ -52,11 +53,11 @@ module Caboose::SpiderIntegrator
           end
         end
       end
-      @form.find_all(:tag => 'textarea').each do |input|
+      @form.search('textarea').each do |input|
         input_hash[ input['name'] ] = create_data(input, mutate_existing_values)
       end
-      @form.find_all(:tag => 'select').each do |select|
-        options = select.find_all(:tag => 'option')
+      @form.search('select').each do |select|
+        options = select.search('option')
         option = options[ rand(options.length) ]
         input_hash[ select['name'] ] = option['value'] 
       end
@@ -72,9 +73,9 @@ module Caboose::SpiderIntegrator
       value = mutate ? nil : input['value'] 
 
       return value || case input['name']
-        when /amount/: rand(10000) - 5000
-        when /_id$/:   rand(500)
-        when /uploaded_data/: # attachment_fu
+        when /amount/ then rand(10000) - 5000
+        when /_id$/ then   rand(500)
+        when /uploaded_data/ # attachment_fu
           nil
         when nil
           # wtf!

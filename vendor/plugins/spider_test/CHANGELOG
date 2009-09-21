@@ -1,3 +1,7 @@
+Added: Now uses Hpricot instead of HTML::Document for a ~10% speedup.
+
+Moved to GitHub
+
 Fixed: Workaround for inputs without a name (e.g. input type="button" onclick="...")
 Fixed: Now accepts form method="GET" as well as "get"
 Fixed: Better static file checking (checks if rails can generate it, THEN checks if the static file exists
