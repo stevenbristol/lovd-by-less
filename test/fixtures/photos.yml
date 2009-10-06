@@ -15,18 +15,18 @@
 first:
   caption: this is just a test photo.
   profile: user
-  image: photo_1.jpg
+  image_file_name: photo_1.jpg
 
 
 
 second:
   caption: this is just a test photo.
   profile: user
-  image: photo_2.jpg
+  image_file_name: photo_2.jpg
 
 
 
 third:
   caption: this is just a test photo.
   profile: user
-  image: photo_3.jpg
+  image_file_name: photo_3.jpg

@@ -124,19 +124,19 @@ class ProfilesControllerTest < ActionController::TestCase
       #raise (p.send :icon_state).inspect
       assert_not_nil p.icon
       get :show, {:id => p.id, :public_view => true}, {:user => p.id}
-      assert_tag :img, :attributes => { :src => /\/system\/profile\/icon\/\d*\/big\/user.png/ }
+      assert_tag :img, :attributes => { :src => /\/system\/icons\/\d*\/big\/user.png/ }
     end
     
     should 'use gravatar otherwise' do
       p =  profiles(:user2)
-      assert_nil p.icon
+      assert !p.icon.file?
       get :show, {:id => p.id}, {:user => p.id, :public_view => true}
       assert_tag :img, :attributes => {:src => /www\.gravatar\.com/}
     end
     
     should 'send the app\'s internal default as the default to gravatar' do
       p =  profiles(:user2)
-      assert_nil p.icon
+      assert !p.icon.file?
       get :show, {:id => p.id}, {:user => p.id, :public_view => true}
       assert_tag :img, :attributes => { :src => /http...www.gravatar.com\/avatar\/[0-9a-f]+\?size\=50&amp;default\=http...test\.host\/images\/avatar_default_small\.png/ }
     end
@@ -148,7 +148,7 @@ class ProfilesControllerTest < ActionController::TestCase
       assert_not_nil profiles(:user).icon
       post :delete_icon, {:id => profiles(:user).id, :format => 'js'}, {:user => profiles(:user).id}
       assert_response :success
-      assert_nil assigns(:p).reload.icon
+      assert !assigns(:p).reload.icon.file?
     end
   end
 

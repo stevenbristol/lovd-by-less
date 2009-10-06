@@ -5,6 +5,6 @@ class PhotoTest < ActiveSupport::TestCase
   context "A Photo instance" do
     
     should_belong_to :profile
-    should_require_attributes :image, :profile_id
+    should_require_attributes :profile_id
   end
 end

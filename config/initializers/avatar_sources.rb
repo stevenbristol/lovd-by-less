@@ -1,5 +1,5 @@
 require 'avatar'
-require 'avatar/source/file_column_source'
+require 'avatar/source/paperclip_source'
 require 'avatar/source/source_chain'
 require 'avatar/source/static_url_source'
 require 'avatar/source/wrapper/rails_asset_source_wrapper'
@@ -24,7 +24,7 @@ default = Avatar::Source::Wrapper::RailsAssetSourceWrapper.new(
 )
 
 chain = Avatar::Source::SourceChain.new
-chain << Avatar::Source::FileColumnSource.new(:icon)
+chain << Avatar::Source::PaperclipSource.new(:icon)
 chain << SizedGravatarSource.new(default, :email)
 
 Avatar::source = chain

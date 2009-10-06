@@ -18,19 +18,22 @@ class Photo < ActiveRecord::Base
   
   belongs_to :profile
   
-  validates_presence_of :image, :profile_id
+  has_attached_file :image, :styles => { :square => "50x50#", :small => "175x250>"}
+  
+  validates_attachment_presence :image
+  validates_presence_of :profile_id
   attr_immutable :id, :profile_id
   
   def after_create
     feed_item = FeedItem.create(:item => self)
     ([profile] + profile.friends + profile.followers).each{ |p| p.feed_items << feed_item }
   end
-
-  file_column :image, :magick => {
-    :versions => { 
-      :square => {:crop => "1:1", :size => "50x50", :name => "square"},
-      :small => "175x250>"
-    }
-  }
+  
+  # file_column :image, :magick => {
+  #   :versions => { 
+  #     :square => {:crop => "1:1", :size => "50x50", :name => "square"},
+  #     :small => "175x250>"
+  #   }
+  # }
     
 end

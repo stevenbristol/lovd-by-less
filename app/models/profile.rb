@@ -78,13 +78,15 @@ class Profile < ActiveRecord::Base
     set_property :min_prefix_len => 3, :morphology => false
   end
   
-  file_column :icon, :magick => {
-    :versions => { 
-      :big => {:crop => "1:1", :size => "150x150", :name => "big"},
-      :medium => {:crop => "1:1", :size => "100x100", :name => "medium"},
-      :small => {:crop => "1:1", :size => "50x50", :name => "small"}
-    }
-  }
+  has_attached_file :icon, :styles => { :big => "150x150#", :medium => "100x100#", :small => "50x50#" }, :default_url => "/avatar_default_:style.png"
+  # 
+  # file_column :icon, :magick => {
+  #   :versions => { 
+  #     :big => {:crop => "1:1", :size => "150x150", :name => "big"},
+  #     :medium => {:crop => "1:1", :size => "100x100", :name => "medium"},
+  #     :small => {:crop => "1:1", :size => "50x50", :name => "small"}
+  #   }
+  # }
   
   cattr_accessor :featured_profile
   @@featured_profile = {:date=>Date.today-4, :profile=>nil}

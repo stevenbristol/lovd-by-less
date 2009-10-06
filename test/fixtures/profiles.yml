@@ -34,7 +34,7 @@ user:
     last_name: Veloper
     email: user@example.com
     is_active: true
-    icon: user.png
+    icon_file_name: user.png
 
 user2:
     user: user2
