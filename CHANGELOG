@@ -1,4 +1,5 @@
-
+2009-10-07
+  Upgraded from file_column to paperclip
 
 2008-04-17
   Fixed bug in less_captcha
