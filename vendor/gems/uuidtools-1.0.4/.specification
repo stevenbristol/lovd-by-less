@@ -65,11 +65,14 @@ files:
 - README
 has_rdoc: true
 homepage: http://uuidtools.rubyforge.org/
+licenses: []
+
 post_install_message: 
 rdoc_options: 
 - --main
 - README
 require_paths: 
+- bin
 - bin
 - lib
 required_ruby_version: !ruby/object:Gem::Requirement 
@@ -87,7 +90,7 @@ required_rubygems_version: !ruby/object:Gem::Requirement
 requirements: []
 
 rubyforge_project: uuidtools
-rubygems_version: 1.3.1
+rubygems_version: 1.3.5
 signing_key: 
 specification_version: 2
 summary: UUID generator

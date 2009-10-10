@@ -195,6 +195,8 @@ files:
 - RELEASE
 has_rdoc: true
 homepage: http://mocha.rubyforge.org
+licenses: []
+
 post_install_message: 
 rdoc_options: 
 - --title
@@ -203,6 +205,7 @@ rdoc_options:
 - README
 - --line-numbers
 require_paths: 
+- bin
 - bin
 - lib
 required_ruby_version: !ruby/object:Gem::Requirement 
@@ -220,7 +223,7 @@ required_rubygems_version: !ruby/object:Gem::Requirement
 requirements: []
 
 rubyforge_project: mocha
-rubygems_version: 1.3.1
+rubygems_version: 1.3.5
 signing_key: 
 specification_version: 2
 summary: Mocking and stubbing library

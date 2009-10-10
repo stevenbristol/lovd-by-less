@@ -7,7 +7,7 @@ require 'avatar/source/wrapper/string_substitution_source_wrapper'
 require 'sized_gravatar_source'
 
 # order:
-# 1.  FileColumn(Profile#icon)
+# 1.  Paperclip(Profile#icon)
 # 2.  Gravatar(Profile#email), with default
 #       a RailsAssetSourceWrapper containing
 #         a StringSubstitutionSourceWrapper containing

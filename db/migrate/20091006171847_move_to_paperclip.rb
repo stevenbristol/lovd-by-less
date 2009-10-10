@@ -1,4 +1,6 @@
 class MoveToPaperclip < ActiveRecord::Migration
+  DEFAULT_FILE_COLUMN_PATH = File.join(RAILS_ROOT, "public", 'system')
+  
   def self.up
     # Profiles
     add_column :profiles, :icon_file_name, :string
@@ -7,8 +9,8 @@ class MoveToPaperclip < ActiveRecord::Migration
     add_column :profiles, :icon_updated_at, :datetime
     
     Profile.find_each do |profile|
-      next unless profile.old_icon
-      profile.icon = File.new(profile.old_icon)
+      next unless profile.read_attribute('icon')
+      profile.icon = File.new(File.join(DEFAULT_FILE_COLUMN_PATH, 'profile', 'icon', profile.id.to_s, profile.read_attribute('icon')))
       profile.save
     end
     
@@ -21,8 +23,8 @@ class MoveToPaperclip < ActiveRecord::Migration
     add_column :photos, :image_updated_at, :datetime
     
     Photo.find_each do |photo|
-      next unless photo.old_image
-      photo.image = File.new(profile.old_image)
+      next unless photo.read_attribute('image')
+      photo.image = File.new(File.join(DEFAULT_FILE_COLUMN_PATH, 'photo', 'image', photo.id.to_s, photo.read_attribute('image')))
       photo.save
     end
     
@@ -30,61 +32,6 @@ class MoveToPaperclip < ActiveRecord::Migration
   end
 
   def self.down
-    # Profiles
-    add_column :profiles, :icon, :string
-    
-    Profile.find_each do |profile|
-      next unless profile.icon
-      profile.old_icon = File.new(profile.icon.path)
-      profile.save
-    end
-    
-    remove_column :profiles, :icon_updated_at
-    remove_column :profiles, :icon_file_size
-    remove_column :profiles, :icon_content_type
-    remove_column :profiles, :icon_file_name
-    
-    # Photos
-    add_column :photos, :image, :string
-    
-    Photo.find_each do |photo|
-      next unless photo.image
-      photo.old_image = File.new(photo.image.path)
-      photo.save
-    end
-    
-    remove_column :photos, :image_updated_at
-    remove_column :photos, :image_file_size
-    remove_column :photos, :image_content_type
-    remove_column :photos, :image_file_name
+    raise ActiveRecord::IrreversibleMigration.new('The migrations from file_column to paperclip is not reversable')
   end
-end
-
-
-# just for redundancy. we want this to be a reverdable migration.
-class Profile < ActiveRecord::Base
-  file_column :icon, :magick => {
-    :versions => { 
-      :big => {:crop => "1:1", :size => "150x150", :name => "big"},
-      :medium => {:crop => "1:1", :size => "100x100", :name => "medium"},
-      :small => {:crop => "1:1", :size => "50x50", :name => "small"}
-    }
-  }
-  alias_method :old_icon=, :icon=
-  alias_method :old_icon, :icon
-  
-  has_attached_file :icon, :styles => { :big => "150x150>", :medium => "100x100>", :small => "50x50>" }
-end
-
-class Photo < ActiveRecord::Base
-  file_column :image, :magick => {
-    :versions => { 
-      :square => {:crop => "1:1", :size => "50x50", :name => "square"},
-      :small => "175x250>"
-    }
-  }
-  alias_method :old_image=, :image=
-  alias_method :old_image, :image
-  
-  has_attached_file :image, :styles => { :square => "50x50#", :small => "175x250>"}
 end

@@ -9,8 +9,8 @@ module PhotosHelper
   
   def photo_path photo = nil, size = :square
     path = nil
-    unless photo.nil? || photo.image.blank?
-      path = url_for_file_column(photo, :image, size.to_s) rescue nil
+    unless photo.image.exists?
+      path = photo.image.url(size) rescue nil
     end
     path = missing_photo_path(size) if path.nil?
     return path

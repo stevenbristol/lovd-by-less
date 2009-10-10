@@ -18,7 +18,7 @@ class Photo < ActiveRecord::Base
   
   belongs_to :profile
   
-  has_attached_file :image, :styles => { :square => "50x50#", :small => "175x250>"}
+  has_attached_file :image, :styles => { :square => "50x50#", :small => "175x250>"}, :path => ":rails_root/public/system/:attachment/:id/:style/:basename.:extension"
   
   validates_attachment_presence :image
   validates_presence_of :profile_id
@@ -28,12 +28,5 @@ class Photo < ActiveRecord::Base
     feed_item = FeedItem.create(:item => self)
     ([profile] + profile.friends + profile.followers).each{ |p| p.feed_items << feed_item }
   end
-  
-  # file_column :image, :magick => {
-  #   :versions => { 
-  #     :square => {:crop => "1:1", :size => "50x50", :name => "square"},
-  #     :small => "175x250>"
-  #   }
-  # }
     
 end

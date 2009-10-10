@@ -1,0 +1,2 @@
+2009-10-09 - Upgrading from file_column to paperclip
+This upgrade has no reverse migration provided.  It is strongly recommended that production files and databases be backed up prior to upgrading and that this upgrade be tested locally in development before an upgrade is performed on production.  If you have modified the default path for file_column, you will need to update the DEFAULT_FILE_COLUMN_PATH found in '20091006171847_move_to_paperclip.rb'.  Once the upgrade is complete, delete the old file_column directories.
