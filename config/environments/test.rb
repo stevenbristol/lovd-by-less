@@ -23,3 +23,5 @@ config.action_controller.asset_host                  = "http://test.host"
 # The :test delivery method accumulates sent emails in the
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
+
+config.gem 'mocha', :version => '=0.9.7', :lib => false
