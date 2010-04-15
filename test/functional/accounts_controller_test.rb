@@ -45,25 +45,23 @@ class AccountsControllerTest < ActionController::TestCase
   
   
   def test_forgot_no_email
-    flashback
     post :login, :user=>{:email=>'asdf'}
     assert_nil session[:user]
     assert_response :success
     assert_equal nil, flash[:notice]
-    assert_equal "Could not find that email address. Try again.", flash.flashed[:error] 
+    assert_equal "Could not find that email address. Try again.", flash[:error] 
   end
   
   
   
   def test_forgot_good_email
-    flashback
     assert u = users(:user)
     assert p = u.crypted_password
     post :login, :user=>{:email=>profiles(:user).email}
     assert_nil session[:user]
     assert_response :success
     assert_equal nil, flash[:error] 
-    assert_equal "A new password has been mailed to you.", flash.flashed[:notice] 
+    assert_equal "A new password has been mailed to you.", flash[:notice] 
     assert_not_equal(assigns(:p), u.crypted_password)
   end
   
@@ -102,7 +100,6 @@ class AccountsControllerTest < ActionController::TestCase
   end
   
   def test_should_fail_signup_cuz_no_terms
-    flashback
     assert_no_difference "User.count" do
       post :signup, {
         :user => { 
@@ -122,7 +119,6 @@ class AccountsControllerTest < ActionController::TestCase
   
   
   def test_should_fail_signup_cuz_captcha
-    flashback
     assert_no_difference "User.count" do
       post :signup, {
         :user => { 
