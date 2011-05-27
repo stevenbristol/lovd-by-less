@@ -1,7 +1,9 @@
-require 'avatar/view/action_view_support'
+# FIXME: gravatarify
+#require 'avatar/view/action_view_support'
 
 module ProfilesHelper
-  include Avatar::View::ActionViewSupport
+  # FIXME: gravatarify
+  # include Avatar::View::ActionViewSupport
   
   def icon profile, size = :small, img_opts = {}
     return "" if profile.nil?
