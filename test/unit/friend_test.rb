@@ -1,10 +1,10 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class FriendTest < ActiveSupport::TestCase
   # 
   # context "A Friend instance" do
-  #   should_belong_to :inviter
-  #   should_belong_to :invited
+  #   should belong_to :inviter
+  #   should belong_to :invited
   # end
   # 
   # 

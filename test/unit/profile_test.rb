@@ -1,21 +1,33 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class ProfileTest < ActiveSupport::TestCase
 
   context 'A Profile instance' do
-    should_belong_to :user
-    should_have_many :friendships
-    should_have_many :friends,   :through     => :friendships
-    should_have_many :follower_friends
-    should_have_many :following_friends
-    should_have_many :followers, :through => :follower_friends
-    should_have_many :followings, :through => :following_friends
-    should_have_many :comments, :blogs
-    should_protect_attributes :is_active
+    should belong_to :user
+    should have_many :friendships
+    should have_many :friends
+    should have_many :follower_friends
+    should have_many :following_friends
+    should have_many :followers
+    should have_many :followings
+    should have_many :comments
+    should have_many :blogs
+    should_not allow_mass_assignment_of :is_active
 
-    should_ensure_length_in_range :email, 3..100, :short_message => 'does not look like an email address.', :long_message => 'does not look like an email address.'
-    should_allow_values_for :email, 'a@x.com', 'de.veloper@example.com', :message => 'does not look like an email address.'
-    should_not_allow_values_for :email, 'example.com', '@example.com', 'developer@example', 'developer', :message => 'does not look like an email address.'
+    should ensure_length_of(:email).
+        is_at_least(3).
+        is_at_most(100).
+        with_short_message('does not look like an email address.').
+        with_long_message('does not look like an email address.')
+        
+    should allow_value('a@x.com').for(:email).with_message('does not look like an email address.')
+    should allow_value('de.veloper@example.com').for(:email).with_message('does not look like an email address.')
+
+    should_not allow_value('example.com').for(:email).with_message('does not look like an email address.')
+    should_not allow_value('@example.com').for(:email).with_message('does not look like an email address.')
+    should_not allow_value('developer@example').for(:email).with_message('does not look like an email address.')
+    should_not allow_value('developer').for(:email).with_message('does not look like an email address.')
+
   end
 
 

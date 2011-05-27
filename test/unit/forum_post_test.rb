@@ -1,17 +1,17 @@
-##
 # ForumPost test
 # Author: Les Freeman (lesliefreeman3@gmail.com)
 # Created on: 5/16/08
 # Updated on: 5/16/08
 #
 
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class ForumPostTest < ActiveSupport::TestCase
   
-  should_require_attributes :body, :owner_id
+  should validate_presence_of :body
+  should validate_presence_of :owner_id
   
-  should_belong_to :owner
-  should_belong_to :topic
+  should belong_to :owner
+  should belong_to :topic
   
 end

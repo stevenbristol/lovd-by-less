@@ -1,10 +1,10 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class CommentTest < ActiveSupport::TestCase
 
   context 'A Comment instance' do
-    should_belong_to :commentable
-    should_belong_to :profile
+    should belong_to :commentable
+    should belong_to :profile
   end
 
   should "show me the wall between us" do

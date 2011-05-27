@@ -5,16 +5,17 @@
 # Updated on: 5/16/08
 # 
 
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class ForumTest < ActiveSupport::TestCase
   
-  include ForumsTestHelper
+  #include ForumsTestHelper
   
   context "A Forum instance" do
     
-    should_require_attributes :name
-    should_have_many :topics, :posts
+    should validate_presence_of :name
+    should have_many :topics
+    should have_many :posts
   
     context ".build_topic" do
       should "return a ForumTopic" do

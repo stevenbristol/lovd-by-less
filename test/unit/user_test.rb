@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
 
@@ -7,12 +7,16 @@ class UserTest < ActiveSupport::TestCase
 
 
   context 'A User instance' do
-    should_require_attributes :login, :password, :password_confirmation
-    should_require_unique_attributes :login
+    should validate_presence_of :login
+    should validate_presence_of :password
+    should validate_presence_of :password_confirmation
+    should validate_uniqueness_of :login
 
-    should_ensure_length_in_range :login, 3..40
-    should_ensure_length_in_range :password, 4..40
-    should_protect_attributes :is_admin, :can_send_messages
+    should ensure_length_of(:login).is_at_least(3).is_at_most(40)
+    should ensure_length_of(:password).is_at_least(4).is_at_most(40)
+    
+    should_not allow_mass_assignment_of :is_admin
+    should_not allow_mass_assignment_of :can_send_messages
 
     should 'be able to change their password' do
       assert p = users(:user).crypted_password
