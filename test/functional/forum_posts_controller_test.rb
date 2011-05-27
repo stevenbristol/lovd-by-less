@@ -6,11 +6,11 @@
 #
 
 
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class ForumPostsControllerTest < ActionController::TestCase
   
-  include ForumsTestHelper
+  # include ForumsTestHelper
   
   ##
   # :index

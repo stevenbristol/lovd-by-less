@@ -5,12 +5,12 @@
 # Updated on: 5/16/08
 #
 
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class ForumTopicsControllerTest < ActionController::TestCase
 
 
-  include ForumsTestHelper
+  # include ForumsTestHelper
   
 
   ##

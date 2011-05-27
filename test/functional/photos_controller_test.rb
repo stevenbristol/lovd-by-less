@@ -1,21 +1,22 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class PhotosControllerTest < ActionController::TestCase
 
-  VALID_PHOTO = {
-    :image => ActionController::TestUploadedFile.new(File.join(RAILS_ROOT, 'public/images/avatar_default_big.png'), 'image/png')
-  }
+  
+  #VALID_PHOTO = {
+  #  :image => ActionController::TestUploadedFile.new(File.join(RAILS_ROOT, 'public/images/avatar_default_big.png'), 'image/png')
+  #}
 
   context 'on GET to :index while not logged in' do
     setup do
       get :index, {:profile_id => profiles(:user).id}
     end
 
-    should_assign_to :profile
-    should_assign_to :photos
-    should_respond_with :success
-    should_render_template :index
-    should_not_set_the_flash
+    should assign_to :profile
+    should assign_to :photos
+    should respond_with :success
+    should render_template :index
+    should_not set_the_flash
     should "not render the upload form" do
       assert_no_tag :tag => 'form', :attributes => {:action => profile_photos_path(assigns(:profile))}
     end
@@ -27,11 +28,11 @@ class PhotosControllerTest < ActionController::TestCase
         get :index, {:profile_id => profiles(:user).id}, {:user => users(:user).id}
     end
 
-    should_assign_to :profile
-    should_assign_to :photos
-    should_respond_with :success
-    should_render_template :index
-    should_not_set_the_flash
+    should assign_to :profile
+    should assign_to :photos
+    should respond_with :success
+    should render_template :index
+    should_not set_the_flash
     should "render the upload form" do
       assert_tag :tag => 'form', :attributes => {:action => profile_photos_path(assigns(:profile))}
     end
@@ -42,11 +43,11 @@ class PhotosControllerTest < ActionController::TestCase
         get :index, {:profile_id => profiles(:user).id}, {:user => users(:user2).id}
     end
 
-    should_assign_to :profile
-    should_assign_to :photos
-    should_respond_with :success
-    should_render_template :index
-    should_not_set_the_flash
+    should assign_to :profile
+    should assign_to :photos
+    should respond_with :success
+    should render_template :index
+    should_not set_the_flash
     should "not render the upload form" do
       assert_no_tag :tag => 'form', :attributes => {:action => profile_photos_path(assigns(:profile))}
     end
@@ -57,9 +58,9 @@ class PhotosControllerTest < ActionController::TestCase
       get :show, {:profile_id => profiles(:user).id, :id => photos(:first)}
     end
 
-    should_respond_with :redirect
-    should_redirect_to 'profile_photos_path(profiles(:user))'
-    should_not_set_the_flash
+    should respond_with :redirect
+    should redirect_to 'profile_photos_path(profiles(:user))'
+    should_not set_the_flash
   end
 
 
@@ -70,9 +71,9 @@ class PhotosControllerTest < ActionController::TestCase
       end
     end
 
-    should_respond_with :redirect
-    should_redirect_to 'profile_photos_path(profiles(:user))'
-    should_set_the_flash_to 'Photo was deleted.'
+    should respond_with :redirect
+    should redirect_to 'profile_photos_path(profiles(:user))'
+    should set_the_flash.to 'Photo was deleted.'
   end
 
   context 'on DELETE to :destroy while logged in as :user' do
@@ -82,9 +83,9 @@ class PhotosControllerTest < ActionController::TestCase
       end
     end
 
-    should_respond_with :redirect
-    should_redirect_to 'home_path'
-    should_set_the_flash_to 'It looks like you don\'t have permission to view that page.'
+    should respond_with :redirect
+    should redirect_to 'home_path'
+    should set_the_flash.to 'It looks like you don\'t have permission to view that page.'
   end
 
   context 'on DELETE to :destroy while logged not in' do
@@ -94,9 +95,9 @@ class PhotosControllerTest < ActionController::TestCase
       end
     end
 
-    should_respond_with :redirect
-    should_redirect_to 'home_path'
-    should_set_the_flash_to 'It looks like you don\'t have permission to view that page.'
+    should respond_with :redirect
+    should redirect_to 'home_path'
+    should set_the_flash.to 'It looks like you don\'t have permission to view that page.'
   end
 
 
@@ -108,9 +109,9 @@ class PhotosControllerTest < ActionController::TestCase
       end
     end
 
-    should_respond_with :redirect
-    should_redirect_to 'profile_photos_path(profiles(:user))'
-    should_set_the_flash_to 'Photo successfully uploaded.'
+    should respond_with :redirect
+    should redirect_to 'profile_photos_path(profiles(:user))'
+    should set_the_flash.to 'Photo successfully uploaded.'
   end
 
   context 'on POST to :create with bad data while logged in as :owner' do
@@ -120,8 +121,8 @@ class PhotosControllerTest < ActionController::TestCase
       end
     end
 
-    should_respond_with :success
-    should_render_template 'index'
+    should respond_with :success
+    should render_template 'index'
   end
 
   context 'on POST to :create while logged in as :user' do
@@ -131,8 +132,8 @@ class PhotosControllerTest < ActionController::TestCase
       end
     end
 
-    should_respond_with :redirect
-    should_redirect_to 'home_path'
+    should respond_with :redirect
+    should redirect_to 'home_path'
   end
 
   context 'on POST to :create while logged not in' do
@@ -142,8 +143,8 @@ class PhotosControllerTest < ActionController::TestCase
       end
     end
 
-    should_respond_with :redirect
-    should_redirect_to 'home_path'
+    should respond_with :redirect
+    should redirect_to 'home_path'
   end
 
 

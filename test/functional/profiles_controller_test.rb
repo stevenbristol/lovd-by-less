@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class ProfilesControllerTest < ActionController::TestCase
 
@@ -8,9 +8,9 @@ class ProfilesControllerTest < ActionController::TestCase
       post :search, {:q => 'user'}
     end
 
-    should_assign_to :results
-    should_respond_with :success
-    should_render_template :search
+    should assign_to :results
+    should respond_with :success
+    should render_template :search
   end
 
   context 'on GET to :index' do
@@ -19,9 +19,9 @@ class ProfilesControllerTest < ActionController::TestCase
       get :index
     end
 
-    should_assign_to :results
-    should_respond_with :success
-    should_render_template :search
+    should assign_to :results
+    should respond_with :success
+    should render_template :search
   end
 
   context 'on GET to :show while not logged in' do
@@ -30,11 +30,11 @@ class ProfilesControllerTest < ActionController::TestCase
       assert_match "Sign-up to Follow", @response.body
     end
 
-    should_assign_to :user
-    should_assign_to :profile
-    should_respond_with :success
-    should_render_template :show
-    should_not_set_the_flash
+    should assign_to :user
+    should assign_to :profile
+    should respond_with :success
+    should render_template :show
+    should_not set_the_flash
   end
 
   context 'on GET to :show.rss while not logged in' do
@@ -43,11 +43,11 @@ class ProfilesControllerTest < ActionController::TestCase
       assert_match "<rss version=\"2.0\">\n  <channel>\n    <title>#{SITE_NAME} Activity Feed</title>", @response.body
     end
 
-    should_assign_to :user
-    should_assign_to :profile
-    should_respond_with :success
-    should_render_template :show
-    should_not_set_the_flash
+    should assign_to :user
+    should assign_to :profile
+    should respond_with :success
+    should render_template :show
+    should_not set_the_flash
   end
 
   context 'on GET to :edit while not logged in' do
@@ -55,10 +55,10 @@ class ProfilesControllerTest < ActionController::TestCase
       get :edit, {:id => profiles(:user).id}
     end
 
-    should_not_assign_to :user
-    should_respond_with :redirect
-    should_redirect_to 'login_path'
-    should_not_set_the_flash
+    should_not assign_to :user
+    should respond_with :redirect
+    should redirect_to 'login_path'
+    should_not set_the_flash
   end
 
 
@@ -67,11 +67,11 @@ class ProfilesControllerTest < ActionController::TestCase
         get :show, {:id => profiles(:user).id}, {:user => profiles(:user).id}
     end
 
-    should_assign_to :user
-    should_assign_to :profile
-    should_respond_with :success
-    should_render_template :show
-    should_not_set_the_flash
+    should assign_to :user
+    should assign_to :profile
+    should respond_with :success
+    should render_template :show
+    should_not set_the_flash
   end
 
   context 'on GET to :show while logged in as :user3' do
@@ -81,11 +81,11 @@ class ProfilesControllerTest < ActionController::TestCase
       assert_match "Be Friends", @response.body
     end
 
-    should_assign_to :user
-    should_assign_to :profile
-    should_respond_with :success
-    should_render_template :show
-    should_not_set_the_flash
+    should assign_to :user
+    should assign_to :profile
+    should respond_with :success
+    should render_template :show
+    should_not set_the_flash
   end
 
   context 'on GET to :show while logged in as :user2' do
@@ -94,11 +94,11 @@ class ProfilesControllerTest < ActionController::TestCase
       assert_match "Start Following", @response.body
     end
 
-    should_assign_to :user
-    should_assign_to :profile
-    should_respond_with :success
-    should_render_template :show
-    should_not_set_the_flash
+    should assign_to :user
+    should assign_to :profile
+    should respond_with :success
+    should render_template :show
+    should_not set_the_flash
   end
 
 
@@ -107,12 +107,11 @@ class ProfilesControllerTest < ActionController::TestCase
         get :edit, {:id => profiles(:user).id}, {:user => profiles(:user).id}
       end
 
-    should_assign_to :user
-    should_assign_to :profile
-    should_respond_with :success
-    should_render_template :edit
-    should_render_a_form
-    should_not_set_the_flash
+    should assign_to :user
+    should assign_to :profile
+    should respond_with :success
+    should render_template :edit
+    should_not set_the_flash
   end  
   
   context 'rendering an avatar' do
@@ -212,7 +211,7 @@ class ProfilesControllerTest < ActionController::TestCase
   should "delete" do
     assert_difference 'User.count', -1 do
       assert users(:user)
-      delete :destroy, {:id=>users(:user).id}, {:user, users(:user).id}
+      delete :destroy, {:id => users(:user).id}, {:user => users(:user).id}
       assert_response 200
       assert_nil User.find_by_id(users(:user).id)
     end
