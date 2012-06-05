@@ -3,11 +3,11 @@
 # Author: Les Freeman (lesliefreeman3@gmail.com)
 #
 
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class ForumsControllerTest < ActionController::TestCase
 
-  include ForumsTestHelper
+  # include ForumsTestHelper
 
   ##
   # :index

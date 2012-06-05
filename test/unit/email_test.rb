@@ -1,10 +1,8 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class EmailTest < ActiveSupport::TestCase
   FIXTURES_PATH = File.dirname(__FILE__) + '/../fixtures'
   CHARSET = "utf-8"
-
-  include ActionMailer::Quoting
 
   def setup
     ActionMailer::Base.delivery_method = :test

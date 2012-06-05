@@ -1,10 +1,10 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class PhotoTest < ActiveSupport::TestCase
   
   context "A Photo instance" do
     
-    should_belong_to :profile
-    should_require_attributes :profile_id
+    should belong_to :profile
+    should validate_presence_of :profile_id
   end
 end

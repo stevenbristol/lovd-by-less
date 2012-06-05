@@ -5,16 +5,19 @@
 # Updated on: 5/16/08
 #
 
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class ForumTopicTest < ActiveSupport::TestCase
   
-  include ForumsTestHelper
+  # include ForumsTestHelper
   
-  should_require_attributes :title, :forum_id, :owner_id
+  should validate_presence_of :title
+  should validate_presence_of :forum_id
+  should validate_presence_of :owner_id
   
-  should_belong_to :forum, :owner
-  should_have_many :posts
+  should belong_to :forum
+  should belong_to :owner
+  should have_many :posts
   
   should "create a feed item" do
     assert_difference "FeedItem.count" do
